@@ -1,0 +1,61 @@
+[package]
+name = "treelog"
+version = "0.0.1"
+edition = "2024"
+authors = ["Milan de Kruijf"]
+description = "A highly customizable, optimized, and modular tree rendering library"
+license = "MIT"
+repository = "https://github.com/muijf/treelog"
+homepage = "https://github.com/muijf/treelog"
+documentation = "https://docs.rs/treelog"
+keywords = ["tree", "visualization", "formatting", "display", "hierarchical"]
+categories = ["development-tools", "text-processing"]
+readme = "README.md"
+
+[lib]
+name = "treelog"
+path = "src/lib.rs"
+
+[[example]]
+name = "basic"
+path = "examples/basic.rs"
+
+[[example]]
+name = "builder"
+path = "examples/builder.rs"
+required-features = ["builder"]
+
+[[example]]
+name = "iterator"
+path = "examples/iterator.rs"
+required-features = ["iterator"]
+
+[[example]]
+name = "customization"
+path = "examples/customization.rs"
+
+[[example]]
+name = "complex"
+path = "examples/complex.rs"
+
+[[example]]
+name = "file_tree"
+path = "examples/file_tree.rs"
+required-features = ["builder"]
+
+[dependencies]
+colored = { version = "3.0", optional = true }
+
+[features]
+default = ["builder", "iterator"]
+builder = []
+iterator = []
+formatters = []
+color = ["colored"]
+all = ["builder", "iterator", "formatters", "color"]
+
+[dev-dependencies]
+colored = "3.0"
+
+[package.metadata.docs.rs]
+all-features = true
