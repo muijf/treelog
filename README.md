@@ -53,7 +53,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-treelog = "0.0.3"
+treelog = "0.0.4"
 ```
 
 ## Quick Start
@@ -545,7 +545,7 @@ Most advanced features are behind feature flags to keep the core library lightwe
 
 ```toml
 [dependencies]
-treelog = { version = "0.0.3", features = ["traversal", "transform", "path", "comparison", "merge", "export"] }
+treelog = { version = "0.0.4", features = ["traversal", "transform", "path", "comparison", "merge", "export"] }
 ```
 
 Available features:
@@ -563,7 +563,7 @@ Available features:
 
 Use `all` feature to enable everything:
 ```toml
-treelog = { version = "0.0.3", features = ["all"] }
+treelog = { version = "0.0.4", features = ["all"] }
 ```
 
 </details>
