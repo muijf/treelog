@@ -1,5 +1,10 @@
 # TreeLog
 
+[![CI](https://github.com/muijf/treelog/workflows/CI/badge.svg)](https://github.com/muijf/treelog/actions)
+[![crates.io](https://img.shields.io/crates/v/treelog.svg)](https://crates.io/crates/treelog)
+[![docs.rs](https://docs.rs/treelog/badge.svg)](https://docs.rs/treelog)
+[![license](https://img.shields.io/crates/l/treelog.svg)](https://github.com/muijf/treelog/blob/main/LICENSE)
+
 A highly customizable, optimized, and modular tree rendering library for Rust.
 
 This library provides both low-level and high-level APIs for rendering hierarchical data structures as trees, similar to the output of tools like `tree`, `npm ls`, or `cargo tree`.
