@@ -30,8 +30,8 @@ fn main() {
     {
         println!("\n4. Custom Formatters:");
         let formatted_config = RenderConfig::default()
-            .with_node_formatter(|label| format!("📁 {}", label))
-            .with_leaf_formatter(|line| format!("📄 {}", line));
+            .with_node_formatter(|label| format!("[DIR] {}", label))
+            .with_leaf_formatter(|line| format!("[FILE] {}", line));
         println!("{}", tree.render_to_string_with_config(&formatted_config));
 
         println!("\n5. Combined Customization:");

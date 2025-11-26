@@ -1,8 +1,5 @@
 # Pre-commit hooks for Rust project
 # Install with: pip install pre-commit && pre-commit install
-#
-# Alternative: Use the simple git hooks in scripts/ directory:
-#   ./scripts/install-hooks.sh
 
 repos:
   # Rust-specific hooks using local scripts
@@ -41,4 +38,3 @@ repos:
         args: ['--maxkb=1000']
       - id: check-merge-conflict
       - id: check-case-conflict
-
