@@ -48,6 +48,48 @@ name = "macro"
 path = "examples/macro.rs"
 required-features = ["macro"]
 
+[[example]]
+name = "statistics"
+path = "examples/statistics.rs"
+
+[[example]]
+name = "traversal"
+path = "examples/traversal.rs"
+required-features = ["traversal"]
+
+[[example]]
+name = "search"
+path = "examples/search.rs"
+
+[[example]]
+name = "transform"
+path = "examples/transform.rs"
+required-features = ["transform"]
+
+[[example]]
+name = "sorting"
+path = "examples/sorting.rs"
+
+[[example]]
+name = "path"
+path = "examples/path.rs"
+required-features = ["path"]
+
+[[example]]
+name = "comparison"
+path = "examples/comparison.rs"
+required-features = ["comparison"]
+
+[[example]]
+name = "merge"
+path = "examples/merge.rs"
+required-features = ["merge"]
+
+[[example]]
+name = "export"
+path = "examples/export.rs"
+required-features = ["export"]
+
 [dependencies]
 colored = { version = "3.0", optional = true }
 
@@ -57,8 +99,14 @@ builder = []
 iterator = []
 macro = []
 formatters = []
+traversal = []
+transform = []
+path = []
+comparison = []
+merge = []
+export = []
 color = ["colored"]
-all = ["builder", "iterator", "macro", "formatters", "color"]
+all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "comparison", "merge", "export", "color"]
 
 [dev-dependencies]
 colored = "3.0"

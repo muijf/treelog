@@ -2,14 +2,26 @@
 
 #[cfg(any(feature = "builder", doc))]
 pub mod builder;
+#[cfg(any(feature = "comparison", doc))]
+pub mod comparison;
 pub mod config;
+#[cfg(any(feature = "export", doc))]
+pub mod export;
 #[cfg(any(feature = "iterator", doc))]
 pub mod iterator;
 mod level;
 #[cfg(any(feature = "macro", doc))]
 mod macros;
+#[cfg(any(feature = "merge", doc))]
+pub mod merge;
+#[cfg(any(feature = "path", doc))]
+pub mod path;
 pub mod renderer;
 pub mod style;
+#[cfg(any(feature = "transform", doc))]
+pub mod transform;
+#[cfg(any(feature = "traversal", doc))]
+pub mod traversal;
 pub mod tree;
 mod utils;
 
