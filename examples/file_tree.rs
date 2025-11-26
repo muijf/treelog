@@ -4,7 +4,7 @@ use treelog::builder::TreeBuilder;
 
 fn main() {
     let mut builder = TreeBuilder::new();
-    
+
     // Build a file system-like structure
     builder
         .node("home")
@@ -40,4 +40,3 @@ fn main() {
     println!("File System Tree:");
     println!("{}", tree.render_to_string());
 }
-

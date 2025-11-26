@@ -206,4 +206,3 @@ mod tests {
         assert!(leaf.add_child(Tree::new_leaf("child")).is_none());
     }
 }
-

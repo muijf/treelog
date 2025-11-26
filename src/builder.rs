@@ -182,7 +182,13 @@ mod tests {
     #[test]
     fn test_multiple_children() {
         let mut builder = TreeBuilder::new();
-        builder.node("root").leaf("item1").leaf("item2").node("child").leaf("subitem").end();
+        builder
+            .node("root")
+            .leaf("item1")
+            .leaf("item2")
+            .node("child")
+            .leaf("subitem")
+            .end();
         let tree = builder.build();
 
         if let Tree::Node(_, children) = &tree {
@@ -190,4 +196,3 @@ mod tests {
         }
     }
 }
-

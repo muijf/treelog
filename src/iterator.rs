@@ -372,4 +372,3 @@ mod tests {
         assert!(!lines.is_empty());
     }
 }
-

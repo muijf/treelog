@@ -155,11 +155,7 @@ impl StyleConfig {
     /// `is_last` indicates if this is the last child at this level.
     #[inline]
     pub fn get_branch(&self, is_last: bool) -> &str {
-        if is_last {
-            &self.last
-        } else {
-            &self.branch
-        }
+        if is_last { &self.last } else { &self.branch }
     }
 
     /// Returns the character sequence for vertical continuation.
@@ -214,4 +210,3 @@ mod tests {
         assert_eq!(config.get_branch(true), " └─");
     }
 }
-

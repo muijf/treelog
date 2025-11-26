@@ -17,9 +17,14 @@ fn main() {
 
     println!("Tree Lines (Iterator API):");
     println!("{}", "=".repeat(50));
-    
+
     for (i, line) in TreeIteratorExt::lines(&tree).enumerate() {
-        println!("Line {}: depth={}, is_last={}", i + 1, line.depth, line.is_last);
+        println!(
+            "Line {}: depth={}, is_last={}",
+            i + 1,
+            line.depth,
+            line.is_last
+        );
         println!("  Prefix: '{}'", line.prefix);
         println!("  Content: '{}'", line.content);
         println!();
@@ -32,4 +37,3 @@ fn main() {
         println!("  {}: {}", i + 1, line);
     }
 }
-

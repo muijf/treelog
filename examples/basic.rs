@@ -22,8 +22,7 @@ fn main() {
     // Render to string
     let mut output = String::new();
     write_tree(&mut output, &tree).unwrap();
-    
+
     println!("Basic Tree:");
     println!("{}", output);
 }
-

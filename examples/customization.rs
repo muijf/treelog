@@ -1,6 +1,6 @@
 //! Example demonstrating customization options: styles, formatters, and configurations.
 
-use treelog::{Tree, TreeStyle, StyleConfig, RenderConfig};
+use treelog::{RenderConfig, StyleConfig, Tree, TreeStyle};
 
 fn main() {
     let tree = Tree::Node(
@@ -47,4 +47,3 @@ fn main() {
         println!("   Enable with: cargo run --example customization --features formatters");
     }
 }
-

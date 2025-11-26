@@ -48,15 +48,16 @@ impl Clone for RenderConfig {
 impl std::fmt::Debug for RenderConfig {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut debug = f.debug_struct("RenderConfig");
-        debug.field("style", &self.style)
+        debug
+            .field("style", &self.style)
             .field("colors", &self.colors);
         #[cfg(feature = "formatters")]
         {
-            debug.field("node_formatter", &self.node_formatter.is_some())
+            debug
+                .field("node_formatter", &self.node_formatter.is_some())
                 .field("leaf_formatter", &self.leaf_formatter.is_some());
         }
-        debug.field("line_ending", &self.line_ending)
-            .finish()
+        debug.field("line_ending", &self.line_ending).finish()
     }
 }
 
@@ -215,17 +216,14 @@ mod tests {
     #[cfg(feature = "formatters")]
     #[test]
     fn test_with_node_formatter() {
-        let config = RenderConfig::default()
-            .with_node_formatter(|label| format!("[{}]", label));
+        let config = RenderConfig::default().with_node_formatter(|label| format!("[{}]", label));
         assert_eq!(config.format_node("test"), "[test]");
     }
 
     #[cfg(feature = "formatters")]
     #[test]
     fn test_with_leaf_formatter() {
-        let config = RenderConfig::default()
-            .with_leaf_formatter(|line| format!("- {}", line));
+        let config = RenderConfig::default().with_leaf_formatter(|line| format!("- {}", line));
         assert_eq!(config.format_leaf("test"), "- test");
     }
 }
-

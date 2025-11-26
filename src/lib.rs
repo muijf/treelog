@@ -18,7 +18,9 @@ pub use style::{StyleConfig, TreeStyle};
 pub use tree::Tree;
 
 // Re-export renderer functions
-pub use renderer::{render_to_string, render_to_string_with_config, write_tree, write_tree_with_config};
+pub use renderer::{
+    render_to_string, render_to_string_with_config, write_tree, write_tree_with_config,
+};
 
 /// Extension methods for Tree that provide convenient rendering.
 impl Tree {
@@ -114,4 +116,3 @@ mod tests {
         assert!(!lines.is_empty());
     }
 }
-
