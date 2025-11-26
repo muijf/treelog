@@ -257,6 +257,45 @@ The library is optimized for performance:
 
 MIT
 
+## Development
+
+### Pre-commit Hooks
+
+This project includes git hooks to ensure code quality. Install them with:
+
+```bash
+./scripts/install-hooks.sh
+```
+
+This will set up hooks that run:
+- **pre-commit**: `cargo fmt` and `cargo clippy` checks
+- **pre-push**: `cargo test` to ensure all tests pass
+
+You can also use the [pre-commit](https://pre-commit.com/) framework (see `.pre-commit-config.yaml`):
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+### Manual Checks
+
+Before committing, you can manually run:
+
+```bash
+# Format code
+cargo fmt --all
+
+# Check formatting
+cargo fmt --all -- --check
+
+# Run clippy
+cargo clippy --all-targets --all-features -- -D warnings
+
+# Run tests
+cargo test --all-features
+```
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
