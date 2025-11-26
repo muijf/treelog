@@ -4,6 +4,7 @@ use std::fmt;
 use std::fmt::Write;
 
 use crate::config::RenderConfig;
+use crate::level::LevelPath;
 use crate::tree::Tree;
 use crate::utils::estimate_capacity;
 
@@ -41,13 +42,13 @@ pub fn write_tree_with_config(
     tree: &Tree,
     config: &RenderConfig,
 ) -> fmt::Result {
-    write_tree_element(f, tree, &Vec::new(), config)
+    write_tree_element(f, tree, &LevelPath::new(), config)
 }
 
 fn write_tree_element(
     f: &mut dyn Write,
     tree: &Tree,
-    level: &[usize],
+    level: &LevelPath,
     config: &RenderConfig,
 ) -> fmt::Result {
     let style = &config.style;
@@ -55,9 +56,9 @@ fn write_tree_element(
     let mut second_line = String::new();
 
     // Build the prefix for the current line
-    for (pos, &is_last) in level.iter().enumerate() {
+    for (pos, is_last) in level.iter().enumerate() {
         let last_row = pos == maxpos - 1;
-        if is_last == 1 {
+        if is_last {
             // This branch is the last child at this level
             if !last_row {
                 write!(f, "{}", style.get_empty())?;
@@ -96,8 +97,8 @@ fn write_tree_element(
 
             let mut remaining = children.len();
             for child in children {
-                let mut lnext = level.to_vec();
-                lnext.push(if remaining == 1 { 1 } else { 0 });
+                let is_last = remaining == 1;
+                let lnext = level.with_child(is_last);
                 remaining -= 1;
                 write_tree_element(f, child, &lnext, config)?;
             }

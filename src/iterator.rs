@@ -1,6 +1,7 @@
 //! Iterator API for line-by-line tree access.
 
 use crate::config::RenderConfig;
+use crate::level::LevelPath;
 use crate::tree::Tree;
 
 /// Represents a single line in the rendered tree.
@@ -25,7 +26,7 @@ struct LeafState {
     index: usize,
     prefix: String,
     second_line_prefix: String,
-    level: Vec<usize>,
+    level: LevelPath,
 }
 
 /// An iterator that yields lines of a rendered tree one at a time.
@@ -46,7 +47,7 @@ pub struct TreeLines<'a> {
     tree: &'a Tree,
     config: RenderConfig,
     // Stack: (child_index, parent_tree, level_info)
-    stack: Vec<(usize, &'a Tree, Vec<usize>)>,
+    stack: Vec<(usize, &'a Tree, LevelPath)>,
     leaf_state: Option<LeafState>,
     root_yielded: bool,
 }
@@ -83,7 +84,7 @@ impl<'a> TreeLines<'a> {
         if let Tree::Node(_, children) = tree
             && !children.is_empty()
         {
-            stack.push((0, tree, Vec::new()));
+            stack.push((0, tree, LevelPath::new()));
         }
 
         TreeLines {
@@ -95,12 +96,12 @@ impl<'a> TreeLines<'a> {
         }
     }
 
-    fn build_prefix(level: &[usize], style: &crate::style::StyleConfig) -> String {
+    fn build_prefix(level: &LevelPath, style: &crate::style::StyleConfig) -> String {
         let mut prefix = String::new();
         let maxpos = level.len();
-        for (pos, &is_last) in level.iter().enumerate() {
+        for (pos, is_last) in level.iter().enumerate() {
             let last_row = pos == maxpos - 1;
-            if is_last == 1 {
+            if is_last {
                 if !last_row {
                     prefix.push_str(style.get_empty());
                 } else {
@@ -115,10 +116,10 @@ impl<'a> TreeLines<'a> {
         prefix
     }
 
-    fn build_second_line_prefix(level: &[usize], style: &crate::style::StyleConfig) -> String {
+    fn build_second_line_prefix(level: &LevelPath, style: &crate::style::StyleConfig) -> String {
         let mut prefix = String::new();
-        for &is_last in level {
-            if is_last == 1 {
+        for is_last in level.iter() {
+            if is_last {
                 prefix.push_str(style.get_empty());
             } else {
                 prefix.push_str(style.get_vertical());
@@ -160,13 +161,14 @@ impl<'a> Iterator for TreeLines<'a> {
                         });
                     }
                     // Multiple lines - set up leaf state
-                    let second_prefix = Self::build_second_line_prefix(&[], &self.config.style);
+                    let second_prefix =
+                        Self::build_second_line_prefix(&LevelPath::new(), &self.config.style);
                     self.leaf_state = Some(LeafState {
                         lines: lines.clone(),
                         index: 0,
                         prefix: String::new(),
                         second_line_prefix: second_prefix,
-                        level: Vec::new(),
+                        level: LevelPath::new(),
                     });
                     return self.next();
                 }
@@ -214,8 +216,7 @@ impl<'a> Iterator for TreeLines<'a> {
 
                     let child = &children[child_idx];
                     let is_last = child_idx == children.len() - 1;
-                    let mut new_level = level.clone();
-                    new_level.push(if is_last { 1 } else { 0 });
+                    let new_level = level.with_child(is_last);
 
                     match child {
                         Tree::Node(label, grand_children) => {
@@ -264,13 +265,12 @@ impl<'a> Iterator for TreeLines<'a> {
                                 });
                             } else {
                                 // Multiple lines - set up leaf state
-                                let level_clone = level.clone();
                                 self.leaf_state = Some(LeafState {
                                     lines: lines.clone(),
                                     index: 0,
                                     prefix: prefix.clone(),
                                     second_line_prefix: second_prefix,
-                                    level: level_clone,
+                                    level: level.clone(),
                                 });
                                 // Push remaining siblings
                                 if child_idx + 1 < children.len() {
