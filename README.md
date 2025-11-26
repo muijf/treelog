@@ -1,19 +1,65 @@
-# TreeLog
+<div align="center">
+
+![TreeLog Banner](images/banner.png)
 
 [![CI](https://github.com/muijf/treelog/workflows/CI/badge.svg)](https://github.com/muijf/treelog/actions)
 [![crates.io](https://img.shields.io/crates/v/treelog.svg)](https://crates.io/crates/treelog)
 [![docs.rs](https://docs.rs/treelog/badge.svg)](https://docs.rs/treelog)
 [![license](https://img.shields.io/crates/l/treelog.svg)](https://github.com/muijf/treelog/blob/main/LICENSE)
 
-A customizable tree rendering library for Rust. Provides low-level and high-level APIs for rendering hierarchical data structures, similar to `tree`, `npm ls`, or `cargo tree`.
+**A customizable tree rendering library for Rust**
 
-**Features**: Multiple styles (Unicode, ASCII, Box drawing, custom), builder API, iterator support, custom formatters, optimized rendering.
+*Provides low-level and high-level APIs for rendering hierarchical data structures, similar to `tree`, `npm ls`, or `cargo tree`.*
+
+[Installation](#installation) • [Quick Start](#quick-start) • [Documentation](https://docs.rs/treelog) • [Examples](#usage)
+
+</div>
+
+---
+
+## Features
+
+- **Multiple Styles** - Unicode, ASCII, Box drawing, and custom styles
+- **Builder API** - Fluent interface for easy tree construction
+- **Iterator Support** - Stream large trees without materializing
+- **Custom Formatters** - Format nodes and leaves to your needs
+- **Optimized** - Pre-computed prefixes and efficient rendering
+- **Zero Dependencies** - Lightweight and fast
 
 ## Installation
+
+Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
 treelog = "0.0.2"
+```
+
+## Quick Start
+
+```rust
+use treelog::{Tree, renderer::write_tree};
+
+let tree = Tree::Node("root".to_string(), vec![
+    Tree::Leaf(vec!["item1".to_string()]),
+    Tree::Node("sub".to_string(), vec![
+        Tree::Leaf(vec!["subitem1".to_string()]),
+        Tree::Leaf(vec!["subitem2".to_string()]),
+    ]),
+]);
+
+let mut output = String::new();
+write_tree(&mut output, &tree).unwrap();
+println!("{}", output);
+```
+
+**Output:**
+```
+root
+├─ item1
+└─ sub
+   ├─ subitem1
+   └─ subitem2
 ```
 
 ## Usage
@@ -113,13 +159,13 @@ for line in TreeIteratorExt::lines(&tree) {
 
 ## Performance
 
-- Pre-computed prefixes, capacity estimation for string buffers
-- Iterator API avoids materializing entire tree
-- Stack-based traversal
+- **Pre-computed prefixes** - Efficient string buffer capacity estimation
+- **Iterator API** - Stream large trees without materializing the entire structure
+- **Stack-based traversal** - Memory-efficient tree walking
 
 ## License
 
-MIT
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Development
 
@@ -133,4 +179,4 @@ Git hooks available via [pre-commit](https://pre-commit.com/) (see `.pre-commit-
 
 ## Contributing
 
-Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
