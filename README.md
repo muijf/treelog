@@ -11,7 +11,7 @@
 
 *Provides low-level and high-level APIs for rendering hierarchical data structures, similar to `tree`, `npm ls`, or `cargo tree`.*
 
-[Installation](#installation) • [Quick Start](#quick-start) • [Documentation](https://docs.rs/treelog) • [Examples](#usage)
+[Installation](#installation) • [Quick Start](#quick-start) • [Documentation](https://docs.rs/treelog) • [Examples](examples/)
 
 </div>
 
