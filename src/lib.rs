@@ -5,6 +5,8 @@ pub mod builder;
 pub mod config;
 #[cfg(any(feature = "iterator", doc))]
 pub mod iterator;
+#[cfg(any(feature = "macro", doc))]
+mod macros;
 pub mod renderer;
 pub mod style;
 pub mod tree;

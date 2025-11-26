@@ -20,6 +20,7 @@
 ## Features
 
 - **Multiple Styles** - Unicode, ASCII, Box drawing, and custom styles
+- **Macro DSL** - Declarative syntax for easy tree construction
 - **Builder API** - Fluent interface for easy tree construction
 - **Iterator Support** - Stream large trees without materializing
 - **Custom Formatters** - Format nodes and leaves to your needs
@@ -75,6 +76,32 @@ write_tree(&mut output, &tree).unwrap();
 // root
 //  └─ item
 ```
+
+### Macro DSL
+
+The `tree!` macro provides a clean, declarative syntax for constructing trees (requires `macro` feature):
+
+```rust
+use treelog::tree;
+
+let tree = tree! {
+    root {
+        "item1",
+        "item2",
+        sub {
+            "subitem1",
+            "subitem2"
+        }
+    }
+};
+println!("{}", tree.render_to_string());
+```
+
+The macro supports:
+- **Nodes**: `identifier { ... }` or `"string" { ... }`
+- **Leaves**: `"string"` or bare identifiers (converted to strings)
+- **Nested structures**: Arbitrary nesting depth
+- **Comma-separated**: Children separated by commas (trailing comma optional)
 
 ### Builder API
 
