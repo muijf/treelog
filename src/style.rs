@@ -9,9 +9,10 @@
 ///
 /// let style = StyleConfig::from(TreeStyle::Unicode);
 /// ```
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, Default)]
 pub enum TreeStyle {
     /// Unicode box drawing characters (default: ├─, └─, │)
+    #[default]
     Unicode,
     /// Simple ASCII characters (+, `, |)
     Ascii,
@@ -30,11 +31,6 @@ pub enum TreeStyle {
     },
 }
 
-impl Default for TreeStyle {
-    fn default() -> Self {
-        TreeStyle::Unicode
-    }
-}
 
 impl TreeStyle {
     /// Returns the default Unicode style configuration.

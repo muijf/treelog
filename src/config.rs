@@ -2,6 +2,14 @@
 
 use crate::style::StyleConfig;
 
+/// Type alias for node formatter functions.
+#[cfg(feature = "formatters")]
+type NodeFormatter = Box<dyn Fn(&str) -> String + Send + Sync>;
+
+/// Type alias for leaf formatter functions.
+#[cfg(feature = "formatters")]
+type LeafFormatter = Box<dyn Fn(&str) -> String + Send + Sync>;
+
 /// Configuration for rendering a tree.
 ///
 /// This struct allows fine-grained control over how trees are rendered,
@@ -23,10 +31,10 @@ pub struct RenderConfig {
     pub colors: bool,
     /// Custom formatter function for node labels (requires `formatters` feature)
     #[cfg(feature = "formatters")]
-    pub node_formatter: Option<Box<dyn Fn(&str) -> String + Send + Sync>>,
+    pub node_formatter: Option<NodeFormatter>,
     /// Custom formatter function for leaf lines (requires `formatters` feature)
     #[cfg(feature = "formatters")]
-    pub leaf_formatter: Option<Box<dyn Fn(&str) -> String + Send + Sync>>,
+    pub leaf_formatter: Option<LeafFormatter>,
     /// Line ending character(s)
     pub line_ending: String,
 }

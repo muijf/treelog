@@ -80,10 +80,10 @@ impl<'a> TreeLines<'a> {
     pub fn with_config(tree: &'a Tree, config: &RenderConfig) -> Self {
         let mut stack = Vec::new();
         // Initialize stack with root's children if it's a node
-        if let Tree::Node(_, children) = tree {
-            if !children.is_empty() {
-                stack.push((0, tree, Vec::new()));
-            }
+        if let Tree::Node(_, children) = tree
+            && !children.is_empty()
+        {
+            stack.push((0, tree, Vec::new()));
         }
 
         TreeLines {
@@ -106,12 +106,10 @@ impl<'a> TreeLines<'a> {
                 } else {
                     prefix.push_str(style.get_branch(true));
                 }
+            } else if !last_row {
+                prefix.push_str(style.get_vertical());
             } else {
-                if !last_row {
-                    prefix.push_str(style.get_vertical());
-                } else {
-                    prefix.push_str(style.get_branch(false));
-                }
+                prefix.push_str(style.get_branch(false));
             }
         }
         prefix

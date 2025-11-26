@@ -61,10 +61,8 @@ impl TreeBuilder {
     /// builder.node("root").leaf("item");
     /// ```
     pub fn leaf(&mut self, line: impl Into<String>) -> &mut Self {
-        if let Some(last) = self.stack.last_mut() {
-            if let Tree::Node(_, children) = last {
-                children.push(Tree::new_leaf(line));
-            }
+        if let Some(Tree::Node(_, children)) = self.stack.last_mut() {
+            children.push(Tree::new_leaf(line));
         }
         self
     }
@@ -80,10 +78,8 @@ impl TreeBuilder {
     /// builder.node("root").leaf_lines(vec!["line1", "line2"]);
     /// ```
     pub fn leaf_lines(&mut self, lines: Vec<impl Into<String>>) -> &mut Self {
-        if let Some(last) = self.stack.last_mut() {
-            if let Tree::Node(_, children) = last {
-                children.push(Tree::new_leaf_lines(lines));
-            }
+        if let Some(Tree::Node(_, children)) = self.stack.last_mut() {
+            children.push(Tree::new_leaf_lines(lines));
         }
         self
     }
@@ -108,10 +104,8 @@ impl TreeBuilder {
     pub fn end(&mut self) -> &mut Self {
         if self.stack.len() > 1 {
             let child = self.stack.pop().unwrap();
-            if let Some(last) = self.stack.last_mut() {
-                if let Tree::Node(_, children) = last {
-                    children.push(child);
-                }
+            if let Some(Tree::Node(_, children)) = self.stack.last_mut() {
+                children.push(child);
             }
         }
         self
