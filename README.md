@@ -13,7 +13,7 @@ A customizable tree rendering library for Rust. Provides low-level and high-leve
 
 ```toml
 [dependencies]
-treelog = "0.1"
+treelog = "0.0.2"
 ```
 
 ## Usage
@@ -129,7 +129,7 @@ cargo clippy --all-targets --all-features -- -D warnings
 cargo test --all-features
 ```
 
-Git hooks available via [pre-commit](https://pre-commit.com/) (see `.pre-commit-config.yaml`) or `./scripts/pre-commit.sh` / `./scripts/pre-push.sh`.
+Git hooks available via [pre-commit](https://pre-commit.com/) (see `.pre-commit-config.yaml`).
 
 ## Contributing
 
