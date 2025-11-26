@@ -54,7 +54,7 @@ println!("{}", output);
 ```
 
 **Output:**
-```
+```text
 root
 ├─ item1
 └─ sub
