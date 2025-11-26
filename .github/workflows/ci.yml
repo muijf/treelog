@@ -47,7 +47,9 @@ jobs:
       - name: Build
         run: cargo build --verbose --all-features
       - name: Run tests
-        run: cargo test --verbose --all-features
+        run: cargo test --lib --verbose --all-features
+      - name: Run doc tests
+        run: cargo test --doc --verbose --all-features
       - name: Build examples
         run: cargo build --examples --verbose --all-features
 
@@ -74,4 +76,3 @@ jobs:
         run: cargo build --verbose
         env:
           CARGO_RESOLVER: 1
-
