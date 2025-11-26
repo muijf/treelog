@@ -175,6 +175,11 @@ cargo clippy --all-targets --all-features -- -D warnings
 cargo test --all-features
 ```
 
+**Real-time feedback**: This project includes VS Code/Cursor settings (`.vscode/settings.json`) that configure rust-analyzer to provide real-time feedback:
+- **Formatting**: Automatically formats on save (matches `cargo fmt`)
+- **Clippy**: Shows clippy warnings/errors as you type (matches pre-commit hook settings)
+- **Tests**: Displays test failures in the editor
+
 Git hooks available via [pre-commit](https://pre-commit.com/) (see `.pre-commit-config.yaml`).
 
 ## Contributing
