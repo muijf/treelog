@@ -310,7 +310,7 @@ pub trait TreeIteratorExt {
     /// Returns an iterator with a custom configuration.
     fn lines_with_config(&self, config: &RenderConfig) -> TreeLines<'_>;
 
-    /// Collects all lines into a Vec<String>.
+    /// Collects all lines into a `Vec<String>`.
     ///
     /// # Examples
     ///
@@ -322,7 +322,7 @@ pub trait TreeIteratorExt {
     /// ```
     fn to_lines(&self) -> Vec<String>;
 
-    /// Collects all lines into a Vec<String> with a custom configuration.
+    /// Collects all lines into a `Vec<String>` with a custom configuration.
     fn to_lines_with_config(&self, config: &RenderConfig) -> Vec<String>;
 }
 
