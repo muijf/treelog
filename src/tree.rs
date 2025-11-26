@@ -448,10 +448,10 @@ impl Tree {
     /// assert!(found.is_some());
     /// ```
     pub fn find_node(&self, label: &str) -> Option<&Tree> {
-        if let Tree::Node(node_label, _) = self {
-            if node_label == label {
-                return Some(self);
-            }
+        if let Tree::Node(node_label, _) = self
+            && node_label == label
+        {
+            return Some(self);
         }
 
         if let Tree::Node(_, children) = self {
@@ -488,10 +488,10 @@ impl Tree {
     }
 
     fn collect_nodes<'a>(&'a self, label: &str, results: &mut Vec<&'a Tree>) {
-        if let Tree::Node(node_label, _) = self {
-            if node_label == label {
-                results.push(self);
-            }
+        if let Tree::Node(node_label, _) = self
+            && node_label == label
+        {
+            results.push(self);
         }
 
         if let Tree::Node(_, children) = self {
@@ -1069,10 +1069,10 @@ mod tests {
             _ => Ordering::Equal,
         };
         tree.sort_children(&mut compare);
-        if let Tree::Node(_, children) = &tree {
-            if let Tree::Leaf(lines) = &children[0] {
-                assert_eq!(lines[0], "a");
-            }
+        if let Tree::Node(_, children) = &tree
+            && let Tree::Leaf(lines) = &children[0]
+        {
+            assert_eq!(lines[0], "a");
         }
     }
 

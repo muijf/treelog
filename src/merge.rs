@@ -118,10 +118,10 @@ mod tests {
         let tree1 = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["a".to_string()])]);
         let tree2 = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["b".to_string()])]);
         let merged = tree1.merge(tree2, MergeStrategy::Replace);
-        if let Tree::Node(_, children) = &merged {
-            if let Tree::Leaf(lines) = &children[0] {
-                assert_eq!(lines[0], "b");
-            }
+        if let Tree::Node(_, children) = &merged
+            && let Tree::Leaf(lines) = &children[0]
+        {
+            assert_eq!(lines[0], "b");
         }
     }
 

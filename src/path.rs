@@ -73,12 +73,11 @@ impl Tree {
             return Some(self);
         }
 
-        if let Tree::Node(_, children) = self {
-            if let Some(&first) = path.first() {
-                if first < children.len() {
-                    return children[first].get_by_path(&path[1..]);
-                }
-            }
+        if let Tree::Node(_, children) = self
+            && let Some(&first) = path.first()
+            && first < children.len()
+        {
+            return children[first].get_by_path(&path[1..]);
         }
 
         None
@@ -107,12 +106,11 @@ impl Tree {
             return Some(self);
         }
 
-        if let Tree::Node(_, children) = self {
-            if let Some(&first) = path.first() {
-                if first < children.len() {
-                    return children[first].get_by_path_mut(&path[1..]);
-                }
-            }
+        if let Tree::Node(_, children) = self
+            && let Some(&first) = path.first()
+            && first < children.len()
+        {
+            return children[first].get_by_path_mut(&path[1..]);
         }
 
         None

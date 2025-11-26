@@ -192,10 +192,10 @@ mod tests {
             vec![Tree::Leaf(vec!["item".to_string()])],
         );
         let transformed = tree.map_leaves(|line| format!("- {line}"));
-        if let Tree::Node(_, children) = &transformed {
-            if let Tree::Leaf(lines) = &children[0] {
-                assert_eq!(lines[0], "- item");
-            }
+        if let Tree::Node(_, children) = &transformed
+            && let Tree::Leaf(lines) = &children[0]
+        {
+            assert_eq!(lines[0], "- item");
         }
     }
 
