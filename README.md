@@ -17,7 +17,8 @@
 
 ---
 
-## Features
+<details>
+<summary><b>Features</b> - Overview of all available features</summary>
 
 ### Core Features
 - **Multiple Styles** - Unicode, ASCII, Box drawing, and custom styles
@@ -43,6 +44,8 @@
 - **Tree Comparison** - Compare structure, compute diffs, check subtrees
 - **Export Formats** - Export to HTML, SVG, and Graphviz DOT format
 - **Tree Validation** - Validate tree structure
+
+</details>
 
 ## Installation
 
@@ -82,7 +85,8 @@ root
 
 ## Usage
 
-### Basic
+<details>
+<summary><b>Basic</b> - Simple tree construction and rendering</summary>
 
 ```rust
 use treelog::{Tree, renderer::write_tree};
@@ -94,9 +98,12 @@ write_tree(&mut output, &tree).unwrap();
 //  └─ item
 ```
 
-### Macro DSL
+</details>
 
-The `tree!` macro provides a clean, declarative syntax for constructing trees (requires `macro` feature):
+<details>
+<summary><b>Macro DSL</b> - Declarative syntax for tree construction (requires <code>macro</code> feature)</summary>
+
+The `tree!` macro provides a clean, declarative syntax for constructing trees:
 
 ```rust
 use treelog::tree;
@@ -120,7 +127,10 @@ The macro supports:
 - **Nested structures**: Arbitrary nesting depth
 - **Comma-separated**: Children separated by commas (trailing comma optional)
 
-### Builder API
+</details>
+
+<details>
+<summary><b>Builder API</b> - Fluent interface for tree construction (requires <code>builder</code> feature)</summary>
 
 ```rust
 use treelog::builder::TreeBuilder;
@@ -131,7 +141,10 @@ let tree = builder.build();
 println!("{}", tree.render_to_string());
 ```
 
-### Low-Level API
+</details>
+
+<details>
+<summary><b>Low-Level API</b> - Direct tree construction</summary>
 
 ```rust
 use treelog::Tree;
@@ -143,7 +156,10 @@ let tree = Tree::Node("root".to_string(), vec![
 println!("{}", tree.render_to_string());
 ```
 
-### Iterator API
+</details>
+
+<details>
+<summary><b>Iterator API</b> - Stream trees line by line (requires <code>iterator</code> feature)</summary>
 
 ```rust
 use treelog::{Tree, TreeIteratorExt};
@@ -159,7 +175,10 @@ for line in TreeIteratorExt::lines(&tree) {
 let lines: Vec<String> = tree.to_lines();
 ```
 
-### Customization
+</details>
+
+<details>
+<summary><b>Customization</b> - Custom styles and formatters</summary>
 
 **Styles**:
 
@@ -188,7 +207,10 @@ let config = RenderConfig::default()
 tree.render_to_string_with_config(&config);
 ```
 
-### Streaming Large Trees
+</details>
+
+<details>
+<summary><b>Streaming Large Trees</b> - Efficient streaming for large trees</summary>
 
 ```rust,no_run
 use treelog::{Tree, TreeIteratorExt};
@@ -200,6 +222,8 @@ for line in TreeIteratorExt::lines(&tree) {
     writeln!(stdout, "{}{}", line.prefix, line.content).unwrap();
 }
 ```
+
+</details>
 
 ## Advanced Features
 
@@ -370,6 +394,11 @@ let mut compare = |a: &Tree, b: &Tree| {
 tree.sort_children(&mut compare);
 ```
 
+</details>
+
+<details>
+<summary><b>Tree Path Utilities</b> - Navigate trees by path (requires <code>path</code> feature)</summary>
+
 Navigate and manipulate trees by path:
 
 ```rust
@@ -505,7 +534,8 @@ std::fs::write("tree.dot", dot).unwrap();
 
 </details>
 
-## Feature Flags
+<details>
+<summary><b>Feature Flags</b> - Configure which features to enable</summary>
 
 Most advanced features are behind feature flags to keep the core library lightweight:
 
@@ -532,16 +562,46 @@ Use `all` feature to enable everything:
 treelog = { version = "0.0.3", features = ["all"] }
 ```
 
-## Performance
+</details>
+
+<details>
+<summary><b>Performance</b> - Performance characteristics and optimizations</summary>
 
 - **Pre-computed prefixes** - Efficient string buffer capacity estimation
 - **Iterator API** - Stream large trees without materializing the entire structure
 - **Stack-based traversal** - Memory-efficient tree walking
 - **Zero-copy operations** - Most operations work with references where possible
 
-## License
+</details>
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Examples
+
+The repository includes comprehensive examples demonstrating all features:
+
+**Core Examples:**
+- **[`basic`](examples/basic.rs)** - Basic tree construction and rendering
+- **[`builder`](examples/builder.rs)** - Using the builder API
+- **[`iterator`](examples/iterator.rs)** - Streaming large trees
+- **[`macro`](examples/macro.rs)** - Using the macro DSL
+- **[`customization`](examples/customization.rs)** - Custom styles and formatters
+- **[`complex`](examples/complex.rs)** - Complex tree structures
+- **[`file_tree`](examples/file_tree.rs)** - File system tree example
+
+**Advanced Examples:**
+- **[`statistics`](examples/statistics.rs)** - Tree statistics and analysis
+- **[`traversal`](examples/traversal.rs)** - Tree traversal iterators
+- **[`search`](examples/search.rs)** - Tree search and query operations
+- **[`transform`](examples/transform.rs)** - Tree transformation operations
+- **[`sorting`](examples/sorting.rs)** - Tree sorting operations
+- **[`path`](examples/path.rs)** - Tree path utilities
+- **[`comparison`](examples/comparison.rs)** - Tree comparison and diff
+- **[`merge`](examples/merge.rs)** - Tree merging strategies
+- **[`export`](examples/export.rs)** - Export to HTML, SVG, and DOT formats
+
+Run any example with:
+```bash
+cargo run --example <name> --all-features
+```
 
 ## Development
 
@@ -558,31 +618,9 @@ cargo test --all-features
 
 Git hooks available via [pre-commit](https://pre-commit.com/) (see `.pre-commit-config.yaml`).
 
-## Examples
+## License
 
-The repository includes comprehensive examples demonstrating all features:
-
-- **[`basic`](examples/basic.rs)** - Basic tree construction and rendering
-- **[`builder`](examples/builder.rs)** - Using the builder API
-- **[`iterator`](examples/iterator.rs)** - Streaming large trees
-- **[`macro`](examples/macro.rs)** - Using the macro DSL
-- **[`customization`](examples/customization.rs)** - Custom styles and formatters
-- **[`complex`](examples/complex.rs)** - Complex tree structures
-- **[`file_tree`](examples/file_tree.rs)** - File system tree example
-- **[`statistics`](examples/statistics.rs)** - Tree statistics and analysis
-- **[`traversal`](examples/traversal.rs)** - Tree traversal iterators
-- **[`search`](examples/search.rs)** - Tree search and query operations
-- **[`transform`](examples/transform.rs)** - Tree transformation operations
-- **[`sorting`](examples/sorting.rs)** - Tree sorting operations
-- **[`path`](examples/path.rs)** - Tree path utilities
-- **[`comparison`](examples/comparison.rs)** - Tree comparison and diff
-- **[`merge`](examples/merge.rs)** - Tree merging strategies
-- **[`export`](examples/export.rs)** - Export to HTML, SVG, and DOT formats
-
-Run any example with:
-```bash
-cargo run --example <name> --all-features
-```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contributing
 

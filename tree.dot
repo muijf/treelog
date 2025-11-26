@@ -1,0 +1,5 @@
+digraph Tree {
+  node0 [label="root"];
+  node1 [label="item", shape=box];
+  node0 -> node1;
+}
