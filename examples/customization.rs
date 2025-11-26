@@ -30,15 +30,15 @@ fn main() {
     {
         println!("\n4. Custom Formatters:");
         let formatted_config = RenderConfig::default()
-            .with_node_formatter(|label| format!("[DIR] {}", label))
-            .with_leaf_formatter(|line| format!("[FILE] {}", line));
+            .with_node_formatter(|label| format!("[DIR] {label}"))
+            .with_leaf_formatter(|line| format!("[FILE] {line}"));
         println!("{}", tree.render_to_string_with_config(&formatted_config));
 
         println!("\n5. Combined Customization:");
         let combined_config = RenderConfig::default()
             .with_style(TreeStyle::Ascii)
             .with_node_formatter(|label| format!("[{}]", label.to_uppercase()))
-            .with_leaf_formatter(|line| format!("- {}", line));
+            .with_leaf_formatter(|line| format!("- {line}"));
         println!("{}", tree.render_to_string_with_config(&combined_config));
     }
     #[cfg(not(feature = "formatters"))]

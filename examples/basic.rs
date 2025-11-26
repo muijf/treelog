@@ -24,5 +24,5 @@ fn main() {
     write_tree(&mut output, &tree).unwrap();
 
     println!("Basic Tree:");
-    println!("{}", output);
+    println!("{output}");
 }

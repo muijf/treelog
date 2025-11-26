@@ -162,7 +162,7 @@ impl Tree {
 impl fmt::Display for Tree {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Tree::Node(label, _) => write!(f, "Node({})", label),
+            Tree::Node(label, _) => write!(f, "Node({label})"),
             Tree::Leaf(lines) => {
                 if lines.len() == 1 {
                     write!(f, "Leaf({})", lines[0])

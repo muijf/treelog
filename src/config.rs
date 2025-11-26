@@ -224,14 +224,14 @@ mod tests {
     #[cfg(feature = "formatters")]
     #[test]
     fn test_with_node_formatter() {
-        let config = RenderConfig::default().with_node_formatter(|label| format!("[{}]", label));
+        let config = RenderConfig::default().with_node_formatter(|label| format!("[{label}]"));
         assert_eq!(config.format_node("test"), "[test]");
     }
 
     #[cfg(feature = "formatters")]
     #[test]
     fn test_with_leaf_formatter() {
-        let config = RenderConfig::default().with_leaf_formatter(|line| format!("- {}", line));
+        let config = RenderConfig::default().with_leaf_formatter(|line| format!("- {line}"));
         assert_eq!(config.format_leaf("test"), "- test");
     }
 }
