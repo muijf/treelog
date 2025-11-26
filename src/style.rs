@@ -31,7 +31,6 @@ pub enum TreeStyle {
     },
 }
 
-
 impl TreeStyle {
     /// Returns the default Unicode style configuration.
     #[inline]
