@@ -27,3 +27,6 @@ Thumbs.db
 # Backup files
 *.bak
 *.tmp
+
+# Export outputs
+exports/

@@ -513,23 +513,27 @@ Export trees to various formats:
 
 ```rust
 use treelog::Tree;
+use std::fs;
 
 let tree = Tree::Node("root".to_string(), vec![
     Tree::Leaf(vec!["item".to_string()])
 ]);
 
+// Create exports directory
+fs::create_dir_all("exports").unwrap();
+
 // Export to HTML (with collapsible nodes)
 let html = tree.to_html();
-std::fs::write("tree.html", html).unwrap();
+fs::write("exports/tree.html", html).unwrap();
 
 // Export to SVG
 let svg = tree.to_svg();
-std::fs::write("tree.svg", svg).unwrap();
+fs::write("exports/tree.svg", svg).unwrap();
 
 // Export to Graphviz DOT format
 let dot = tree.to_dot();
-std::fs::write("tree.dot", dot).unwrap();
-// Render with: dot -Tpng tree.dot -o tree.png
+fs::write("exports/tree.dot", dot).unwrap();
+// Render with: dot -Tpng exports/tree.dot -o exports/tree.png
 ```
 
 </details>

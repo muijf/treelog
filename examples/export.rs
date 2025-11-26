@@ -22,26 +22,29 @@ fn main() {
     println!("Original tree:");
     println!("{}", tree.render_to_string());
 
+    // Create exports directory if it doesn't exist
+    fs::create_dir_all("exports").expect("Failed to create exports directory");
+
     println!("\n=== Export to HTML ===");
     let html = tree.to_html();
     println!("HTML output (first 200 chars):");
     let preview_len = html.len().min(200);
     println!("{}...", &html[..preview_len]);
-    fs::write("tree.html", html).expect("Failed to write HTML file");
-    println!("Full HTML written to tree.html");
+    fs::write("exports/tree.html", html).expect("Failed to write HTML file");
+    println!("Full HTML written to exports/tree.html");
 
     println!("\n=== Export to SVG ===");
     let svg = tree.to_svg();
     println!("SVG output (first 200 chars):");
     println!("{}...", &svg[..svg.len().min(200)]);
-    fs::write("tree.svg", svg).expect("Failed to write SVG file");
-    println!("Full SVG written to tree.svg");
+    fs::write("exports/tree.svg", svg).expect("Failed to write SVG file");
+    println!("Full SVG written to exports/tree.svg");
 
     println!("\n=== Export to DOT (Graphviz) ===");
     let dot = tree.to_dot();
     println!("DOT output:");
     println!("{dot}");
-    fs::write("tree.dot", dot).expect("Failed to write DOT file");
-    println!("DOT file written to tree.dot");
-    println!("\nYou can render the DOT file with: dot -Tpng tree.dot -o tree.png");
+    fs::write("exports/tree.dot", dot).expect("Failed to write DOT file");
+    println!("DOT file written to exports/tree.dot");
+    println!("\nYou can render the DOT file with: dot -Tpng exports/tree.dot -o exports/tree.png");
 }
