@@ -1,6 +1,6 @@
 [package]
 name = "treelog"
-version = "0.0.2"
+version = "0.0.3"
 edition = "2024"
 authors = ["Milan de Kruijf"]
 description = "A highly customizable, optimized, and modular tree rendering library"

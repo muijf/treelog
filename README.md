@@ -32,7 +32,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-treelog = "0.0.2"
+treelog = "0.0.3"
 ```
 
 ## Quick Start
