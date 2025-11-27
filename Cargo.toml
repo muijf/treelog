@@ -36,6 +36,7 @@ syn = { version = "2.0", optional = true, features = ["full", "parsing", "extra-
 ron = { version = "0.12", optional = true }
 tree-sitter = { version = "0.25", optional = true }
 clap = { version = "4.5", optional = true, features = ["derive"] }
+indicatif = { version = "0.18.3", optional = true }
 
 [features]
 default = ["builder", "iterator"]
@@ -78,7 +79,8 @@ arbitrary-git2 = ["dep:git2"]
 arbitrary-syn = ["dep:syn"]
 arbitrary-tree-sitter = ["dep:tree-sitter"]
 arbitrary-clap = ["dep:clap"]
-all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "compare", "search", "sort", "stats", "merge", "export", "color", "serde", "serde-json", "serde-yaml", "serde-toml", "serde-ron", "walkdir", "petgraph", "cargo-metadata", "git2", "syn", "tree-sitter", "clap", "arbitrary", "arbitrary-json", "arbitrary-yaml", "arbitrary-toml", "arbitrary-xml", "arbitrary-walkdir", "arbitrary-petgraph", "arbitrary-cargo", "arbitrary-git2", "arbitrary-syn", "arbitrary-tree-sitter", "arbitrary-clap"]
+indicatif = ["dep:indicatif"]
+all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "compare", "search", "sort", "stats", "merge", "export", "color", "serde", "serde-json", "serde-yaml", "serde-toml", "serde-ron", "walkdir", "petgraph", "cargo-metadata", "git2", "syn", "tree-sitter", "clap", "arbitrary", "arbitrary-json", "arbitrary-yaml", "arbitrary-toml", "arbitrary-xml", "arbitrary-walkdir", "arbitrary-petgraph", "arbitrary-cargo", "arbitrary-git2", "arbitrary-syn", "arbitrary-tree-sitter", "arbitrary-clap", "indicatif"]
 
 [dev-dependencies]
 colored = "3.0"
