@@ -34,7 +34,7 @@ impl Config {
     const MAX_CHUNK_SIZE: u64 = 102_400;
 
     /// Sleep duration between simulation steps (milliseconds).
-    const SLEEP_DURATION_MS: u64 = 3;
+    const SLEEP_DURATION_MS: u64 = 10;
 
     /// Threshold for random action selection (higher = more increments, less tree modifications).
     const ACTION_RANDOM_THRESHOLD: u64 = 16;
