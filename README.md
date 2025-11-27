@@ -55,7 +55,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-treelog = "0.0.4"
+treelog = "0.0.5"
 ```
 
 ### As a CLI Tool
@@ -771,7 +771,7 @@ Most advanced features are behind feature flags to keep the core library lightwe
 
 ```toml
 [dependencies]
-treelog = { version = "0.0.4", features = ["traversal", "transform", "path", "comparison", "merge", "export"] }
+treelog = { version = "0.0.5", features = ["traversal", "transform", "path", "comparison", "merge", "export"] }
 ```
 
 Available features:
@@ -803,12 +803,12 @@ Available features:
 
 Use `all` feature to enable everything (note: `cli` is separate and must be enabled explicitly for the binary):
 ```toml
-treelog = { version = "0.0.4", features = ["all"] }
+treelog = { version = "0.0.5", features = ["all"] }
 ```
 
 To build the CLI binary, enable the `cli` feature along with any input source features you need:
 ```toml
-treelog = { version = "0.0.4", features = ["cli", "walkdir", "json"] }
+treelog = { version = "0.0.5", features = ["cli", "walkdir", "json"] }
 ```
 
 </details>

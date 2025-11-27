@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.5] - 2025-11-27
+
 ## [0.0.2] - YYYY-MM-DD
 
 ### Added
@@ -17,5 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Custom formatters for nodes and leaves
 - Feature flags for optional functionality
 
-[Unreleased]: https://github.com/muijf/treelog/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/muijf/treelog/compare/v0.0.5...HEAD
+[0.0.5]: https://github.com/muijf/treelog/compare/v0.0.2...v0.0.5
 [0.0.2]: https://github.com/muijf/treelog/releases/tag/v0.0.2
