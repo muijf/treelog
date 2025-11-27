@@ -23,6 +23,7 @@ use crate::traversal::{Leaves, LevelOrder, Nodes, PostOrder, PreOrder};
 /// );
 /// ```
 #[derive(Clone, Debug, PartialEq, Eq)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum Tree {
     /// A node with a label and child trees.
     Node(String, Vec<Tree>),
@@ -772,6 +773,7 @@ impl Tree {
 /// This struct provides various metrics about a tree, including its depth,
 /// width, and counts of nodes and leaves.
 #[derive(Clone, Debug, PartialEq, Eq)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct TreeStats {
     /// Maximum depth of the tree
     pub depth: usize,

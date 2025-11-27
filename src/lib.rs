@@ -2,11 +2,15 @@
 
 #[cfg(any(feature = "builder", doc))]
 pub mod builder;
+#[cfg(any(feature = "cargo-metadata", doc))]
+pub mod cargo;
 #[cfg(any(feature = "comparison", doc))]
 pub mod comparison;
 pub mod config;
 #[cfg(any(feature = "export", doc))]
 pub mod export;
+#[cfg(any(feature = "walkdir", doc))]
+pub mod filesystem;
 #[cfg(any(feature = "iterator", doc))]
 pub mod iterator;
 mod level;
@@ -16,7 +20,11 @@ mod macros;
 pub mod merge;
 #[cfg(any(feature = "path", doc))]
 pub mod path;
+#[cfg(any(feature = "petgraph", doc))]
+pub mod petgraph;
 pub mod renderer;
+#[cfg(any(feature = "serde", doc))]
+pub mod serde;
 pub mod style;
 #[cfg(any(feature = "transform", doc))]
 pub mod transform;

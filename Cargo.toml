@@ -16,6 +16,45 @@ readme = "README.md"
 name = "treelog"
 path = "src/lib.rs"
 
+[dependencies]
+colored = { version = "3.0", optional = true }
+serde = { version = "1.0", features = ["derive"], optional = true }
+serde_json = { version = "1.0", optional = true }
+serde_yaml = { version = "0.9", optional = true }
+toml = { version = "0.8", optional = true }
+walkdir = { version = "2", optional = true }
+petgraph = { version = "0.6", optional = true }
+cargo_metadata = { version = "0.18", optional = true }
+
+[features]
+default = ["builder", "iterator"]
+builder = []
+iterator = []
+macro = []
+formatters = []
+traversal = []
+transform = []
+path = []
+comparison = []
+merge = []
+export = []
+color = ["colored"]
+serde = ["dep:serde"]
+json = ["serde", "dep:serde_json"]
+yaml = ["serde", "dep:serde_yaml"]
+toml = ["dep:toml"]
+walkdir = ["dep:walkdir"]
+petgraph = ["dep:petgraph"]
+cargo-metadata = ["dep:cargo_metadata"]
+all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "comparison", "merge", "export", "color", "serde", "json", "yaml", "toml", "walkdir", "petgraph", "cargo-metadata"]
+
+[dev-dependencies]
+colored = "3.0"
+
+[package.metadata.docs.rs]
+all-features = true
+
+
 [[example]]
 name = "basic"
 path = "examples/basic.rs"
@@ -90,26 +129,22 @@ name = "export"
 path = "examples/export.rs"
 required-features = ["export"]
 
-[dependencies]
-colored = { version = "3.0", optional = true }
+[[example]]
+name = "serde"
+path = "examples/serde.rs"
+required-features = ["json", "yaml"]
 
-[features]
-default = ["builder", "iterator"]
-builder = []
-iterator = []
-macro = []
-formatters = []
-traversal = []
-transform = []
-path = []
-comparison = []
-merge = []
-export = []
-color = ["colored"]
-all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "comparison", "merge", "export", "color"]
+[[example]]
+name = "filesystem"
+path = "examples/filesystem.rs"
+required-features = ["walkdir"]
 
-[dev-dependencies]
-colored = "3.0"
+[[example]]
+name = "petgraph"
+path = "examples/petgraph.rs"
+required-features = ["petgraph"]
 
-[package.metadata.docs.rs]
-all-features = true
+[[example]]
+name = "cargo"
+path = "examples/cargo.rs"
+required-features = ["cargo-metadata"]

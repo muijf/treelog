@@ -539,6 +539,99 @@ fs::write("exports/tree.dot", dot).unwrap();
 </details>
 
 <details>
+<summary><b>Library Integrations</b> - Integrations with popular Rust libraries</summary>
+
+### Serialization (serde)
+
+Serialize and deserialize trees to/from JSON and YAML:
+
+```rust
+use treelog::Tree;
+
+let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
+
+// JSON serialization (requires `json` feature)
+#[cfg(feature = "json")]
+{
+    let json = tree.to_json().unwrap();
+    let deserialized = Tree::from_json(&json).unwrap();
+}
+
+// YAML serialization (requires `yaml` feature)
+#[cfg(feature = "yaml")]
+{
+    let yaml = tree.to_yaml().unwrap();
+    let deserialized = Tree::from_yaml(&yaml).unwrap();
+}
+```
+
+### TOML Support
+
+**Serialize/deserialize trees to/from TOML** (requires both `toml` and `serde` features):
+
+```rust
+use treelog::Tree;
+
+let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
+
+// Serialize tree to TOML (preserves exact Tree structure)
+let toml = tree.to_toml().unwrap();
+
+// Deserialize back
+let deserialized = Tree::from_toml(&toml).unwrap();
+```
+
+### File System Integration
+
+Build trees from directory structures (requires `walkdir` feature):
+
+```rust
+use treelog::Tree;
+
+// Build tree from current directory
+let tree = Tree::from_dir(".").unwrap();
+
+// Build tree with maximum depth
+let tree = Tree::from_dir_max_depth(".", 2).unwrap();
+```
+
+### Graph Integration
+
+Convert between trees and petgraph graphs (requires `petgraph` feature):
+
+```rust
+use treelog::Tree;
+use petgraph::Graph;
+
+// Tree to graph
+let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
+let graph: Graph<String, ()> = tree.to_graph();
+
+// Graph to tree
+let mut graph = Graph::<String, ()>::new();
+let a = graph.add_node("A".to_string());
+let b = graph.add_node("B".to_string());
+graph.add_edge(a, b, ());
+let tree = Tree::from_graph(&graph);
+```
+
+### Cargo Metadata Integration
+
+Visualize Cargo dependency trees (requires `cargo-metadata` feature):
+
+```rust
+use treelog::Tree;
+
+// Build dependency tree for current project
+let tree = Tree::from_cargo_metadata("Cargo.toml").unwrap();
+
+// Build dependency tree for specific package
+let tree = Tree::from_cargo_package_deps("treelog", "Cargo.toml").unwrap();
+```
+
+</details>
+
+<details>
 <summary><b>Feature Flags</b> - Configure which features to enable</summary>
 
 Most advanced features are behind feature flags to keep the core library lightweight:
@@ -560,6 +653,13 @@ Available features:
 - `macro` - Macro DSL for tree construction
 - `formatters` - Custom formatters for nodes and leaves
 - `color` - Color output support
+- `serde` - Serde serialization support (Serialize/Deserialize traits)
+- `json` - JSON serialization/deserialization (requires `serde`)
+- `yaml` - YAML serialization/deserialization (requires `serde`)
+- `toml` - TOML parsing and tree conversion
+- `walkdir` - File system tree building from directories
+- `petgraph` - Graph to/from tree conversion
+- `cargo-metadata` - Cargo dependency tree visualization
 
 Use `all` feature to enable everything:
 ```toml
@@ -601,6 +701,13 @@ The repository includes comprehensive examples demonstrating all features:
 - **[`comparison`](examples/comparison.rs)** - Tree comparison and diff
 - **[`merge`](examples/merge.rs)** - Tree merging strategies
 - **[`export`](examples/export.rs)** - Export to HTML, SVG, and DOT formats
+
+**Integration Examples:**
+- **[`serde`](examples/serde.rs)** - JSON and YAML serialization
+- **[`toml`](examples/toml.rs)** - TOML parsing and conversion
+- **[`filesystem`](examples/filesystem.rs)** - File system tree building
+- **[`petgraph`](examples/petgraph.rs)** - Graph to/from tree conversion
+- **[`cargo`](examples/cargo.rs)** - Cargo dependency tree visualization
 
 Run any example with:
 ```bash
