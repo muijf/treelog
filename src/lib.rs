@@ -1,5 +1,13 @@
 #![doc = include_str!("../README.md")]
 
+#[cfg(any(
+    feature = "arbitrary-json",
+    feature = "arbitrary-yaml",
+    feature = "arbitrary-toml",
+    feature = "arbitrary-xml",
+    doc
+))]
+pub mod arbitrary;
 #[cfg(any(feature = "builder", doc))]
 pub mod builder;
 #[cfg(any(feature = "cargo-metadata", doc))]
@@ -27,9 +35,13 @@ pub mod path;
 #[cfg(any(feature = "petgraph", doc))]
 pub mod petgraph;
 pub mod renderer;
-#[cfg(any(feature = "ron", doc))]
-pub mod ron;
-#[cfg(any(feature = "serde", doc))]
+#[cfg(any(
+    feature = "serde-json",
+    feature = "serde-yaml",
+    feature = "serde-toml",
+    feature = "serde-ron",
+    doc
+))]
 pub mod serde;
 pub mod style;
 #[cfg(any(feature = "syn", doc))]
@@ -42,8 +54,6 @@ pub mod tree;
 #[cfg(any(feature = "tree-sitter", doc))]
 pub mod tree_sitter;
 mod utils;
-#[cfg(any(feature = "roxmltree", doc))]
-pub mod xml;
 
 // Re-export main types
 pub use config::RenderConfig;

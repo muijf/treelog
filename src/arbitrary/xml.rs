@@ -1,4 +1,4 @@
-//! XML/HTML DOM tree building using roxmltree.
+//! XML/HTML arbitrary serialization support for Tree.
 
 use crate::tree::Tree;
 use std::path::Path;
@@ -6,7 +6,7 @@ use std::path::Path;
 impl Tree {
     /// Builds a tree from an XML/HTML string.
     ///
-    /// Requires the `roxmltree` feature.
+    /// Requires the `arbitrary-xml` feature.
     ///
     /// XML/HTML elements become nodes, and text content becomes leaves.
     ///
@@ -16,10 +16,9 @@ impl Tree {
     /// use treelog::Tree;
     ///
     /// let xml = r#"<root><child>text</child></root>"#;
-    /// let tree = Tree::from_xml(xml).unwrap();
+    /// let tree = Tree::from_arbitrary_xml(xml).unwrap();
     /// ```
-    #[cfg(feature = "roxmltree")]
-    pub fn from_xml(xml_str: &str) -> Result<Self, roxmltree::Error> {
+    pub fn from_arbitrary_xml(xml_str: &str) -> Result<Self, roxmltree::Error> {
         let doc = roxmltree::Document::parse(xml_str)?;
         let root = doc.root_element();
         Ok(Self::from_xml_node(&root))
@@ -27,22 +26,22 @@ impl Tree {
 
     /// Builds a tree from an XML/HTML file.
     ///
-    /// Requires the `roxmltree` feature.
+    /// Requires the `arbitrary-xml` feature.
     ///
     /// # Examples
     ///
     /// ```no_run
     /// use treelog::Tree;
     ///
-    /// let tree = Tree::from_xml_file("example.xml").unwrap();
+    /// let tree = Tree::from_arbitrary_xml_file("example.xml").unwrap();
     /// ```
-    #[cfg(feature = "roxmltree")]
-    pub fn from_xml_file<P: AsRef<Path>>(path: P) -> Result<Self, Box<dyn std::error::Error>> {
+    pub fn from_arbitrary_xml_file<P: AsRef<Path>>(
+        path: P,
+    ) -> Result<Self, Box<dyn std::error::Error>> {
         let content = std::fs::read_to_string(path)?;
-        Self::from_xml(&content).map_err(|e| e.into())
+        Self::from_arbitrary_xml(&content).map_err(|e| e.into())
     }
 
-    #[cfg(feature = "roxmltree")]
     fn from_xml_node(node: &roxmltree::Node) -> Self {
         let mut label_parts = Vec::new();
         label_parts.push(node.tag_name().name().to_string());
@@ -84,21 +83,19 @@ impl Tree {
 mod tests {
     use super::*;
 
-    #[cfg(feature = "roxmltree")]
     #[test]
-    fn test_from_xml() {
+    fn test_from_arbitrary_xml() {
         let xml = r#"<root><child>text</child></root>"#;
-        let tree = Tree::from_xml(xml);
+        let tree = Tree::from_arbitrary_xml(xml);
         assert!(tree.is_ok());
         let tree = tree.unwrap();
         assert!(tree.is_node());
     }
 
-    #[cfg(feature = "roxmltree")]
     #[test]
-    fn test_from_xml_with_attributes() {
+    fn test_from_arbitrary_xml_with_attributes() {
         let xml = r#"<root id="1"><child class="test">text</child></root>"#;
-        let tree = Tree::from_xml(xml);
+        let tree = Tree::from_arbitrary_xml(xml);
         assert!(tree.is_ok());
         let tree = tree.unwrap();
         assert!(tree.is_node());

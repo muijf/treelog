@@ -50,21 +50,25 @@ comparison = []
 merge = []
 export = []
 color = ["colored"]
-serde = ["dep:serde"]
-json = ["serde", "dep:serde_json"]
-yaml = ["serde", "dep:serde_yaml"]
-toml = ["serde", "dep:toml"]
+serde = ["serde-json", "serde-yaml", "serde-toml", "serde-ron"]
+serde-json = ["dep:serde", "dep:serde_json"]
+serde-yaml = ["dep:serde", "dep:serde_yaml"]
+serde-toml = ["dep:serde", "dep:toml"]
+serde-ron = ["dep:serde", "dep:ron"]
 walkdir = ["dep:walkdir"]
 petgraph = ["dep:petgraph"]
 cargo-metadata = ["dep:cargo_metadata"]
 git2 = ["dep:git2"]
-roxmltree = ["dep:roxmltree"]
 syn = ["dep:syn"]
-ron = ["serde", "dep:ron"]
 tree-sitter = ["dep:tree-sitter"]
 clap = ["dep:clap"]
 cli = ["clap"]
-all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "comparison", "merge", "export", "color", "serde", "json", "yaml", "toml", "walkdir", "petgraph", "cargo-metadata", "git2", "roxmltree", "syn", "ron", "tree-sitter", "clap"]
+arbitrary = ["arbitrary-json", "arbitrary-yaml", "arbitrary-toml", "arbitrary-xml"]
+arbitrary-json = ["serde-json"]
+arbitrary-yaml = ["serde-yaml"]
+arbitrary-toml = ["serde-toml"]
+arbitrary-xml = ["dep:roxmltree"]
+all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "comparison", "merge", "export", "color", "serde", "serde-json", "serde-yaml", "serde-toml", "serde-ron", "walkdir", "petgraph", "cargo-metadata", "git2", "syn", "tree-sitter", "clap", "arbitrary", "arbitrary-json", "arbitrary-yaml", "arbitrary-toml", "arbitrary-xml"]
 
 [dev-dependencies]
 colored = "3.0"
@@ -150,7 +154,7 @@ required-features = ["export"]
 [[example]]
 name = "serde"
 path = "examples/serde.rs"
-required-features = ["json", "yaml"]
+required-features = ["serde-json", "serde-yaml"]
 
 [[example]]
 name = "filesystem"
@@ -175,7 +179,7 @@ required-features = ["git2"]
 [[example]]
 name = "xml"
 path = "examples/xml.rs"
-required-features = ["roxmltree"]
+required-features = ["arbitrary-xml"]
 
 [[example]]
 name = "syn"
@@ -185,7 +189,7 @@ required-features = ["syn"]
 [[example]]
 name = "ron"
 path = "examples/ron.rs"
-required-features = ["ron", "serde"]
+required-features = ["serde-ron"]
 
 [[example]]
 name = "tree_sitter"
@@ -196,3 +200,8 @@ required-features = ["tree-sitter"]
 name = "clap"
 path = "examples/clap.rs"
 required-features = ["clap"]
+
+[[example]]
+name = "arbitrary"
+path = "examples/arbitrary.rs"
+required-features = ["arbitrary-json", "arbitrary-yaml", "arbitrary-toml"]

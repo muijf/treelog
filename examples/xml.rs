@@ -18,7 +18,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         </html>
     "#;
 
-    let tree = Tree::from_xml(xml)?;
+    let tree = Tree::from_arbitrary_xml(xml)?;
     println!("XML structure:");
     println!("{}", tree.render_to_string());
 
@@ -32,7 +32,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         </root>
     "#;
 
-    let tree2 = Tree::from_xml(xml_with_attrs)?;
+    let tree2 = Tree::from_arbitrary_xml(xml_with_attrs)?;
     println!("XML with attributes:");
     println!("{}", tree2.render_to_string());
 

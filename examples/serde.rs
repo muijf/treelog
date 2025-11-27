@@ -22,7 +22,7 @@ fn main() {
     println!("{}", tree.render_to_string());
     println!();
 
-    #[cfg(feature = "json")]
+    #[cfg(feature = "serde-json")]
     {
         println!("=== JSON Serialization ===");
         match tree.to_json() {
@@ -54,7 +54,7 @@ fn main() {
         }
     }
 
-    #[cfg(feature = "yaml")]
+    #[cfg(feature = "serde-yaml")]
     {
         println!("=== YAML Serialization ===");
         match tree.to_yaml() {
@@ -77,7 +77,7 @@ fn main() {
         }
     }
 
-    #[cfg(all(feature = "toml", feature = "serde"))]
+    #[cfg(feature = "serde-toml")]
     {
         println!("=== TOML Serialization (serde-based) ===");
         match tree.to_toml() {
@@ -108,14 +108,10 @@ fn main() {
         }
     }
 
-    #[cfg(not(any(
-        feature = "json",
-        feature = "yaml",
-        all(feature = "toml", feature = "serde")
-    )))]
+    #[cfg(not(any(feature = "serde-json", feature = "serde-yaml", feature = "serde-toml")))]
     {
         println!(
-            "Note: Enable 'json', 'yaml', or both 'toml' and 'serde' features to see serialization examples."
+            "Note: Enable 'serde-json', 'serde-yaml', or 'serde-toml' features to see serialization examples."
         );
     }
 }

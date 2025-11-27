@@ -19,13 +19,13 @@ pub enum SortMethod {
 #[derive(Clone, Debug, ValueEnum)]
 pub enum OutputFormat {
     Text,
-    #[cfg(feature = "json")]
+    #[cfg(feature = "serde-json")]
     Json,
-    #[cfg(feature = "yaml")]
+    #[cfg(feature = "serde-yaml")]
     Yaml,
-    #[cfg(feature = "toml")]
+    #[cfg(feature = "serde-toml")]
     Toml,
-    #[cfg(feature = "ron")]
+    #[cfg(feature = "serde-ron")]
     Ron,
     #[cfg(feature = "export")]
     Html,
@@ -181,7 +181,7 @@ pub enum FromSource {
         commit: bool,
     },
     /// Build tree from XML/HTML file
-    #[cfg(feature = "roxmltree")]
+    #[cfg(feature = "arbitrary-xml")]
     Xml {
         /// XML/HTML file path (use '-' for stdin)
         file: String,
@@ -202,25 +202,25 @@ pub enum FromSource {
         language: Option<String>,
     },
     /// Build tree from JSON file
-    #[cfg(feature = "json")]
+    #[cfg(feature = "serde-json")]
     Json {
         /// JSON file path (use '-' for stdin)
         file: String,
     },
     /// Build tree from YAML file
-    #[cfg(feature = "yaml")]
+    #[cfg(feature = "serde-yaml")]
     Yaml {
         /// YAML file path (use '-' for stdin)
         file: String,
     },
     /// Build tree from TOML file
-    #[cfg(feature = "toml")]
+    #[cfg(feature = "serde-toml")]
     Toml {
         /// TOML file path (use '-' for stdin)
         file: String,
     },
     /// Build tree from RON file
-    #[cfg(feature = "ron")]
+    #[cfg(feature = "serde-ron")]
     Ron {
         /// RON file path (use '-' for stdin)
         file: String,
@@ -314,16 +314,16 @@ fn handle_from(source: &FromSource, cli: &Cli) -> Result<(), Box<dyn std::error:
         feature = "walkdir",
         feature = "cargo-metadata",
         feature = "git2",
-        feature = "roxmltree",
+        feature = "arbitrary-xml",
         feature = "syn",
         feature = "tree-sitter",
-        feature = "json",
-        feature = "yaml",
-        feature = "toml",
-        feature = "ron"
+        feature = "serde-json",
+        feature = "serde-yaml",
+        feature = "serde-toml",
+        feature = "serde-ron"
     )))]
     {
-        return Err("No input source features enabled. Enable at least one feature (walkdir, cargo-metadata, git2, roxmltree, syn, tree-sitter, json, yaml, toml, or ron).".into());
+        return Err("No input source features enabled. Enable at least one feature (walkdir, cargo-metadata, git2, arbitrary-xml, syn, tree-sitter, serde-json, serde-yaml, serde-toml, or serde-ron).".into());
     }
 
     #[allow(unreachable_code)]
@@ -361,14 +361,14 @@ fn handle_from(source: &FromSource, cli: &Cli) -> Result<(), Box<dyn std::error:
                 treelog::Tree::from_git_repo(path)?
             }
         }
-        #[cfg(feature = "roxmltree")]
+        #[cfg(feature = "arbitrary-xml")]
         FromSource::Xml { file } => {
             if file == "-" {
                 let mut content = String::new();
                 io::stdin().read_to_string(&mut content)?;
-                treelog::Tree::from_xml(&content)?
+                treelog::Tree::from_arbitrary_xml(&content)?
             } else {
-                treelog::Tree::from_xml_file(file)?
+                treelog::Tree::from_arbitrary_xml_file(file)?
             }
         }
         #[cfg(feature = "syn")]
@@ -380,22 +380,22 @@ fn handle_from(source: &FromSource, cli: &Cli) -> Result<(), Box<dyn std::error:
         } => {
             return Err("tree-sitter parsing requires language specification. This feature needs implementation.".into());
         }
-        #[cfg(feature = "json")]
+        #[cfg(feature = "serde-json")]
         FromSource::Json { file } => {
             let content = read_file_or_stdin(file)?;
             treelog::Tree::from_json(&content)?
         }
-        #[cfg(feature = "yaml")]
+        #[cfg(feature = "serde-yaml")]
         FromSource::Yaml { file } => {
             let content = read_file_or_stdin(file)?;
             treelog::Tree::from_yaml(&content)?
         }
-        #[cfg(feature = "toml")]
+        #[cfg(feature = "serde-toml")]
         FromSource::Toml { file } => {
             let content = read_file_or_stdin(file)?;
             treelog::Tree::from_toml(&content)?
         }
-        #[cfg(feature = "ron")]
+        #[cfg(feature = "serde-ron")]
         FromSource::Ron { file } => {
             let content = read_file_or_stdin(file)?;
             treelog::Tree::from_ron(&content)?
@@ -404,16 +404,16 @@ fn handle_from(source: &FromSource, cli: &Cli) -> Result<(), Box<dyn std::error:
             feature = "walkdir",
             feature = "cargo-metadata",
             feature = "git2",
-            feature = "roxmltree",
+            feature = "arbitrary-xml",
             feature = "syn",
             feature = "tree-sitter",
-            feature = "json",
-            feature = "yaml",
-            feature = "toml",
-            feature = "ron"
+            feature = "serde-json",
+            feature = "serde-yaml",
+            feature = "serde-toml",
+            feature = "serde-ron"
         )))]
         _ => {
-            return Err("No input source features enabled. Enable at least one feature (walkdir, cargo-metadata, git2, roxmltree, syn, tree-sitter, json, yaml, toml, or ron).".into());
+            return Err("No input source features enabled. Enable at least one feature (walkdir, cargo-metadata, git2, arbitrary-xml, syn, tree-sitter, serde-json, serde-yaml, serde-toml, or serde-ron).".into());
         }
     };
 
@@ -577,30 +577,35 @@ fn read_tree(input: &str) -> Result<treelog::Tree, Box<dyn std::error::Error>> {
     let content = read_file_or_stdin(input)?;
 
     // Try to deserialize from JSON first
-    #[cfg(feature = "json")]
+    #[cfg(feature = "serde-json")]
     if let Ok(tree) = treelog::Tree::from_json(&content) {
         return Ok(tree);
     }
 
     // Try YAML
-    #[cfg(feature = "yaml")]
+    #[cfg(feature = "serde-yaml")]
     if let Ok(tree) = treelog::Tree::from_yaml(&content) {
         return Ok(tree);
     }
 
     // Try TOML
-    #[cfg(feature = "toml")]
+    #[cfg(feature = "serde-toml")]
     if let Ok(tree) = treelog::Tree::from_toml(&content) {
         return Ok(tree);
     }
 
     // Try RON
-    #[cfg(feature = "ron")]
+    #[cfg(feature = "serde-ron")]
     if let Ok(tree) = treelog::Tree::from_ron(&content) {
         return Ok(tree);
     }
 
-    #[cfg(not(any(feature = "json", feature = "yaml", feature = "toml", feature = "ron")))]
+    #[cfg(not(any(
+        feature = "serde-json",
+        feature = "serde-yaml",
+        feature = "serde-toml",
+        feature = "serde-ron"
+    )))]
     let _ = content; // Suppress unused variable warning when no features enabled
 
     Err("Could not parse tree. Ensure the input is valid JSON, YAML, TOML, or RON, or enable the appropriate feature.".into())
@@ -626,19 +631,19 @@ fn output_tree(tree: &treelog::Tree, cli: &Cli) -> Result<(), Box<dyn std::error
         OutputFormat::Svg => tree.to_svg(),
         #[cfg(feature = "export")]
         OutputFormat::Dot => tree.to_dot(),
-        #[cfg(feature = "json")]
+        #[cfg(feature = "serde-json")]
         OutputFormat::Json => tree
             .to_json_pretty()
             .map_err(|e| format!("Failed to serialize to JSON: {}", e))?,
-        #[cfg(feature = "yaml")]
+        #[cfg(feature = "serde-yaml")]
         OutputFormat::Yaml => tree
             .to_yaml()
             .map_err(|e| format!("Failed to serialize to YAML: {}", e))?,
-        #[cfg(feature = "toml")]
+        #[cfg(feature = "serde-toml")]
         OutputFormat::Toml => tree
             .to_toml()
             .map_err(|e| format!("Failed to serialize to TOML: {}", e))?,
-        #[cfg(feature = "ron")]
+        #[cfg(feature = "serde-ron")]
         OutputFormat::Ron => tree
             .to_ron_pretty()
             .map_err(|e| format!("Failed to serialize to RON: {}", e))?,
@@ -649,25 +654,25 @@ fn output_tree(tree: &treelog::Tree, cli: &Cli) -> Result<(), Box<dyn std::error
                     .into(),
             );
         }
-        #[cfg(not(feature = "json"))]
+        #[cfg(not(feature = "serde-json"))]
         OutputFormat::Json => {
             return Err(
                 "JSON feature is not enabled. Enable the 'json' feature to use JSON format.".into(),
             );
         }
-        #[cfg(not(feature = "yaml"))]
+        #[cfg(not(feature = "serde-yaml"))]
         OutputFormat::Yaml => {
             return Err(
                 "YAML feature is not enabled. Enable the 'yaml' feature to use YAML format.".into(),
             );
         }
-        #[cfg(not(feature = "toml"))]
+        #[cfg(not(feature = "serde-toml"))]
         OutputFormat::Toml => {
             return Err(
                 "TOML feature is not enabled. Enable the 'toml' feature to use TOML format.".into(),
             );
         }
-        #[cfg(not(feature = "ron"))]
+        #[cfg(not(feature = "serde-ron"))]
         OutputFormat::Ron => {
             return Err(
                 "RON feature is not enabled. Enable the 'ron' feature to use RON format.".into(),

@@ -5,7 +5,7 @@ use crate::tree::Tree;
 impl Tree {
     /// Deserializes a tree from RON.
     ///
-    /// Requires the `ron` feature.
+    /// Requires the `serde-ron` feature.
     ///
     /// # Examples
     ///
@@ -20,14 +20,13 @@ impl Tree {
     /// let tree = Tree::from_ron(&ron).unwrap();
     /// assert_eq!(original, tree);
     /// ```
-    #[cfg(feature = "ron")]
     pub fn from_ron(ron_str: &str) -> Result<Self, ron::de::SpannedError> {
         ron::from_str(ron_str)
     }
 
     /// Serializes the tree to RON.
     ///
-    /// Requires the `ron` feature.
+    /// Requires the `serde-ron` feature.
     ///
     /// # Examples
     ///
@@ -37,14 +36,13 @@ impl Tree {
     /// let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
     /// let ron = tree.to_ron().unwrap();
     /// ```
-    #[cfg(feature = "ron")]
     pub fn to_ron(&self) -> Result<String, ron::error::Error> {
         ron::to_string(self)
     }
 
     /// Serializes the tree to pretty-printed RON.
     ///
-    /// Requires the `ron` feature.
+    /// Requires the `serde-ron` feature.
     ///
     /// # Examples
     ///
@@ -54,7 +52,6 @@ impl Tree {
     /// let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
     /// let ron = tree.to_ron_pretty().unwrap();
     /// ```
-    #[cfg(feature = "ron")]
     pub fn to_ron_pretty(&self) -> Result<String, ron::error::Error> {
         let pretty = ron::ser::PrettyConfig::default();
         ron::ser::to_string_pretty(self, pretty)
@@ -65,7 +62,6 @@ impl Tree {
 mod tests {
     use super::*;
 
-    #[cfg(feature = "ron")]
     #[test]
     fn test_ron_roundtrip() {
         let tree = Tree::Node(
@@ -83,7 +79,6 @@ mod tests {
         assert_eq!(tree, deserialized);
     }
 
-    #[cfg(feature = "ron")]
     #[test]
     fn test_ron_pretty() {
         let tree = Tree::Node(

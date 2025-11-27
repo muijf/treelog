@@ -678,10 +678,10 @@ use treelog::Tree;
 
 // Build tree from XML string
 let xml = r#"<root><child>text</child></root>"#;
-let tree = Tree::from_xml(xml).unwrap();
+let tree = Tree::from_arbitrary_xml(xml).unwrap();
 
 // Build tree from XML file
-let tree = Tree::from_xml_file("example.xml").unwrap();
+let tree = Tree::from_arbitrary_xml_file("example.xml").unwrap();
 ```
 
 ### Rust AST Integration
