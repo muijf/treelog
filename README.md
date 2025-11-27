@@ -7,11 +7,11 @@
 [![docs.rs](https://docs.rs/treelog/badge.svg)](https://docs.rs/treelog)
 [![license](https://img.shields.io/crates/l/treelog.svg)](https://github.com/muijf/treelog/blob/main/LICENSE)
 
-**A customizable tree rendering library for Rust**
+**A customizable tree rendering library and CLI for Rust**
 
-*Provides low-level and high-level APIs for rendering hierarchical data structures, similar to `tree`, `npm ls`, or `cargo tree`.*
+*Provides low-level and high-level APIs for rendering hierarchical data structures, similar to `tree`, `npm ls`, or `cargo tree`. Also includes a command-line utility for quick tree visualization.*
 
-[Installation](#installation) • [Quick Start](#quick-start) • [Documentation](https://docs.rs/treelog) • [Examples](#examples)
+[Installation](#installation) • [Quick Start](#quick-start) • [CLI Usage](#cli-usage) • [Documentation](https://docs.rs/treelog) • [Examples](#examples)
 
 </div>
 
@@ -49,12 +49,32 @@
 
 ## Installation
 
+### As a Library
+
 Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
 treelog = "0.0.4"
 ```
+
+### As a CLI Tool
+
+Install the CLI tool using cargo:
+
+```bash
+cargo install treelog --features cli,walkdir,json
+```
+
+Or build from source:
+
+```bash
+git clone https://github.com/muijf/treelog
+cd treelog
+cargo build --release --bin treelog --features cli,walkdir,json
+```
+
+The CLI requires the `cli` feature and optionally other features depending on the input sources you want to use.
 
 ## Quick Start
 
@@ -715,7 +735,7 @@ use treelog::Tree;
 use tree_sitter::{Parser, Language};
 
 // Load a language (tree-sitter-rust is available as a dev-dependency for doctests)
-let language = tree_sitter_rust::language();
+let language: Language = tree_sitter_rust::LANGUAGE.into();
 
 let mut parser = Parser::new();
 parser.set_language(&language).unwrap();
@@ -779,10 +799,16 @@ Available features:
 - `ron` - RON (Rusty Object Notation) serialization
 - `tree-sitter` - Tree-sitter parse tree visualization
 - `clap` - Command-line argument structure visualization
+- `cli` - CLI binary (includes `clap`)
 
-Use `all` feature to enable everything:
+Use `all` feature to enable everything (note: `cli` is separate and must be enabled explicitly for the binary):
 ```toml
 treelog = { version = "0.0.4", features = ["all"] }
+```
+
+To build the CLI binary, enable the `cli` feature along with any input source features you need:
+```toml
+treelog = { version = "0.0.4", features = ["cli", "walkdir", "json"] }
 ```
 
 </details>
@@ -796,6 +822,102 @@ treelog = { version = "0.0.4", features = ["all"] }
 - **Zero-copy operations** - Most operations work with references where possible
 
 </details>
+
+## CLI Usage
+
+The `treelog` CLI tool provides a convenient way to visualize trees from various sources without writing code. It's built on top of the library and exposes all its features through a command-line interface.
+
+### Basic Usage
+
+```bash
+# Visualize a directory structure
+treelog from dir . --max-depth 3
+
+# Visualize Cargo dependencies
+treelog from cargo
+
+# Visualize Git repository structure
+treelog from git .
+
+# Get tree statistics
+treelog from dir . --format json | treelog stats
+```
+
+### Input Sources
+
+The CLI supports creating trees from various sources:
+
+- **Directory structures**: `treelog from dir <path> [--max-depth <n>]`
+- **Cargo metadata**: `treelog from cargo [--package <name>]`
+- **Git repositories**: `treelog from git [path] [--branches] [--commit]`
+- **XML/HTML files**: `treelog from xml <file>`
+- **Rust source files**: `treelog from rust <file>`
+- **JSON/YAML/TOML/RON files**: `treelog from json|yaml|toml|ron <file>`
+
+### Rendering Options
+
+```bash
+# Use ASCII style
+treelog from dir . --style ascii
+
+# Custom style
+treelog from dir . --custom-style ">-,<-,| ,   "
+
+# Output to file
+treelog from dir . --output tree.txt
+
+# Export to different formats
+treelog from dir . --format json > tree.json
+treelog from dir . --format html > tree.html
+treelog from dir . --format svg > tree.svg
+treelog from dir . --format dot > tree.dot
+```
+
+### Tree Operations
+
+```bash
+# Get statistics
+treelog stats < input.json
+
+# Search for nodes
+treelog search "pattern" < input.json
+
+# Sort tree
+treelog sort --method label < input.json
+
+# Transform tree
+treelog transform map-nodes "[{}]" < input.json
+
+# Compare trees
+treelog compare tree1.json tree2.json
+
+# Merge trees
+treelog merge --strategy append tree1.json tree2.json
+```
+
+### Piping and Serialization
+
+The CLI supports piping trees between commands using serialized formats:
+
+```bash
+# Create tree and get statistics
+treelog from dir . --format json | treelog stats
+
+# Transform and export
+treelog from dir . --format json | treelog transform filter "src" | treelog export html > output.html
+```
+
+**Note**: When piping between commands, use `--format json` (or `yaml`, `toml`, `ron`) to serialize the tree structure. The default `text` format is for human-readable output only.
+
+### Help
+
+Get help for any command:
+
+```bash
+treelog --help
+treelog from --help
+treelog from dir --help
+```
 
 ## Examples
 

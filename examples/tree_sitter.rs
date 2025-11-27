@@ -7,7 +7,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Tree-sitter Parse Tree Visualization Example\n");
 
     // Load the Rust language
-    let language = tree_sitter_rust::language();
+    let language: tree_sitter::Language = tree_sitter_rust::LANGUAGE.into();
 
     // Example Rust code to parse
     let source_code = r#"

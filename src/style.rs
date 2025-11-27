@@ -1,5 +1,8 @@
 //! Tree style definitions and customization options.
 
+#[cfg(feature = "clap")]
+use clap::ValueEnum;
+
 /// Predefined tree styles with different character sets.
 ///
 /// # Examples
@@ -10,6 +13,7 @@
 /// let style = StyleConfig::from(TreeStyle::Unicode);
 /// ```
 #[derive(Clone, Debug, PartialEq, Eq, Default)]
+#[cfg_attr(feature = "clap", derive(ValueEnum))]
 pub enum TreeStyle {
     /// Unicode box drawing characters (default: ├─, └─, │)
     #[default]
@@ -19,6 +23,7 @@ pub enum TreeStyle {
     /// Box drawing characters (┌, └, │, ─)
     Box,
     /// Custom character set
+    #[cfg_attr(feature = "clap", value(skip))]
     Custom {
         /// Character for branch (non-last child)
         branch: String,

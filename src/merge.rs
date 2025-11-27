@@ -2,14 +2,19 @@
 
 use crate::tree::Tree;
 
+#[cfg(feature = "clap")]
+use clap::ValueEnum;
+
 /// Strategy for merging two trees.
 #[derive(Clone, Debug, PartialEq, Eq)]
+#[cfg_attr(feature = "clap", derive(ValueEnum))]
 pub enum MergeStrategy {
     /// Replace nodes/leaves in the first tree with those from the second tree
     Replace,
     /// Append children from the second tree to nodes in the first tree
     Append,
     /// Merge nodes with matching labels, append children otherwise
+    #[cfg_attr(feature = "clap", value(name = "merge-by-label"))]
     MergeByLabel,
 }
 
