@@ -97,11 +97,11 @@ impl<'a> TreeLines<'a> {
     }
 
     fn build_prefix(level: &LevelPath, style: &crate::style::StyleConfig) -> String {
-        crate::utils::compute_prefix(level, style)
+        crate::prefix::compute_prefix(level, style)
     }
 
     fn build_second_line_prefix(level: &LevelPath, style: &crate::style::StyleConfig) -> String {
-        crate::utils::compute_second_line_prefix(level, style)
+        crate::prefix::compute_second_line_prefix(level, style)
     }
 }
 

@@ -31,6 +31,7 @@ mod macros;
 pub mod merge;
 #[cfg(any(feature = "path", doc))]
 pub mod path;
+mod prefix;
 pub mod renderer;
 #[cfg(any(feature = "search", doc))]
 pub mod search;
@@ -69,8 +70,8 @@ pub use renderer::{
     render_to_string, render_to_string_with_config, write_tree, write_tree_with_config,
 };
 
-// Re-export utility functions
-pub use utils::{compute_prefix, compute_second_line_prefix};
+// Re-export prefix functions
+pub use prefix::{compute_prefix, compute_second_line_prefix};
 
 /// Extension methods for Tree that provide convenient rendering.
 impl Tree {
