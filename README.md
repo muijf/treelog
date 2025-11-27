@@ -42,7 +42,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-treelog = "0.0.5"
+treelog = "0.0.6"
 ```
 
 ### As a CLI Tool
@@ -128,10 +128,10 @@ cargo build --release --bin treelog --features cli,arbitrary-walkdir,serde-json
 
 ```toml
 # Common feature set
-treelog = { version = "0.0.5", features = ["traversal", "transform", "path", "compare", "merge", "export"] }
+treelog = { version = "0.0.6", features = ["traversal", "transform", "path", "compare", "merge", "export"] }
 
 # Enable everything
-treelog = { version = "0.0.5", features = ["all"] }
+treelog = { version = "0.0.6", features = ["all"] }
 ```
 
 > **Note**: The `cli` feature is separate and must be enabled explicitly for the binary. Use convenience aliases like `walkdir` (for `arbitrary-walkdir`) when available.
