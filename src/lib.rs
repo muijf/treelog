@@ -4,6 +4,8 @@
 pub mod builder;
 #[cfg(any(feature = "cargo-metadata", doc))]
 pub mod cargo;
+#[cfg(any(feature = "clap", doc))]
+pub mod clap;
 #[cfg(any(feature = "comparison", doc))]
 pub mod comparison;
 pub mod config;
@@ -11,6 +13,8 @@ pub mod config;
 pub mod export;
 #[cfg(any(feature = "walkdir", doc))]
 pub mod filesystem;
+#[cfg(any(feature = "git2", doc))]
+pub mod git2;
 #[cfg(any(feature = "iterator", doc))]
 pub mod iterator;
 mod level;
@@ -23,15 +27,23 @@ pub mod path;
 #[cfg(any(feature = "petgraph", doc))]
 pub mod petgraph;
 pub mod renderer;
+#[cfg(any(feature = "ron", doc))]
+pub mod ron;
 #[cfg(any(feature = "serde", doc))]
 pub mod serde;
 pub mod style;
+#[cfg(any(feature = "syn", doc))]
+pub mod syn;
 #[cfg(any(feature = "transform", doc))]
 pub mod transform;
 #[cfg(any(feature = "traversal", doc))]
 pub mod traversal;
 pub mod tree;
+#[cfg(any(feature = "tree-sitter", doc))]
+pub mod tree_sitter;
 mod utils;
+#[cfg(any(feature = "roxmltree", doc))]
+pub mod xml;
 
 // Re-export main types
 pub use config::RenderConfig;

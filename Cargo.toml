@@ -25,6 +25,12 @@ toml = { version = "0.8", optional = true }
 walkdir = { version = "2", optional = true }
 petgraph = { version = "0.6", optional = true }
 cargo_metadata = { version = "0.18", optional = true }
+git2 = { version = "0.18", optional = true }
+roxmltree = { version = "0.19", optional = true }
+syn = { version = "2.0", optional = true, features = ["full", "parsing", "extra-traits"] }
+ron = { version = "0.8", optional = true }
+tree-sitter = { version = "0.21", optional = true }
+clap = { version = "4.5", optional = true, features = ["derive"] }
 
 [features]
 default = ["builder", "iterator"]
@@ -42,18 +48,24 @@ color = ["colored"]
 serde = ["dep:serde"]
 json = ["serde", "dep:serde_json"]
 yaml = ["serde", "dep:serde_yaml"]
-toml = ["dep:toml"]
+toml = ["serde", "dep:toml"]
 walkdir = ["dep:walkdir"]
 petgraph = ["dep:petgraph"]
 cargo-metadata = ["dep:cargo_metadata"]
-all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "comparison", "merge", "export", "color", "serde", "json", "yaml", "toml", "walkdir", "petgraph", "cargo-metadata"]
+git2 = ["dep:git2"]
+roxmltree = ["dep:roxmltree"]
+syn = ["dep:syn"]
+ron = ["serde", "dep:ron"]
+tree-sitter = ["dep:tree-sitter"]
+clap = ["dep:clap"]
+all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "comparison", "merge", "export", "color", "serde", "json", "yaml", "toml", "walkdir", "petgraph", "cargo-metadata", "git2", "roxmltree", "syn", "ron", "tree-sitter", "clap"]
 
 [dev-dependencies]
 colored = "3.0"
+tree-sitter-rust = "0.21"
 
 [package.metadata.docs.rs]
 all-features = true
-
 
 [[example]]
 name = "basic"
@@ -148,3 +160,33 @@ required-features = ["petgraph"]
 name = "cargo"
 path = "examples/cargo.rs"
 required-features = ["cargo-metadata"]
+
+[[example]]
+name = "git2"
+path = "examples/git2.rs"
+required-features = ["git2"]
+
+[[example]]
+name = "xml"
+path = "examples/xml.rs"
+required-features = ["roxmltree"]
+
+[[example]]
+name = "syn"
+path = "examples/syn.rs"
+required-features = ["syn"]
+
+[[example]]
+name = "ron"
+path = "examples/ron.rs"
+required-features = ["ron", "serde"]
+
+[[example]]
+name = "tree_sitter"
+path = "examples/tree_sitter.rs"
+required-features = ["tree-sitter"]
+
+[[example]]
+name = "clap"
+path = "examples/clap.rs"
+required-features = ["clap"]

@@ -629,6 +629,119 @@ let tree = Tree::from_cargo_metadata("Cargo.toml").unwrap();
 let tree = Tree::from_cargo_package_deps("treelog", "Cargo.toml").unwrap();
 ```
 
+### Git Integration
+
+Visualize Git repository structures (requires `git2` feature):
+
+```rust
+use treelog::Tree;
+
+// Build tree from Git repository
+let tree = Tree::from_git_repo(".").unwrap();
+
+// Build tree from branches
+use git2::Repository;
+let repo = Repository::open(".").unwrap();
+let tree = Tree::from_git_branches(&repo).unwrap();
+
+// Build tree from specific commit
+let commit = repo.head().unwrap().peel_to_commit().unwrap();
+let tree = Tree::from_git_commit_tree(&repo, &commit).unwrap();
+```
+
+### XML/HTML Integration
+
+Visualize XML/HTML DOM trees (requires `roxmltree` feature):
+
+```rust,no_run
+use treelog::Tree;
+
+// Build tree from XML string
+let xml = r#"<root><child>text</child></root>"#;
+let tree = Tree::from_xml(xml).unwrap();
+
+// Build tree from XML file
+let tree = Tree::from_xml_file("example.xml").unwrap();
+```
+
+### Rust AST Integration
+
+Visualize Rust source code AST (requires `syn` feature):
+
+```rust,no_run
+use treelog::Tree;
+
+// Build tree from Rust file
+let tree = Tree::from_syn_file("src/lib.rs").unwrap();
+
+// Build tree from syn::File AST
+use syn::parse_file;
+let ast = parse_file("fn main() {}").unwrap();
+let tree = Tree::from_syn_file_ast(&ast);
+
+// Build tree from individual item
+use syn::parse_quote;
+let item: syn::Item = parse_quote! {
+    struct Test { field: i32 }
+};
+let tree = Tree::from_syn_item(&item);
+```
+
+### RON Integration
+
+Serialize and deserialize trees to/from RON (requires `ron` and `serde` features):
+
+```rust
+use treelog::Tree;
+
+let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
+
+// Serialize to RON
+let ron = tree.to_ron().unwrap();
+
+// Serialize to pretty RON
+let ron_pretty = tree.to_ron_pretty().unwrap();
+
+// Deserialize from RON
+let deserialized = Tree::from_ron(&ron).unwrap();
+```
+
+### Tree-sitter Integration
+
+Visualize tree-sitter parse trees (requires `tree-sitter` feature):
+
+```rust
+use treelog::Tree;
+use tree_sitter::{Parser, Language};
+
+// Load a language (tree-sitter-rust is available as a dev-dependency for doctests)
+let language = tree_sitter_rust::language();
+
+let mut parser = Parser::new();
+parser.set_language(&language).unwrap();
+let source_code = "fn main() {}";
+let parse_tree = parser.parse(source_code, None).unwrap();
+let tree = Tree::from_tree_sitter(&parse_tree);
+
+// Or parse and convert in one step
+let tree = Tree::from_tree_sitter_language(source_code, language).unwrap();
+```
+
+### Clap Integration
+
+Visualize command-line argument structures (requires `clap` feature):
+
+```rust
+use treelog::Tree;
+use clap::{Command, Arg};
+
+let cmd = Command::new("myapp")
+    .subcommand(Command::new("subcommand"))
+    .arg(Arg::new("input").short('i'));
+
+let tree = Tree::from_clap_command(&cmd);
+```
+
 </details>
 
 <details>
@@ -660,6 +773,12 @@ Available features:
 - `walkdir` - File system tree building from directories
 - `petgraph` - Graph to/from tree conversion
 - `cargo-metadata` - Cargo dependency tree visualization
+- `git2` - Git repository structure visualization
+- `roxmltree` - XML/HTML DOM tree visualization
+- `syn` - Rust AST visualization
+- `ron` - RON (Rusty Object Notation) serialization
+- `tree-sitter` - Tree-sitter parse tree visualization
+- `clap` - Command-line argument structure visualization
 
 Use `all` feature to enable everything:
 ```toml
@@ -708,6 +827,12 @@ The repository includes comprehensive examples demonstrating all features:
 - **[`filesystem`](examples/filesystem.rs)** - File system tree building
 - **[`petgraph`](examples/petgraph.rs)** - Graph to/from tree conversion
 - **[`cargo`](examples/cargo.rs)** - Cargo dependency tree visualization
+- **[`git2`](examples/git2.rs)** - Git repository structure visualization
+- **[`xml`](examples/xml.rs)** - XML/HTML DOM tree visualization
+- **[`syn`](examples/syn.rs)** - Rust AST visualization
+- **[`ron`](examples/ron.rs)** - RON serialization
+- **[`tree_sitter`](examples/tree_sitter.rs)** - Tree-sitter parse tree visualization
+- **[`clap`](examples/clap.rs)** - Command-line argument structure visualization
 
 Run any example with:
 ```bash
