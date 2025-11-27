@@ -18,7 +18,7 @@ path = "src/lib.rs"
 
 [[bin]]
 name = "treelog"
-path = "src/cli.rs"
+path = "src/cli/mod.rs"
 required-features = ["cli"]
 
 [dependencies]
