@@ -11,6 +11,7 @@ use indicatif::{HumanDuration, MultiProgress, MultiProgressAlignment, ProgressBa
 use once_cell::sync::Lazy;
 use rand::rngs::ThreadRng;
 use rand::{Rng, RngCore};
+use treelog::{LevelPath, StyleConfig, compute_prefix};
 
 const TERMINAL_WIDTH_PERCENTAGE: f64 = 0.25;
 const MIN_CHUNK_SIZE: u64 = 1024;
@@ -18,9 +19,6 @@ const MAX_CHUNK_SIZE: u64 = 102_400;
 const SLEEP_DURATION_MS: u64 = 3;
 const ACTION_RANDOM_THRESHOLD: u64 = 16;
 const DEFAULT_TERMINAL_WIDTH: usize = 80;
-const TREE_VERTICAL: &str = "│  ";
-const TREE_BRANCH: &str = "├─ ";
-const TREE_LAST: &str = "└─ ";
 const LABEL_WIDTH: usize = 11;
 
 #[derive(Debug, Clone)]
@@ -265,6 +263,7 @@ struct TreeState<'a> {
     parent_to_children: HashMap<usize, Vec<usize>>,
     tree_prefixes: HashMap<usize, String>,
     active_indices: Vec<usize>,
+    style: StyleConfig,
 }
 
 impl<'a> TreeState<'a> {
@@ -275,58 +274,54 @@ impl<'a> TreeState<'a> {
             parent_to_children: HashMap::new(),
             tree_prefixes: HashMap::new(),
             active_indices: Vec::new(),
+            style: StyleConfig::default(),
         }
     }
 
     fn compute_prefix(&self, item_idx: usize) -> String {
         let item = self.items[self.index_to_position[&item_idx]];
-        let Some(parent_idx) = item.parent else {
+        let Some(_parent_idx) = item.parent else {
             return String::new();
         };
 
-        let mut prefix = String::new();
-        let mut current = Some(parent_idx);
-        let mut ancestors = Vec::new();
-
-        while let Some(parent_idx) = current {
-            if let Some(&parent_pos) = self.index_to_position.get(&parent_idx) {
-                ancestors.push((parent_idx, parent_pos));
-                current = self.items[parent_pos].parent;
-            } else {
-                break;
-            }
-        }
-
-        ancestors.reverse();
-        for (_ancestor_idx, ancestor_pos) in ancestors {
-            if let Some(ancestor_parent) = self.items[ancestor_pos].parent
-                && let Some(siblings) = self.parent_to_children.get(&ancestor_parent)
-                && {
-                    let ancestor_idx = self.items[ancestor_pos].index;
-                    siblings.iter().any(|&sibling_idx| {
-                        sibling_idx != ancestor_idx
-                            && self
-                                .index_to_position
-                                .get(&sibling_idx)
-                                .is_some_and(|&sibling_pos| sibling_pos > ancestor_pos)
-                    })
+        // Build LevelPath by walking up the ancestor chain
+        // The LevelPath represents the path from root to this item,
+        // where each boolean indicates if that ancestor was the last child at its level
+        let level_path = LevelPath::from_parent_chain(
+            item_idx,
+            |idx| {
+                if let Some(&pos) = self.index_to_position.get(&idx) {
+                    self.items[pos].parent
+                } else {
+                    None
                 }
-            {
-                prefix.push_str(TREE_VERTICAL);
-            }
-        }
+            },
+            |idx| {
+                // Determine if this item is the last child of its parent
+                if let Some(&pos) = self.index_to_position.get(&idx)
+                    && let Some(parent_idx) = self.items[pos].parent
+                    && let Some(children) = self.parent_to_children.get(&parent_idx)
+                {
+                    // Get all children that are already in the tree, sorted by position
+                    let mut existing_children: Vec<(usize, usize)> = children
+                        .iter()
+                        .filter_map(|&child_idx| {
+                            self.index_to_position
+                                .get(&child_idx)
+                                .map(|&pos| (child_idx, pos))
+                        })
+                        .collect();
+                    existing_children.sort_by_key(|(_, pos)| *pos);
+                    // Check if this item is the last child
+                    if let Some((last_idx, _)) = existing_children.last() {
+                        return *last_idx == idx;
+                    }
+                }
+                false
+            },
+        );
 
-        if let Some(children) = self.parent_to_children.get(&parent_idx) {
-            let mut existing_children: Vec<(usize, usize)> = children
-                .iter()
-                .filter_map(|&idx| self.index_to_position.get(&idx).map(|&pos| (idx, pos)))
-                .collect();
-            existing_children.sort_by_key(|(_, pos)| *pos);
-            let is_last = existing_children.last().map(|(idx, _)| *idx) == Some(item_idx);
-            prefix.push_str(if is_last { TREE_LAST } else { TREE_BRANCH });
-        }
-
-        prefix
+        compute_prefix(&level_path, &self.style)
     }
 
     fn find_insert_position(&self, item: &Dependency) -> usize {

@@ -52,12 +52,13 @@ pub mod transform;
 #[cfg(any(feature = "traversal", doc))]
 pub mod traversal;
 pub mod tree;
-mod utils;
+pub mod utils;
 
 // Re-export main types
 pub use config::RenderConfig;
 #[cfg(any(feature = "iterator", doc))]
 pub use iterator::{Line, TreeIteratorExt};
+pub use level::LevelPath;
 #[cfg(any(feature = "stats", doc))]
 pub use stats::TreeStats;
 pub use style::{StyleConfig, TreeStyle};
@@ -67,6 +68,9 @@ pub use tree::Tree;
 pub use renderer::{
     render_to_string, render_to_string_with_config, write_tree, write_tree_with_config,
 };
+
+// Re-export utility functions
+pub use utils::{compute_prefix, compute_second_line_prefix};
 
 /// Extension methods for Tree that provide convenient rendering.
 impl Tree {

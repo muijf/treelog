@@ -93,7 +93,7 @@ fn write_tree_element(
             } else {
                 formatted_label
             };
-            write!(f, " {}{}", final_label, config.line_ending)?;
+            write!(f, "{}{}", final_label, config.line_ending)?;
 
             let mut remaining = children.len();
             for child in children {
@@ -120,7 +120,7 @@ fn write_tree_element(
                     formatted_line
                 };
                 if i == 0 {
-                    writeln!(f, " {}{}", final_line, config.line_ending.trim_end())?;
+                    writeln!(f, "{}{}", final_line, config.line_ending.trim_end())?;
                 } else {
                     writeln!(
                         f,

@@ -212,7 +212,7 @@ mod tests {
     #[test]
     fn test_with_style() {
         let config = RenderConfig::default().with_style(TreeStyle::Ascii);
-        assert_eq!(config.style.branch, " +-");
+        assert_eq!(config.style.branch, "+- ");
     }
 
     #[test]

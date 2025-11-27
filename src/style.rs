@@ -41,9 +41,9 @@ impl TreeStyle {
     #[inline]
     pub fn unicode() -> StyleConfig {
         StyleConfig {
-            branch: " ├─".to_string(),
-            last: " └─".to_string(),
-            vertical: " │ ".to_string(),
+            branch: "├─ ".to_string(),
+            last: "└─ ".to_string(),
+            vertical: "│  ".to_string(),
             empty: "   ".to_string(),
         }
     }
@@ -52,9 +52,9 @@ impl TreeStyle {
     #[inline]
     pub fn ascii() -> StyleConfig {
         StyleConfig {
-            branch: " +-".to_string(),
-            last: " `-".to_string(),
-            vertical: " | ".to_string(),
+            branch: "+- ".to_string(),
+            last: "`- ".to_string(),
+            vertical: "|  ".to_string(),
             empty: "   ".to_string(),
         }
     }
@@ -63,9 +63,9 @@ impl TreeStyle {
     #[inline]
     pub fn box_drawing() -> StyleConfig {
         StyleConfig {
-            branch: " ├─".to_string(),
-            last: " └─".to_string(),
-            vertical: " │ ".to_string(),
+            branch: "├─ ".to_string(),
+            last: "└─ ".to_string(),
+            vertical: "│  ".to_string(),
             empty: "   ".to_string(),
         }
     }
@@ -178,22 +178,22 @@ mod tests {
     #[test]
     fn test_default_style() {
         let config = StyleConfig::default();
-        assert_eq!(config.branch, " ├─");
-        assert_eq!(config.last, " └─");
+        assert_eq!(config.branch, "├─ ");
+        assert_eq!(config.last, "└─ ");
     }
 
     #[test]
     fn test_unicode_style() {
         let config = TreeStyle::unicode();
-        assert_eq!(config.branch, " ├─");
-        assert_eq!(config.last, " └─");
+        assert_eq!(config.branch, "├─ ");
+        assert_eq!(config.last, "└─ ");
     }
 
     #[test]
     fn test_ascii_style() {
         let config = TreeStyle::ascii();
-        assert_eq!(config.branch, " +-");
-        assert_eq!(config.last, " `-");
+        assert_eq!(config.branch, "+- ");
+        assert_eq!(config.last, "`- ");
     }
 
     #[test]
@@ -206,7 +206,7 @@ mod tests {
     #[test]
     fn test_get_branch() {
         let config = StyleConfig::default();
-        assert_eq!(config.get_branch(false), " ├─");
-        assert_eq!(config.get_branch(true), " └─");
+        assert_eq!(config.get_branch(false), "├─ ");
+        assert_eq!(config.get_branch(true), "└─ ");
     }
 }

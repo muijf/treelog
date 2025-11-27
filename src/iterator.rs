@@ -97,35 +97,11 @@ impl<'a> TreeLines<'a> {
     }
 
     fn build_prefix(level: &LevelPath, style: &crate::style::StyleConfig) -> String {
-        let mut prefix = String::new();
-        let maxpos = level.len();
-        for (pos, is_last) in level.iter().enumerate() {
-            let last_row = pos == maxpos - 1;
-            if is_last {
-                if !last_row {
-                    prefix.push_str(style.get_empty());
-                } else {
-                    prefix.push_str(style.get_branch(true));
-                }
-            } else if !last_row {
-                prefix.push_str(style.get_vertical());
-            } else {
-                prefix.push_str(style.get_branch(false));
-            }
-        }
-        prefix
+        crate::utils::compute_prefix(level, style)
     }
 
     fn build_second_line_prefix(level: &LevelPath, style: &crate::style::StyleConfig) -> String {
-        let mut prefix = String::new();
-        for is_last in level.iter() {
-            if is_last {
-                prefix.push_str(style.get_empty());
-            } else {
-                prefix.push_str(style.get_vertical());
-            }
-        }
-        prefix
+        crate::utils::compute_second_line_prefix(level, style)
     }
 }
 
