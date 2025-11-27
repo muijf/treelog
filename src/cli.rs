@@ -3,10 +3,10 @@
 use clap::{ArgAction, Parser, Subcommand, ValueEnum};
 use std::io::{self, Read};
 #[cfg(any(
-    feature = "walkdir",
-    feature = "cargo-metadata",
-    feature = "git2",
-    feature = "syn"
+    feature = "arbitrary-walkdir",
+    feature = "arbitrary-cargo",
+    feature = "arbitrary-git2",
+    feature = "arbitrary-syn"
 ))]
 use std::path::PathBuf;
 
@@ -117,7 +117,7 @@ pub enum Commands {
         input: String,
     },
     /// Compare two trees
-    #[cfg(feature = "comparison")]
+    #[cfg(feature = "compare")]
     Compare {
         /// First tree file
         first: String,
@@ -149,7 +149,7 @@ pub enum Commands {
 #[derive(Subcommand)]
 pub enum FromSource {
     /// Build tree from directory structure
-    #[cfg(feature = "walkdir")]
+    #[cfg(feature = "arbitrary-walkdir")]
     Dir {
         /// Directory path
         path: PathBuf,
@@ -158,7 +158,7 @@ pub enum FromSource {
         max_depth: Option<usize>,
     },
     /// Build tree from Cargo metadata
-    #[cfg(feature = "cargo-metadata")]
+    #[cfg(feature = "arbitrary-cargo")]
     Cargo {
         /// Manifest path (default: Cargo.toml in current directory)
         #[arg(default_value = "Cargo.toml")]
@@ -168,7 +168,7 @@ pub enum FromSource {
         package: Option<String>,
     },
     /// Build tree from Git repository
-    #[cfg(feature = "git2")]
+    #[cfg(feature = "arbitrary-git2")]
     Git {
         /// Repository path (default: current directory)
         #[arg(default_value = ".")]
@@ -187,14 +187,14 @@ pub enum FromSource {
         file: String,
     },
     /// Build tree from Rust source file (AST)
-    #[cfg(feature = "syn")]
+    #[cfg(feature = "arbitrary-syn")]
     Rust {
         /// Rust source file path
         file: PathBuf,
     },
     /// Build tree from tree-sitter parse
-    #[cfg(feature = "tree-sitter")]
-    Parse {
+    #[cfg(feature = "arbitrary-tree-sitter")]
+    TreeSitter {
         /// Source file path (use '-' for stdin)
         file: String,
         /// Language name (e.g., rust, javascript)
@@ -290,7 +290,7 @@ fn main() {
             reverse,
             input,
         } => handle_sort(method, *reverse, input, &cli),
-        #[cfg(feature = "comparison")]
+        #[cfg(feature = "compare")]
         Commands::Compare { first, second } => handle_compare(first, second),
         #[cfg(feature = "merge")]
         Commands::Merge {
@@ -311,24 +311,24 @@ fn main() {
 #[allow(unreachable_code, unused_variables)]
 fn handle_from(source: &FromSource, cli: &Cli) -> Result<(), Box<dyn std::error::Error>> {
     #[cfg(not(any(
-        feature = "walkdir",
-        feature = "cargo-metadata",
-        feature = "git2",
+        feature = "arbitrary-walkdir",
+        feature = "arbitrary-cargo",
+        feature = "arbitrary-git2",
         feature = "arbitrary-xml",
-        feature = "syn",
-        feature = "tree-sitter",
+        feature = "arbitrary-syn",
+        feature = "arbitrary-tree-sitter",
         feature = "serde-json",
         feature = "serde-yaml",
         feature = "serde-toml",
         feature = "serde-ron"
     )))]
     {
-        return Err("No input source features enabled. Enable at least one feature (walkdir, cargo-metadata, git2, arbitrary-xml, syn, tree-sitter, serde-json, serde-yaml, serde-toml, or serde-ron).".into());
+        return Err("No input source features enabled. Enable at least one feature (arbitrary-walkdir, arbitrary-cargo, arbitrary-git2, arbitrary-xml, arbitrary-syn, arbitrary-tree-sitter, serde-json, serde-yaml, serde-toml, or serde-ron).".into());
     }
 
     #[allow(unreachable_code)]
     let tree = match source {
-        #[cfg(feature = "walkdir")]
+        #[cfg(feature = "arbitrary-walkdir")]
         FromSource::Dir { path, max_depth } => {
             if let Some(depth) = max_depth {
                 treelog::Tree::from_dir_max_depth(path, *depth)?
@@ -336,7 +336,7 @@ fn handle_from(source: &FromSource, cli: &Cli) -> Result<(), Box<dyn std::error:
                 treelog::Tree::from_dir(path)?
             }
         }
-        #[cfg(feature = "cargo-metadata")]
+        #[cfg(feature = "arbitrary-cargo")]
         FromSource::Cargo { manifest, package } => {
             if let Some(pkg) = package {
                 treelog::Tree::from_cargo_package_deps(pkg, manifest)?
@@ -344,7 +344,7 @@ fn handle_from(source: &FromSource, cli: &Cli) -> Result<(), Box<dyn std::error:
                 treelog::Tree::from_cargo_metadata(manifest)?
             }
         }
-        #[cfg(feature = "git2")]
+        #[cfg(feature = "arbitrary-git2")]
         FromSource::Git {
             path,
             branches,
@@ -371,10 +371,10 @@ fn handle_from(source: &FromSource, cli: &Cli) -> Result<(), Box<dyn std::error:
                 treelog::Tree::from_arbitrary_xml_file(file)?
             }
         }
-        #[cfg(feature = "syn")]
+        #[cfg(feature = "arbitrary-syn")]
         FromSource::Rust { file } => treelog::Tree::from_syn_file(file)?,
-        #[cfg(feature = "tree-sitter")]
-        FromSource::Parse {
+        #[cfg(feature = "arbitrary-tree-sitter")]
+        FromSource::TreeSitter {
             file: _file,
             language: _language,
         } => {
@@ -401,12 +401,12 @@ fn handle_from(source: &FromSource, cli: &Cli) -> Result<(), Box<dyn std::error:
             treelog::Tree::from_ron(&content)?
         }
         #[cfg(not(any(
-            feature = "walkdir",
-            feature = "cargo-metadata",
-            feature = "git2",
+            feature = "arbitrary-walkdir",
+            feature = "arbitrary-cargo",
+            feature = "arbitrary-git2",
             feature = "arbitrary-xml",
-            feature = "syn",
-            feature = "tree-sitter",
+            feature = "arbitrary-syn",
+            feature = "arbitrary-tree-sitter",
             feature = "serde-json",
             feature = "serde-yaml",
             feature = "serde-toml",
@@ -508,7 +508,7 @@ fn handle_sort(
 }
 
 #[allow(unused_variables)]
-#[cfg(feature = "comparison")]
+#[cfg(feature = "compare")]
 fn handle_compare(first: &str, second: &str) -> Result<(), Box<dyn std::error::Error>> {
     let tree1 = read_tree(first)?;
     let tree2 = read_tree(second)?;
@@ -526,13 +526,13 @@ fn handle_compare(first: &str, second: &str) -> Result<(), Box<dyn std::error::E
         println!("Found {} difference(s):", diffs.len());
         for diff in diffs {
             match diff {
-                treelog::comparison::TreeDiff::OnlyInFirst { path, content } => {
+                treelog::compare::TreeDiff::OnlyInFirst { path, content } => {
                     println!("  Only in first (path: {:?}): {}", path, content);
                 }
-                treelog::comparison::TreeDiff::OnlyInSecond { path, content } => {
+                treelog::compare::TreeDiff::OnlyInSecond { path, content } => {
                     println!("  Only in second (path: {:?}): {}", path, content);
                 }
-                treelog::comparison::TreeDiff::DifferentContent {
+                treelog::compare::TreeDiff::DifferentContent {
                     path,
                     first,
                     second,

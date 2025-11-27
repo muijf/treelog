@@ -20,7 +20,7 @@ impl Tree {
     /// // let tree = parser.parse("source code", None).unwrap();
     /// // let tree = Tree::from_tree_sitter(&tree);
     /// ```
-    #[cfg(feature = "tree-sitter")]
+    #[cfg(feature = "arbitrary-tree-sitter")]
     pub fn from_tree_sitter(parse_tree: &tree_sitter::Tree) -> Self {
         let root_node = parse_tree.root_node();
         Self::from_tree_sitter_node(&root_node)
@@ -41,7 +41,7 @@ impl Tree {
     /// // This requires a specific language to be loaded
     /// // let tree = Tree::from_tree_sitter_language(source_code, language).unwrap();
     /// ```
-    #[cfg(feature = "tree-sitter")]
+    #[cfg(feature = "arbitrary-tree-sitter")]
     pub fn from_tree_sitter_language(
         source: &str,
         language: tree_sitter::Language,
@@ -52,7 +52,7 @@ impl Tree {
         Ok(Self::from_tree_sitter(&parse_tree))
     }
 
-    #[cfg(feature = "tree-sitter")]
+    #[cfg(feature = "arbitrary-tree-sitter")]
     fn from_tree_sitter_node(node: &tree_sitter::Node) -> Self {
         let kind = node.kind();
         let mut label = kind.to_string();
@@ -95,7 +95,7 @@ impl Tree {
 
 #[cfg(test)]
 mod tests {
-    #[cfg(feature = "tree-sitter")]
+    #[cfg(feature = "arbitrary-tree-sitter")]
     #[test]
     fn test_tree_sitter_parsing() {
         // This test would require a tree-sitter language to be loaded

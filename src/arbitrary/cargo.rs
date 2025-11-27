@@ -14,7 +14,7 @@ impl Tree {
     ///
     /// let tree = Tree::from_cargo_metadata(".").unwrap();
     /// ```
-    #[cfg(feature = "cargo-metadata")]
+    #[cfg(feature = "arbitrary-cargo")]
     pub fn from_cargo_metadata<P: AsRef<std::path::Path>>(
         manifest_path: P,
     ) -> Result<Self, cargo_metadata::Error> {
@@ -44,7 +44,7 @@ impl Tree {
         ))
     }
 
-    #[cfg(feature = "cargo-metadata")]
+    #[cfg(feature = "arbitrary-cargo")]
     #[allow(clippy::only_used_in_recursion)]
     fn from_cargo_package(
         package: &cargo_metadata::Package,
@@ -91,7 +91,7 @@ impl Tree {
     ///
     /// let tree = Tree::from_cargo_package_deps("treelog", ".").unwrap();
     /// ```
-    #[cfg(feature = "cargo-metadata")]
+    #[cfg(feature = "arbitrary-cargo")]
     pub fn from_cargo_package_deps<P: AsRef<std::path::Path>>(
         package_name: &str,
         manifest_path: P,
@@ -126,7 +126,7 @@ impl Tree {
 mod tests {
     use super::*;
 
-    #[cfg(feature = "cargo-metadata")]
+    #[cfg(feature = "arbitrary-cargo")]
     #[test]
     fn test_cargo_metadata_parsing() {
         // This test requires a valid Cargo.toml in the project root

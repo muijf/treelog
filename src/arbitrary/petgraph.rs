@@ -24,7 +24,7 @@ impl Tree {
     ///
     /// let tree = Tree::from_graph(&graph);
     /// ```
-    #[cfg(feature = "petgraph")]
+    #[cfg(feature = "arbitrary-petgraph")]
     pub fn from_graph<N, E, Ty, Ix>(graph: &petgraph::Graph<N, E, Ty, Ix>) -> Self
     where
         N: std::fmt::Display + Clone,
@@ -51,7 +51,7 @@ impl Tree {
         Self::from_graph_recursive(graph, root_idx, &mut std::collections::HashSet::new())
     }
 
-    #[cfg(feature = "petgraph")]
+    #[cfg(feature = "arbitrary-petgraph")]
     fn from_graph_recursive<N, E, Ty, Ix>(
         graph: &petgraph::Graph<N, E, Ty, Ix>,
         node_idx: petgraph::graph::NodeIndex<Ix>,
@@ -103,7 +103,7 @@ impl Tree {
     /// let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
     /// let graph: Graph<String, ()> = tree.to_graph();
     /// ```
-    #[cfg(feature = "petgraph")]
+    #[cfg(feature = "arbitrary-petgraph")]
     pub fn to_graph<N, E>(&self) -> petgraph::Graph<N, E>
     where
         N: From<String> + Clone,
@@ -117,7 +117,7 @@ impl Tree {
         graph
     }
 
-    #[cfg(feature = "petgraph")]
+    #[cfg(feature = "arbitrary-petgraph")]
     fn to_graph_recursive<N, E>(
         &self,
         graph: &mut petgraph::Graph<N, E>,
@@ -151,7 +151,7 @@ impl Tree {
 mod tests {
     use super::*;
 
-    #[cfg(feature = "petgraph")]
+    #[cfg(feature = "arbitrary-petgraph")]
     #[test]
     fn test_tree_to_graph() {
         let tree = Tree::Node(
@@ -168,7 +168,7 @@ mod tests {
         assert_eq!(graph.node_count(), 4); // root, item1, sub, subitem
     }
 
-    #[cfg(feature = "petgraph")]
+    #[cfg(feature = "arbitrary-petgraph")]
     #[test]
     fn test_graph_to_tree() {
         use petgraph::Graph;

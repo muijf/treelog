@@ -17,7 +17,7 @@ impl Tree {
     ///
     /// let tree = Tree::from_syn_file("src/lib.rs").unwrap();
     /// ```
-    #[cfg(feature = "syn")]
+    #[cfg(feature = "arbitrary-syn")]
     pub fn from_syn_file<P: AsRef<Path>>(path: P) -> Result<Self, Box<dyn std::error::Error>> {
         let content = std::fs::read_to_string(path)?;
         let ast = syn::parse_file(&content)?;
@@ -38,7 +38,7 @@ impl Tree {
     /// let ast = parse_file(code).unwrap();
     /// let tree = Tree::from_syn_file_ast(&ast);
     /// ```
-    #[cfg(feature = "syn")]
+    #[cfg(feature = "arbitrary-syn")]
     pub fn from_syn_file_ast(file: &syn::File) -> Self {
         let mut children = Vec::new();
 
@@ -68,7 +68,7 @@ impl Tree {
     /// };
     /// let tree = Tree::from_syn_item(&item);
     /// ```
-    #[cfg(feature = "syn")]
+    #[cfg(feature = "arbitrary-syn")]
     pub fn from_syn_item(item: &syn::Item) -> Self {
         match item {
             syn::Item::Const(item) => {
@@ -194,7 +194,7 @@ impl Tree {
 mod tests {
     use super::*;
 
-    #[cfg(feature = "syn")]
+    #[cfg(feature = "arbitrary-syn")]
     #[test]
     fn test_from_syn_file_ast() {
         let code = "fn main() {}";
@@ -203,7 +203,7 @@ mod tests {
         assert!(tree.is_node());
     }
 
-    #[cfg(feature = "syn")]
+    #[cfg(feature = "arbitrary-syn")]
     #[test]
     fn test_from_syn_item() {
         let item: syn::Item = syn::parse_quote! {

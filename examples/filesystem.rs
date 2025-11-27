@@ -3,7 +3,7 @@
 use treelog::Tree;
 
 fn main() {
-    #[cfg(feature = "walkdir")]
+    #[cfg(feature = "arbitrary-walkdir")]
     {
         println!("=== File System Tree (Current Directory) ===");
         match Tree::from_dir(".") {

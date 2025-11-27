@@ -16,7 +16,7 @@ impl Tree {
     ///
     /// let tree = Tree::from_git_repo(".").unwrap();
     /// ```
-    #[cfg(feature = "git2")]
+    #[cfg(feature = "arbitrary-git2")]
     pub fn from_git_repo<P: AsRef<std::path::Path>>(path: P) -> Result<Self, git2::Error> {
         let repo = git2::Repository::open(path)?;
         let mut tree = Tree::new_node("repository".to_string());
@@ -51,7 +51,7 @@ impl Tree {
     /// let commit = repo.head().unwrap().peel_to_commit().unwrap();
     /// let tree = Tree::from_git_commit_tree(&repo, &commit).unwrap();
     /// ```
-    #[cfg(feature = "git2")]
+    #[cfg(feature = "arbitrary-git2")]
     pub fn from_git_commit_tree(
         repo: &git2::Repository,
         commit: &git2::Commit,
@@ -78,7 +78,7 @@ impl Tree {
     /// let repo = Repository::open(".").unwrap();
     /// let tree = Tree::from_git_branches(&repo).unwrap();
     /// ```
-    #[cfg(feature = "git2")]
+    #[cfg(feature = "arbitrary-git2")]
     pub fn from_git_branches(repo: &git2::Repository) -> Result<Self, git2::Error> {
         let branches = repo.branches(Some(git2::BranchType::Local))?;
         let mut tree = Tree::new_node("branches".to_string());
@@ -100,7 +100,7 @@ impl Tree {
         Ok(tree)
     }
 
-    #[cfg(feature = "git2")]
+    #[cfg(feature = "arbitrary-git2")]
     fn from_git_tree(
         repo: &git2::Repository,
         tree_obj: &git2::Tree,
@@ -141,7 +141,7 @@ impl Tree {
 mod tests {
     use super::*;
 
-    #[cfg(feature = "git2")]
+    #[cfg(feature = "arbitrary-git2")]
     #[test]
     fn test_git_repo_parsing() {
         // This test requires a valid Git repository

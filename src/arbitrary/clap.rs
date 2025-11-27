@@ -19,7 +19,7 @@ impl Tree {
     ///     .subcommand(Command::new("subcommand"));
     /// let tree = Tree::from_clap_command(&cmd);
     /// ```
-    #[cfg(feature = "clap")]
+    #[cfg(feature = "arbitrary-clap")]
     pub fn from_clap_command(cmd: &clap::Command) -> Self {
         let name = cmd.get_name().to_string();
         let mut children = Vec::new();
@@ -66,7 +66,7 @@ impl Tree {
 mod tests {
     use super::*;
 
-    #[cfg(feature = "clap")]
+    #[cfg(feature = "arbitrary-clap")]
     #[test]
     fn test_from_clap_command() {
         use clap::Command;
@@ -77,7 +77,7 @@ mod tests {
         assert_eq!(tree.label(), Some("test"));
     }
 
-    #[cfg(feature = "clap")]
+    #[cfg(feature = "arbitrary-clap")]
     #[test]
     fn test_from_clap_command_with_args() {
         use clap::{Arg, Command};

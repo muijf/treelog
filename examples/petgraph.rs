@@ -3,7 +3,7 @@
 use treelog::Tree;
 
 fn main() {
-    #[cfg(feature = "petgraph")]
+    #[cfg(feature = "arbitrary-petgraph")]
     {
         use petgraph::Graph;
 

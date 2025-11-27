@@ -1,7 +1,8 @@
-//! Example: Arbitrary serialization and deserialization (JSON, YAML, and TOML).
+//! Example: Arbitrary serialization (JSON, YAML, and TOML).
 //!
 //! This example demonstrates converting arbitrary data structures (not just Tree structures)
-//! to and from Tree format. This is different from the exact Tree serialization in `serde.rs`.
+//! to Tree format. This is a one-way conversion from arbitrary data to Tree, different from
+//! the exact Tree serialization in `serde.rs`.
 
 use treelog::Tree;
 
@@ -43,16 +44,6 @@ builder = []
                 Ok(tree) => {
                     println!("Tree representation:");
                     println!("{}", tree.render_to_string());
-                    println!();
-
-                    // Convert back to TOML
-                    match tree.to_arbitrary_toml() {
-                        Ok(converted_toml) => {
-                            println!("Converted back to TOML:");
-                            println!("{}", converted_toml);
-                        }
-                        Err(e) => println!("Error converting back to TOML: {}", e),
-                    }
                 }
                 Err(e) => println!("Error parsing TOML: {}", e),
             }
@@ -85,16 +76,6 @@ builder = []
                 Ok(tree) => {
                     println!("Tree representation:");
                     println!("{}", tree.render_to_string());
-                    println!();
-
-                    // Convert back to JSON (pretty)
-                    match tree.to_arbitrary_json_pretty() {
-                        Ok(converted_json) => {
-                            println!("Converted back to JSON (pretty):");
-                            println!("{}", converted_json);
-                        }
-                        Err(e) => println!("Error converting back to JSON: {}", e),
-                    }
                 }
                 Err(e) => println!("Error parsing JSON: {}", e),
             }
@@ -133,16 +114,6 @@ features:
                 Ok(tree) => {
                     println!("Tree representation:");
                     println!("{}", tree.render_to_string());
-                    println!();
-
-                    // Convert back to YAML
-                    match tree.to_arbitrary_yaml() {
-                        Ok(converted_yaml) => {
-                            println!("Converted back to YAML:");
-                            println!("{}", converted_yaml);
-                        }
-                        Err(e) => println!("Error converting back to YAML: {}", e),
-                    }
                 }
                 Err(e) => println!("Error parsing YAML: {}", e),
             }

@@ -46,7 +46,10 @@ formatters = []
 traversal = []
 transform = []
 path = []
-comparison = []
+compare = []
+search = []
+sort = []
+stats = []
 merge = []
 export = []
 color = ["colored"]
@@ -55,20 +58,27 @@ serde-json = ["dep:serde", "dep:serde_json"]
 serde-yaml = ["dep:serde", "dep:serde_yaml"]
 serde-toml = ["dep:serde", "dep:toml"]
 serde-ron = ["dep:serde", "dep:ron"]
-walkdir = ["dep:walkdir"]
-petgraph = ["dep:petgraph"]
-cargo-metadata = ["dep:cargo_metadata"]
-git2 = ["dep:git2"]
-syn = ["dep:syn"]
-tree-sitter = ["dep:tree-sitter"]
+walkdir = ["arbitrary-walkdir"]
+petgraph = ["arbitrary-petgraph"]
+cargo-metadata = ["arbitrary-cargo"]
+git2 = ["arbitrary-git2"]
+syn = ["arbitrary-syn"]
+tree-sitter = ["arbitrary-tree-sitter"]
 clap = ["dep:clap"]
 cli = ["clap"]
-arbitrary = ["arbitrary-json", "arbitrary-yaml", "arbitrary-toml", "arbitrary-xml"]
+arbitrary = ["arbitrary-json", "arbitrary-yaml", "arbitrary-toml", "arbitrary-xml", "arbitrary-walkdir", "arbitrary-petgraph", "arbitrary-cargo", "arbitrary-git2", "arbitrary-syn", "arbitrary-tree-sitter", "arbitrary-clap"]
 arbitrary-json = ["serde-json"]
 arbitrary-yaml = ["serde-yaml"]
 arbitrary-toml = ["serde-toml"]
 arbitrary-xml = ["dep:roxmltree"]
-all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "comparison", "merge", "export", "color", "serde", "serde-json", "serde-yaml", "serde-toml", "serde-ron", "walkdir", "petgraph", "cargo-metadata", "git2", "syn", "tree-sitter", "clap", "arbitrary", "arbitrary-json", "arbitrary-yaml", "arbitrary-toml", "arbitrary-xml"]
+arbitrary-walkdir = ["dep:walkdir"]
+arbitrary-petgraph = ["dep:petgraph"]
+arbitrary-cargo = ["dep:cargo_metadata"]
+arbitrary-git2 = ["dep:git2"]
+arbitrary-syn = ["dep:syn"]
+arbitrary-tree-sitter = ["dep:tree-sitter"]
+arbitrary-clap = ["dep:clap"]
+all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "compare", "search", "sort", "stats", "merge", "export", "color", "serde", "serde-json", "serde-yaml", "serde-toml", "serde-ron", "walkdir", "petgraph", "cargo-metadata", "git2", "syn", "tree-sitter", "clap", "arbitrary", "arbitrary-json", "arbitrary-yaml", "arbitrary-toml", "arbitrary-xml", "arbitrary-walkdir", "arbitrary-petgraph", "arbitrary-cargo", "arbitrary-git2", "arbitrary-syn", "arbitrary-tree-sitter", "arbitrary-clap"]
 
 [dev-dependencies]
 colored = "3.0"
@@ -139,7 +149,7 @@ required-features = ["path"]
 [[example]]
 name = "comparison"
 path = "examples/comparison.rs"
-required-features = ["comparison"]
+required-features = ["compare"]
 
 [[example]]
 name = "merge"
@@ -159,22 +169,22 @@ required-features = ["serde-json", "serde-yaml"]
 [[example]]
 name = "filesystem"
 path = "examples/filesystem.rs"
-required-features = ["walkdir"]
+required-features = ["arbitrary-walkdir"]
 
 [[example]]
 name = "petgraph"
 path = "examples/petgraph.rs"
-required-features = ["petgraph"]
+required-features = ["arbitrary-petgraph"]
 
 [[example]]
 name = "cargo"
 path = "examples/cargo.rs"
-required-features = ["cargo-metadata"]
+required-features = ["arbitrary-cargo"]
 
 [[example]]
 name = "git2"
 path = "examples/git2.rs"
-required-features = ["git2"]
+required-features = ["arbitrary-git2"]
 
 [[example]]
 name = "xml"
@@ -184,7 +194,7 @@ required-features = ["arbitrary-xml"]
 [[example]]
 name = "syn"
 path = "examples/syn.rs"
-required-features = ["syn"]
+required-features = ["arbitrary-syn"]
 
 [[example]]
 name = "ron"
@@ -194,12 +204,12 @@ required-features = ["serde-ron"]
 [[example]]
 name = "tree_sitter"
 path = "examples/tree_sitter.rs"
-required-features = ["tree-sitter"]
+required-features = ["arbitrary-tree-sitter"]
 
 [[example]]
 name = "clap"
 path = "examples/clap.rs"
-required-features = ["clap"]
+required-features = ["arbitrary-clap"]
 
 [[example]]
 name = "arbitrary"

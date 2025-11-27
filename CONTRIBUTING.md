@@ -64,6 +64,17 @@ Enhancement suggestions are welcome! Please include:
    cargo run --example basic
    ```
 
+5. **Set up pre-commit hooks** (optional but recommended):
+   ```bash
+   # Install pre-commit
+   pip install pre-commit
+
+   # Install git hooks
+   pre-commit install
+   ```
+
+   Pre-commit hooks will automatically run code formatting and linting checks before each commit. See [pre-commit.com](https://pre-commit.com/) for more information.
+
 ## Coding Standards
 
 ### Code Style
@@ -132,4 +143,3 @@ If you have questions about contributing, feel free to:
 - Review existing code for examples
 
 Thank you for contributing to TreeLog!
-

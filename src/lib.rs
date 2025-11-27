@@ -5,24 +5,23 @@
     feature = "arbitrary-yaml",
     feature = "arbitrary-toml",
     feature = "arbitrary-xml",
+    feature = "arbitrary-walkdir",
+    feature = "arbitrary-git2",
+    feature = "arbitrary-syn",
+    feature = "arbitrary-tree-sitter",
+    feature = "arbitrary-clap",
+    feature = "arbitrary-cargo",
+    feature = "arbitrary-petgraph",
     doc
 ))]
 pub mod arbitrary;
 #[cfg(any(feature = "builder", doc))]
 pub mod builder;
-#[cfg(any(feature = "cargo-metadata", doc))]
-pub mod cargo;
-#[cfg(any(feature = "clap", doc))]
-pub mod clap;
-#[cfg(any(feature = "comparison", doc))]
-pub mod comparison;
+#[cfg(any(feature = "compare", doc))]
+pub mod compare;
 pub mod config;
 #[cfg(any(feature = "export", doc))]
 pub mod export;
-#[cfg(any(feature = "walkdir", doc))]
-pub mod filesystem;
-#[cfg(any(feature = "git2", doc))]
-pub mod git2;
 #[cfg(any(feature = "iterator", doc))]
 pub mod iterator;
 mod level;
@@ -32,9 +31,9 @@ mod macros;
 pub mod merge;
 #[cfg(any(feature = "path", doc))]
 pub mod path;
-#[cfg(any(feature = "petgraph", doc))]
-pub mod petgraph;
 pub mod renderer;
+#[cfg(any(feature = "search", doc))]
+pub mod search;
 #[cfg(any(
     feature = "serde-json",
     feature = "serde-yaml",
@@ -43,22 +42,24 @@ pub mod renderer;
     doc
 ))]
 pub mod serde;
+#[cfg(any(feature = "sort", doc))]
+pub mod sort;
+#[cfg(any(feature = "stats", doc))]
+pub mod stats;
 pub mod style;
-#[cfg(any(feature = "syn", doc))]
-pub mod syn;
 #[cfg(any(feature = "transform", doc))]
 pub mod transform;
 #[cfg(any(feature = "traversal", doc))]
 pub mod traversal;
 pub mod tree;
-#[cfg(any(feature = "tree-sitter", doc))]
-pub mod tree_sitter;
 mod utils;
 
 // Re-export main types
 pub use config::RenderConfig;
 #[cfg(any(feature = "iterator", doc))]
 pub use iterator::{Line, TreeIteratorExt};
+#[cfg(any(feature = "stats", doc))]
+pub use stats::TreeStats;
 pub use style::{StyleConfig, TreeStyle};
 pub use tree::Tree;
 

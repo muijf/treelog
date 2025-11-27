@@ -11,41 +11,30 @@
 
 *Provides low-level and high-level APIs for rendering hierarchical data structures, similar to `tree`, `npm ls`, or `cargo tree`. Also includes a command-line utility for quick tree visualization.*
 
-[Installation](#installation) • [Quick Start](#quick-start) • [CLI Usage](#cli-usage) • [Documentation](https://docs.rs/treelog) • [Examples](#examples)
+[Documentation](https://docs.rs/treelog) • [Examples](examples/)
 
 </div>
 
 ---
 
-<details>
-<summary><b>Features</b> - Overview of all available features</summary>
+**Key Features:** Multiple styles • Macro DSL • Builder API • Iterator support • Tree statistics & traversal • Search & filtering • Transformation & sorting • Export to HTML/SVG/DOT • Integrations with JSON/YAML/TOML, filesystem, Git, Cargo, and more
 
-### Core Features
-- **Multiple Styles** - Unicode, ASCII, Box drawing, and custom styles
-- **Macro DSL** - Declarative syntax for easy tree construction
-- **Builder API** - Fluent interface for easy tree construction
-- **Iterator Support** - Stream large trees without materializing
-- **Custom Formatters** - Format nodes and leaves to your needs
-- **Optimized** - Pre-computed prefixes and efficient rendering
-- **Zero Dependencies** - Lightweight and fast
+---
 
-### Analysis & Statistics
-- **Tree Statistics** - Get depth, width, node/leaf counts, and more
-- **Tree Traversal** - Pre-order, post-order, level-order, and filtered iterators
-- **Tree Search** - Find nodes/leaves by label or content, get paths
+## Table of Contents
 
-### Transformation & Manipulation
-- **Tree Transformation** - Map, filter, and prune trees functionally
-- **Tree Sorting** - Sort children by label, depth, or custom comparison
-- **Tree Merging** - Merge trees with different strategies (replace, append, merge-by-label)
+- [Installation](#installation)
+- [Feature Flags](#feature-flags)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+- [Advanced Features](#advanced-features)
+- [CLI Usage](#cli-usage)
+- [Examples](#examples)
+- [Development](#development)
+- [License](#license)
+- [Contributing](#contributing)
 
-### Utilities
-- **Path Utilities** - Navigate trees by path, flatten to lists
-- **Tree Comparison** - Compare structure, compute diffs, check subtrees
-- **Export Formats** - Export to HTML, SVG, and Graphviz DOT format
-- **Tree Validation** - Validate tree structure
-
-</details>
+---
 
 ## Installation
 
@@ -60,21 +49,85 @@ treelog = "0.0.5"
 
 ### As a CLI Tool
 
-Install the CLI tool using cargo:
-
 ```bash
-cargo install treelog --features cli,walkdir,json
-```
+# Install from crates.io
+cargo install treelog --features cli,arbitrary-walkdir,serde-json
 
-Or build from source:
-
-```bash
+# Or build from source
 git clone https://github.com/muijf/treelog
 cd treelog
-cargo build --release --bin treelog --features cli,walkdir,json
+cargo build --release --bin treelog --features cli,arbitrary-walkdir,serde-json
 ```
 
-The CLI requires the `cli` feature and optionally other features depending on the input sources you want to use.
+> **Note**: The CLI requires the `cli` feature. Enable additional features based on the input sources you need. You can use convenience aliases like `walkdir` (for `arbitrary-walkdir`).
+
+## Feature Flags
+
+> Most features are optional to keep the core library lightweight. Enable only what you need.
+
+**Core Features:**
+- `builder` - Builder API for constructing trees
+- `iterator` - Iterator API for streaming trees
+- `macro` - Macro DSL for tree construction
+- `formatters` - Custom formatters for nodes and leaves
+- `color` - Color output support (requires `colored`)
+
+**Tree Operations:**
+- `traversal` - Tree traversal iterators (pre-order, post-order, level-order)
+- `transform` - Tree transformation operations (map, filter, prune)
+- `path` - Tree path utilities (get by path, flatten)
+- `compare` - Tree comparison and diff operations
+- `search` - Tree search operations (find nodes/leaves, get paths)
+- `sort` - Tree sorting operations (sort by label, depth, custom)
+- `stats` - Tree statistics and metrics
+- `merge` - Tree merging with different strategies
+- `export` - Export to HTML, SVG, and DOT formats
+
+**Exact Serialization (Round-Trip):**
+- `serde` - Meta-feature enabling all serde serialization (includes `serde-json`, `serde-yaml`, `serde-toml`, `serde-ron`)
+- `serde-json` - JSON serialization/deserialization (Tree ↔ JSON)
+- `serde-yaml` - YAML serialization/deserialization (Tree ↔ YAML)
+- `serde-toml` - TOML serialization/deserialization (Tree ↔ TOML)
+- `serde-ron` - RON serialization/deserialization (Tree ↔ RON)
+
+**Arbitrary Conversion (One-Way):**
+- `arbitrary` - Meta-feature enabling all arbitrary conversions
+- `arbitrary-json` - Convert any JSON to Tree (requires `serde-json`)
+- `arbitrary-yaml` - Convert any YAML to Tree (requires `serde-yaml`)
+- `arbitrary-toml` - Convert any TOML to Tree (requires `serde-toml`)
+- `arbitrary-xml` - Convert XML/HTML to Tree
+- `arbitrary-walkdir` - Build trees from directory structures
+- `arbitrary-petgraph` - Convert petgraph graphs to Tree
+- `arbitrary-cargo` - Build trees from Cargo metadata
+- `arbitrary-git2` - Build trees from Git repositories
+- `arbitrary-syn` - Build trees from Rust AST
+- `arbitrary-tree-sitter` - Build trees from tree-sitter parse trees
+- `arbitrary-clap` - Build trees from clap command structures
+
+**Convenience Aliases:**
+- `walkdir` - Alias for `arbitrary-walkdir`
+- `petgraph` - Alias for `arbitrary-petgraph`
+- `cargo-metadata` - Alias for `arbitrary-cargo`
+- `git2` - Alias for `arbitrary-git2`
+- `syn` - Alias for `arbitrary-syn`
+- `tree-sitter` - Alias for `arbitrary-tree-sitter`
+- `clap` - Alias for `arbitrary-clap` (also used by CLI)
+- `cli` - CLI binary (includes `clap`)
+
+**Quick examples:**
+
+```toml
+# Common feature set
+treelog = { version = "0.0.5", features = ["traversal", "transform", "path", "compare", "merge", "export"] }
+
+# Enable everything
+treelog = { version = "0.0.5", features = ["all"] }
+
+# CLI with common sources
+treelog = { version = "0.0.5", features = ["cli", "walkdir", "serde-json"] }
+```
+
+> **Note**: The `cli` feature is separate and must be enabled explicitly for the binary. Use convenience aliases like `walkdir` (for `arbitrary-walkdir`) when available.
 
 ## Quick Start
 
@@ -106,7 +159,7 @@ root
 ## Usage
 
 <details>
-<summary><b>Basic</b> - Simple tree construction and rendering</summary>
+<summary><b>Basic Tree Construction</b></summary>
 
 ```rust
 use treelog::{Tree, renderer::write_tree};
@@ -121,7 +174,7 @@ write_tree(&mut output, &tree).unwrap();
 </details>
 
 <details>
-<summary><b>Macro DSL</b> - Declarative syntax for tree construction (requires <code>macro</code> feature)</summary>
+<summary><b>Macro DSL</b> <code>macro</code> feature</summary>
 
 The `tree!` macro provides a clean, declarative syntax for constructing trees:
 
@@ -150,7 +203,7 @@ The macro supports:
 </details>
 
 <details>
-<summary><b>Builder API</b> - Fluent interface for tree construction (requires <code>builder</code> feature)</summary>
+<summary><b>Builder API</b> <code>builder</code> feature</summary>
 
 ```rust
 use treelog::builder::TreeBuilder;
@@ -164,7 +217,7 @@ println!("{}", tree.render_to_string());
 </details>
 
 <details>
-<summary><b>Low-Level API</b> - Direct tree construction</summary>
+<summary><b>Low-Level API</b></summary>
 
 ```rust
 use treelog::Tree;
@@ -179,7 +232,7 @@ println!("{}", tree.render_to_string());
 </details>
 
 <details>
-<summary><b>Iterator API</b> - Stream trees line by line (requires <code>iterator</code> feature)</summary>
+<summary><b>Iterator API</b> <code>iterator</code> feature</summary>
 
 ```rust
 use treelog::{Tree, TreeIteratorExt};
@@ -198,7 +251,7 @@ let lines: Vec<String> = tree.to_lines();
 </details>
 
 <details>
-<summary><b>Customization</b> - Custom styles and formatters</summary>
+<summary><b>Custom Styles & Formatters</b></summary>
 
 **Styles**:
 
@@ -215,7 +268,7 @@ let style = StyleConfig::custom("├─", "└─", "│ ", "   ");
 tree.render_to_string_with_config(&RenderConfig::default().with_style(style));
 ```
 
-**Formatters** (requires `formatters` feature):
+**Formatters** <code>formatters</code> feature:
 
 ```rust
 use treelog::{Tree, RenderConfig};
@@ -230,7 +283,7 @@ tree.render_to_string_with_config(&config);
 </details>
 
 <details>
-<summary><b>Streaming Large Trees</b> - Efficient streaming for large trees</summary>
+<summary><b>Streaming Large Trees</b></summary>
 
 ```rust,no_run
 use treelog::{Tree, TreeIteratorExt};
@@ -248,9 +301,8 @@ for line in TreeIteratorExt::lines(&tree) {
 ## Advanced Features
 
 <details>
-<summary><b>Tree Statistics</b> - Get detailed metrics about your tree</summary>
+<summary><b>Tree Statistics</b> <code>stats</code> feature</summary>
 
-Get detailed statistics about your tree:
 
 ```rust
 use treelog::Tree;
@@ -274,9 +326,7 @@ println!("{:#?}", stats);
 </details>
 
 <details>
-<summary><b>Tree Traversal</b> - Iterate over trees in different orders (requires <code>traversal</code> feature)</summary>
-
-Iterate over trees in different orders:
+<summary><b>Tree Traversal</b> <code>traversal</code> feature</summary>
 
 ```rust
 use treelog::Tree;
@@ -313,9 +363,7 @@ for leaf in tree.leaves() {
 </details>
 
 <details>
-<summary><b>Tree Search</b> - Find nodes and leaves in your tree</summary>
-
-Find nodes and leaves in your tree:
+<summary><b>Tree Search</b> <code>search</code> feature</summary>
 
 ```rust
 use treelog::Tree;
@@ -351,9 +399,7 @@ if let Some(path) = tree.path_to("main.rs") {
 </details>
 
 <details>
-<summary><b>Tree Transformation</b> - Transform trees functionally (requires <code>transform</code> feature)</summary>
-
-Transform trees functionally:
+<summary><b>Tree Transformation</b> <code>transform</code> feature</summary>
 
 ```rust
 use treelog::Tree;
@@ -388,9 +434,7 @@ let pruned = tree.prune(|t| {
 </details>
 
 <details>
-<summary><b>Tree Sorting</b> - Sort tree children</summary>
-
-Sort tree children:
+<summary><b>Tree Sorting</b> <code>sort</code> feature</summary>
 
 ```rust
 use treelog::Tree;
@@ -417,9 +461,7 @@ tree.sort_children(&mut compare);
 </details>
 
 <details>
-<summary><b>Tree Path Utilities</b> - Navigate trees by path (requires <code>path</code> feature)</summary>
-
-Navigate and manipulate trees by path:
+<summary><b>Tree Path Utilities</b> <code>path</code> feature</summary>
 
 ```rust
 use treelog::Tree;
@@ -455,9 +497,7 @@ for entry in flattened {
 </details>
 
 <details>
-<summary><b>Tree Comparison</b> - Compare trees and find differences (requires <code>comparison</code> feature)</summary>
-
-Compare trees and find differences:
+<summary><b>Tree Comparison</b> <code>compare</code> feature</summary>
 
 ```rust
 use treelog::Tree;
@@ -478,13 +518,13 @@ if tree1.eq_structure(&tree2) {
 let diffs = tree1.diff(&tree2);
 for diff in diffs {
     match diff {
-        treelog::comparison::TreeDiff::OnlyInFirst { path, content } => {
+        treelog::compare::TreeDiff::OnlyInFirst { path, content } => {
             println!("Only in first: {:?} - {}", path, content);
         }
-        treelog::comparison::TreeDiff::OnlyInSecond { path, content } => {
+        treelog::compare::TreeDiff::OnlyInSecond { path, content } => {
             println!("Only in second: {:?} - {}", path, content);
         }
-        treelog::comparison::TreeDiff::DifferentContent { path, first, second } => {
+        treelog::compare::TreeDiff::DifferentContent { path, first, second } => {
             println!("Different at {:?}: '{}' vs '{}'", path, first, second);
         }
     }
@@ -500,9 +540,7 @@ if subtree.is_subtree_of(&tree1) {
 </details>
 
 <details>
-<summary><b>Tree Merging</b> - Merge trees with different strategies (requires <code>merge</code> feature)</summary>
-
-Merge trees with different strategies:
+<summary><b>Tree Merging</b> <code>merge</code> feature</summary>
 
 ```rust
 use treelog::{Tree, merge::MergeStrategy};
@@ -527,9 +565,7 @@ let merged = tree1.merge(tree2, MergeStrategy::MergeByLabel);
 </details>
 
 <details>
-<summary><b>Export Formats</b> - Export trees to HTML, SVG, and DOT (requires <code>export</code> feature)</summary>
-
-Export trees to various formats:
+<summary><b>Export Formats</b> <code>export</code> feature</summary>
 
 ```rust
 use treelog::Tree;
@@ -559,51 +595,37 @@ fs::write("exports/tree.dot", dot).unwrap();
 </details>
 
 <details>
-<summary><b>Library Integrations</b> - Integrations with popular Rust libraries</summary>
+<summary><b>Library Integrations</b></summary>
 
-### Serialization (serde)
+> **Understanding Serialization**: TreeLog provides two approaches for JSON/YAML/TOML/RON:
+> - **Arbitrary conversion** (`from_arbitrary_*`) - Converts ANY data structure to Tree (one-way, for visualization)
+> - **Exact serialization** (`from_*` / `to_*`) - Preserves exact Tree structure (round-trip, for persistence)
 
-Serialize and deserialize trees to/from JSON and YAML:
+### JSON, YAML, TOML, RON
+
+**Exact serialization** <code>serde-json</code>, <code>serde-yaml</code>, <code>serde-toml</code>, <code>serde-ron</code>:
 
 ```rust
 use treelog::Tree;
 
 let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
 
-// JSON serialization (requires `json` feature)
-#[cfg(feature = "json")]
-{
+// Round-trip serialization
     let json = tree.to_json().unwrap();
-    let deserialized = Tree::from_json(&json).unwrap();
-}
-
-// YAML serialization (requires `yaml` feature)
-#[cfg(feature = "yaml")]
-{
-    let yaml = tree.to_yaml().unwrap();
-    let deserialized = Tree::from_yaml(&yaml).unwrap();
-}
+let restored = Tree::from_json(&json).unwrap();
 ```
 
-### TOML Support
-
-**Serialize/deserialize trees to/from TOML** (requires both `toml` and `serde` features):
+**Arbitrary conversion** <code>arbitrary-json</code>, <code>arbitrary-yaml</code>, <code>arbitrary-toml</code>:
 
 ```rust
 use treelog::Tree;
 
-let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
-
-// Serialize tree to TOML (preserves exact Tree structure)
-let toml = tree.to_toml().unwrap();
-
-// Deserialize back
-let deserialized = Tree::from_toml(&toml).unwrap();
+// Convert any JSON/YAML/TOML to Tree (one-way)
+let json = r#"{"name": "test", "value": 42}"#;
+let tree = Tree::from_arbitrary_json(json).unwrap();
 ```
 
-### File System Integration
-
-Build trees from directory structures (requires `walkdir` feature):
+### File System <code>arbitrary-walkdir</code>
 
 ```rust
 use treelog::Tree;
@@ -615,9 +637,7 @@ let tree = Tree::from_dir(".").unwrap();
 let tree = Tree::from_dir_max_depth(".", 2).unwrap();
 ```
 
-### Graph Integration
-
-Convert between trees and petgraph graphs (requires `petgraph` feature):
+### Petgraph <code>arbitrary-petgraph</code>
 
 ```rust
 use treelog::Tree;
@@ -635,9 +655,7 @@ graph.add_edge(a, b, ());
 let tree = Tree::from_graph(&graph);
 ```
 
-### Cargo Metadata Integration
-
-Visualize Cargo dependency trees (requires `cargo-metadata` feature):
+### Cargo <code>arbitrary-cargo</code>
 
 ```rust
 use treelog::Tree;
@@ -649,9 +667,7 @@ let tree = Tree::from_cargo_metadata("Cargo.toml").unwrap();
 let tree = Tree::from_cargo_package_deps("treelog", "Cargo.toml").unwrap();
 ```
 
-### Git Integration
-
-Visualize Git repository structures (requires `git2` feature):
+### Git <code>arbitrary-git2</code>
 
 ```rust
 use treelog::Tree;
@@ -669,9 +685,7 @@ let commit = repo.head().unwrap().peel_to_commit().unwrap();
 let tree = Tree::from_git_commit_tree(&repo, &commit).unwrap();
 ```
 
-### XML/HTML Integration
-
-Visualize XML/HTML DOM trees (requires `roxmltree` feature):
+### XML/HTML <code>arbitrary-xml</code>
 
 ```rust,no_run
 use treelog::Tree;
@@ -684,9 +698,7 @@ let tree = Tree::from_arbitrary_xml(xml).unwrap();
 let tree = Tree::from_arbitrary_xml_file("example.xml").unwrap();
 ```
 
-### Rust AST Integration
-
-Visualize Rust source code AST (requires `syn` feature):
+### Rust AST <code>arbitrary-syn</code>
 
 ```rust,no_run
 use treelog::Tree;
@@ -707,9 +719,7 @@ let item: syn::Item = parse_quote! {
 let tree = Tree::from_syn_item(&item);
 ```
 
-### RON Integration
-
-Serialize and deserialize trees to/from RON (requires `ron` and `serde` features):
+### RON <code>serde-ron</code>
 
 ```rust
 use treelog::Tree;
@@ -726,9 +736,7 @@ let ron_pretty = tree.to_ron_pretty().unwrap();
 let deserialized = Tree::from_ron(&ron).unwrap();
 ```
 
-### Tree-sitter Integration
-
-Visualize tree-sitter parse trees (requires `tree-sitter` feature):
+### Tree-sitter <code>arbitrary-tree-sitter</code>
 
 ```rust
 use treelog::Tree;
@@ -747,9 +755,7 @@ let tree = Tree::from_tree_sitter(&parse_tree);
 let tree = Tree::from_tree_sitter_language(source_code, language).unwrap();
 ```
 
-### Clap Integration
-
-Visualize command-line argument structures (requires `clap` feature):
+### Clap <code>arbitrary-clap</code>
 
 ```rust
 use treelog::Tree;
@@ -765,56 +771,7 @@ let tree = Tree::from_clap_command(&cmd);
 </details>
 
 <details>
-<summary><b>Feature Flags</b> - Configure which features to enable</summary>
-
-Most advanced features are behind feature flags to keep the core library lightweight:
-
-```toml
-[dependencies]
-treelog = { version = "0.0.5", features = ["traversal", "transform", "path", "comparison", "merge", "export"] }
-```
-
-Available features:
-- `traversal` - Tree traversal iterators (pre-order, post-order, level-order)
-- `transform` - Tree transformation operations (map, filter, prune)
-- `path` - Tree path utilities (get by path, flatten)
-- `comparison` - Tree comparison and diff operations
-- `merge` - Tree merging with different strategies
-- `export` - Export to HTML, SVG, and DOT formats
-- `builder` - Builder API for constructing trees
-- `iterator` - Iterator API for streaming trees
-- `macro` - Macro DSL for tree construction
-- `formatters` - Custom formatters for nodes and leaves
-- `color` - Color output support
-- `serde` - Serde serialization support (Serialize/Deserialize traits)
-- `json` - JSON serialization/deserialization (requires `serde`)
-- `yaml` - YAML serialization/deserialization (requires `serde`)
-- `toml` - TOML parsing and tree conversion
-- `walkdir` - File system tree building from directories
-- `petgraph` - Graph to/from tree conversion
-- `cargo-metadata` - Cargo dependency tree visualization
-- `git2` - Git repository structure visualization
-- `roxmltree` - XML/HTML DOM tree visualization
-- `syn` - Rust AST visualization
-- `ron` - RON (Rusty Object Notation) serialization
-- `tree-sitter` - Tree-sitter parse tree visualization
-- `clap` - Command-line argument structure visualization
-- `cli` - CLI binary (includes `clap`)
-
-Use `all` feature to enable everything (note: `cli` is separate and must be enabled explicitly for the binary):
-```toml
-treelog = { version = "0.0.5", features = ["all"] }
-```
-
-To build the CLI binary, enable the `cli` feature along with any input source features you need:
-```toml
-treelog = { version = "0.0.5", features = ["cli", "walkdir", "json"] }
-```
-
-</details>
-
-<details>
-<summary><b>Performance</b> - Performance characteristics and optimizations</summary>
+<summary><b>Performance</b></summary>
 
 - **Pre-computed prefixes** - Efficient string buffer capacity estimation
 - **Iterator API** - Stream large trees without materializing the entire structure
@@ -825,7 +782,7 @@ treelog = { version = "0.0.5", features = ["cli", "walkdir", "json"] }
 
 ## CLI Usage
 
-The `treelog` CLI tool provides a convenient way to visualize trees from various sources without writing code. It's built on top of the library and exposes all its features through a command-line interface.
+> The CLI tool provides a convenient way to visualize trees from various sources without writing code. All library features are available through the command-line interface.
 
 ### Basic Usage
 
@@ -839,34 +796,47 @@ treelog from cargo
 # Visualize Git repository structure
 treelog from git .
 
+# Render a tree from a file (JSON/YAML/TOML/RON)
+treelog render tree.json
+
+# Render a tree from stdin
+cat tree.json | treelog render
+
 # Get tree statistics
 treelog from dir . --format json | treelog stats
 ```
 
 ### Input Sources
 
-The CLI supports creating trees from various sources:
+```bash
+# Filesystem & Git
+treelog from dir <path> [--max-depth <n>]        # arbitrary-walkdir
+treelog from git [path] [--branches] [--commit]  # arbitrary-git2
 
-- **Directory structures**: `treelog from dir <path> [--max-depth <n>]`
-- **Cargo metadata**: `treelog from cargo [--package <name>]`
-- **Git repositories**: `treelog from git [path] [--branches] [--commit]`
-- **XML/HTML files**: `treelog from xml <file>`
-- **Rust source files**: `treelog from rust <file>`
-- **JSON/YAML/TOML/RON files**: `treelog from json|yaml|toml|ron <file>`
+# Code & AST
+treelog from rust <file>                         # arbitrary-syn
+treelog from tree-sitter <file> [--language]     # arbitrary-tree-sitter
+treelog from xml <file>                          # arbitrary-xml
+
+# Package Managers
+treelog from cargo [--manifest <path>] [--package <name>]  # arbitrary-cargo
+
+# Data Formats
+treelog from json <file>   # serde-json
+treelog from yaml <file>   # serde-yaml
+treelog from toml <file>   # serde-toml
+treelog from ron <file>    # serde-ron
+```
 
 ### Rendering Options
 
 ```bash
-# Use ASCII style
+# Styles
 treelog from dir . --style ascii
-
-# Custom style
 treelog from dir . --custom-style ">-,<-,| ,   "
 
-# Output to file
+# Output
 treelog from dir . --output tree.txt
-
-# Export to different formats
 treelog from dir . --format json > tree.json
 treelog from dir . --format html > tree.html
 treelog from dir . --format svg > tree.svg
@@ -876,28 +846,29 @@ treelog from dir . --format dot > tree.dot
 ### Tree Operations
 
 ```bash
-# Get statistics
-treelog stats < input.json
+# Basic operations
+treelog render tree.json          # Render from file
+treelog render -                   # Render from stdin
+treelog stats tree.json            # Get statistics
+treelog search "pattern" tree.json # Search nodes/leaves
 
-# Search for nodes
-treelog search "pattern" < input.json
+# Manipulation
+treelog sort --method label tree.json
+treelog sort --method depth --reverse tree.json
+treelog transform map-nodes "[{}]" tree.json
+treelog transform filter "src" tree.json
 
-# Sort tree
-treelog sort --method label < input.json
-
-# Transform tree
-treelog transform map-nodes "[{}]" < input.json
-
-# Compare trees
+# Comparison & Merging
 treelog compare tree1.json tree2.json
-
-# Merge trees
 treelog merge --strategy append tree1.json tree2.json
+
+# Export
+treelog export html tree.json > output.html
+treelog export svg tree.json > output.svg
+treelog export dot tree.json > output.dot
 ```
 
 ### Piping and Serialization
-
-The CLI supports piping trees between commands using serialized formats:
 
 ```bash
 # Create tree and get statistics
@@ -907,11 +878,9 @@ treelog from dir . --format json | treelog stats
 treelog from dir . --format json | treelog transform filter "src" | treelog export html > output.html
 ```
 
-**Note**: When piping between commands, use `--format json` (or `yaml`, `toml`, `ron`) to serialize the tree structure. The default `text` format is for human-readable output only.
+> **Note**: When piping between commands, use `--format json` (or `yaml`, `toml`, `ron`) to serialize the tree structure. The default `text` format is for human-readable output only.
 
 ### Help
-
-Get help for any command:
 
 ```bash
 treelog --help
@@ -921,7 +890,7 @@ treelog from dir --help
 
 ## Examples
 
-The repository includes comprehensive examples demonstrating all features:
+> Run any example with: `cargo run --example <name> --all-features`
 
 **Core Examples:**
 - **[`basic`](examples/basic.rs)** - Basic tree construction and rendering
@@ -944,7 +913,8 @@ The repository includes comprehensive examples demonstrating all features:
 - **[`export`](examples/export.rs)** - Export to HTML, SVG, and DOT formats
 
 **Integration Examples:**
-- **[`serde`](examples/serde.rs)** - JSON and YAML serialization
+- **[`arbitrary`](examples/arbitrary.rs)** - Arbitrary data conversion (JSON/YAML/TOML to Tree)
+- **[`serde`](examples/serde.rs)** - Exact JSON and YAML serialization (Tree ↔ JSON/YAML)
 - **[`toml`](examples/toml.rs)** - TOML parsing and conversion
 - **[`filesystem`](examples/filesystem.rs)** - File system tree building
 - **[`petgraph`](examples/petgraph.rs)** - Graph to/from tree conversion
@@ -956,25 +926,27 @@ The repository includes comprehensive examples demonstrating all features:
 - **[`tree_sitter`](examples/tree_sitter.rs)** - Tree-sitter parse tree visualization
 - **[`clap`](examples/clap.rs)** - Command-line argument structure visualization
 
-Run any example with:
-```bash
-cargo run --example <name> --all-features
-```
-
 ## Development
 
+**Format code:**
 ```bash
 cargo fmt --all
+```
+Formats all Rust code according to the official style guide.
+
+**Lint code:**
+```bash
 cargo clippy --all-targets --all-features -- -D warnings
+```
+Runs Clippy linter with all targets and features enabled, treating warnings as errors.
+
+**Run tests:**
+```bash
 cargo test --all-features
 ```
+Runs all tests with all features enabled to ensure comprehensive coverage.
 
-**Real-time feedback**: This project includes VS Code/Cursor settings (`.vscode/settings.json`) that configure rust-analyzer to provide real-time feedback:
-- **Formatting**: Automatically formats on save (matches `cargo fmt`)
-- **Clippy**: Shows clippy warnings/errors as you type (matches pre-commit hook settings)
-- **Tests**: Displays test failures in the editor
-
-Git hooks available via [pre-commit](https://pre-commit.com/) (see `.pre-commit-config.yaml`).
+> **Editor setup**: Recommended extensions are available in [`.vscode/extensions.json`](.vscode/extensions.json). See [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines and pre-commit hooks.
 
 ## License
 

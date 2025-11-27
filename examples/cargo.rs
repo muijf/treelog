@@ -3,7 +3,7 @@
 use treelog::Tree;
 
 fn main() {
-    #[cfg(feature = "cargo-metadata")]
+    #[cfg(feature = "arbitrary-cargo")]
     {
         println!("=== Cargo Dependency Tree ===");
         match Tree::from_cargo_metadata("Cargo.toml") {

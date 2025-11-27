@@ -2,6 +2,108 @@
 
 use crate::tree::Tree;
 
+impl Tree {
+    /// Returns an iterator that traverses the tree in pre-order (root, then children).
+    ///
+    /// Requires the `traversal` feature.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use treelog::Tree;
+    ///
+    /// let tree = Tree::Node("root".to_string(), vec![
+    ///     Tree::Leaf(vec!["item".to_string()])
+    /// ]);
+    /// for node in tree.pre_order() {
+    ///     println!("{:?}", node);
+    /// }
+    /// ```
+    pub fn pre_order(&self) -> PreOrder<'_> {
+        PreOrder::new(self)
+    }
+
+    /// Returns an iterator that traverses the tree in post-order (children, then root).
+    ///
+    /// Requires the `traversal` feature.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use treelog::Tree;
+    ///
+    /// let tree = Tree::Node("root".to_string(), vec![
+    ///     Tree::Leaf(vec!["item".to_string()])
+    /// ]);
+    /// for node in tree.post_order() {
+    ///     println!("{:?}", node);
+    /// }
+    /// ```
+    pub fn post_order(&self) -> PostOrder<'_> {
+        PostOrder::new(self)
+    }
+
+    /// Returns an iterator that traverses the tree in level-order (breadth-first).
+    ///
+    /// Requires the `traversal` feature.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use treelog::Tree;
+    ///
+    /// let tree = Tree::Node("root".to_string(), vec![
+    ///     Tree::Leaf(vec!["item".to_string()])
+    /// ]);
+    /// for node in tree.level_order() {
+    ///     println!("{:?}", node);
+    /// }
+    /// ```
+    pub fn level_order(&self) -> LevelOrder<'_> {
+        LevelOrder::new(self)
+    }
+
+    /// Returns an iterator over all nodes (excluding leaves).
+    ///
+    /// Requires the `traversal` feature.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use treelog::Tree;
+    ///
+    /// let tree = Tree::Node("root".to_string(), vec![
+    ///     Tree::Leaf(vec!["item".to_string()])
+    /// ]);
+    /// for node in tree.nodes() {
+    ///     println!("Node: {}", node.label().unwrap());
+    /// }
+    /// ```
+    pub fn nodes(&self) -> Nodes<'_> {
+        Nodes::new(self)
+    }
+
+    /// Returns an iterator over all leaves (excluding nodes).
+    ///
+    /// Requires the `traversal` feature.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use treelog::Tree;
+    ///
+    /// let tree = Tree::Node("root".to_string(), vec![
+    ///     Tree::Leaf(vec!["item".to_string()])
+    /// ]);
+    /// for leaf in tree.leaves() {
+    ///     println!("Leaf: {:?}", leaf.lines());
+    /// }
+    /// ```
+    pub fn leaves(&self) -> Leaves<'_> {
+        Leaves::new(self)
+    }
+}
+
 /// An iterator that traverses a tree in pre-order (root, then children).
 ///
 /// # Examples

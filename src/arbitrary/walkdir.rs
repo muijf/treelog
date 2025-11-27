@@ -17,7 +17,7 @@ impl Tree {
     ///
     /// let tree = Tree::from_dir(".").unwrap();
     /// ```
-    #[cfg(feature = "walkdir")]
+    #[cfg(feature = "arbitrary-walkdir")]
     pub fn from_dir<P: AsRef<Path>>(path: P) -> Result<Self, walkdir::Error> {
         let path = path.as_ref();
         let mut tree = Tree::new_node(
@@ -76,7 +76,7 @@ impl Tree {
     ///
     /// let tree = Tree::from_dir_max_depth(".", 2).unwrap();
     /// ```
-    #[cfg(feature = "walkdir")]
+    #[cfg(feature = "arbitrary-walkdir")]
     pub fn from_dir_max_depth<P: AsRef<Path>>(
         path: P,
         max_depth: usize,
@@ -136,7 +136,7 @@ impl Tree {
 mod tests {
     use super::*;
 
-    #[cfg(feature = "walkdir")]
+    #[cfg(feature = "arbitrary-walkdir")]
     #[test]
     fn test_from_dir_current() {
         // Test with current directory (should always exist)
@@ -146,7 +146,7 @@ mod tests {
         assert!(tree.is_node());
     }
 
-    #[cfg(feature = "walkdir")]
+    #[cfg(feature = "arbitrary-walkdir")]
     #[test]
     fn test_from_dir_max_depth() {
         // Test with current directory and max depth
