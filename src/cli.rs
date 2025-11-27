@@ -19,12 +19,19 @@ pub enum SortMethod {
 #[derive(Clone, Debug, ValueEnum)]
 pub enum OutputFormat {
     Text,
+    #[cfg(feature = "json")]
     Json,
+    #[cfg(feature = "yaml")]
     Yaml,
+    #[cfg(feature = "toml")]
     Toml,
+    #[cfg(feature = "ron")]
     Ron,
+    #[cfg(feature = "export")]
     Html,
+    #[cfg(feature = "export")]
     Svg,
+    #[cfg(feature = "export")]
     Dot,
 }
 
