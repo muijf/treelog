@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="346" height="346">
+<style>
+  .node-text { fill: #4C74B9; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 20px; }
+  .leaf-text { fill: #212b2b; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 20px; }
+  .tree-line { stroke: #c0d1d1; stroke-width: 3; }
+</style>
+  <text x="20" y="20" class="node-text" dominant-baseline="middle">.</text>
+  <line x1="35" y1="30" x2="35" y2="590" class="tree-line"/>
+  <line x1="35" y1="50" x2="50" y2="50" class="tree-line"/>
+  <text x="50" y="50" class="node-text" dominant-baseline="middle">.git</text>
+  <line x1="35" y1="80" x2="50" y2="80" class="tree-line"/>
+  <text x="50" y="80" class="node-text" dominant-baseline="middle">.github</text>
+  <line x1="35" y1="110" x2="50" y2="110" class="tree-line"/>
+  <text x="50" y="110" class="node-text" dominant-baseline="middle">.vscode</text>
+  <line x1="35" y1="140" x2="50" y2="140" class="tree-line"/>
+  <text x="50" y="140" class="node-text" dominant-baseline="middle">examples</text>
+  <line x1="35" y1="170" x2="50" y2="170" class="tree-line"/>
+  <text x="50" y="170" class="node-text" dominant-baseline="middle">images</text>
+  <line x1="35" y1="200" x2="50" y2="200" class="tree-line"/>
+  <text x="50" y="200" class="node-text" dominant-baseline="middle">scripts</text>
+  <line x1="35" y1="230" x2="50" y2="230" class="tree-line"/>
+  <text x="50" y="230" class="node-text" dominant-baseline="middle">src</text>
+  <line x1="35" y1="260" x2="50" y2="260" class="tree-line"/>
+  <text x="50" y="260" class="node-text" dominant-baseline="middle">target</text>
+  <line x1="35" y1="290" x2="50" y2="290" class="tree-line"/>
+  <text x="50" y="290" class="leaf-text" dominant-baseline="middle">.gitignore</text>
+  <line x1="35" y1="320" x2="50" y2="320" class="tree-line"/>
+  <text x="50" y="320" class="leaf-text" dominant-baseline="middle">.pre-commit-config.yaml</text>
+  <line x1="35" y1="350" x2="50" y2="350" class="tree-line"/>
+  <text x="50" y="350" class="leaf-text" dominant-baseline="middle">CHANGELOG.md</text>
+  <line x1="35" y1="380" x2="50" y2="380" class="tree-line"/>
+  <text x="50" y="380" class="leaf-text" dominant-baseline="middle">CODE_OF_CONDUCT.md</text>
+  <line x1="35" y1="410" x2="50" y2="410" class="tree-line"/>
+  <text x="50" y="410" class="leaf-text" dominant-baseline="middle">CONTRIBUTING.md</text>
+  <line x1="35" y1="440" x2="50" y2="440" class="tree-line"/>
+  <text x="50" y="440" class="leaf-text" dominant-baseline="middle">Cargo.lock</text>
+  <line x1="35" y1="470" x2="50" y2="470" class="tree-line"/>
+  <text x="50" y="470" class="leaf-text" dominant-baseline="middle">Cargo.toml</text>
+  <line x1="35" y1="500" x2="50" y2="500" class="tree-line"/>
+  <text x="50" y="500" class="leaf-text" dominant-baseline="middle">LICENSE</text>
+  <line x1="35" y1="530" x2="50" y2="530" class="tree-line"/>
+  <text x="50" y="530" class="leaf-text" dominant-baseline="middle">README.md</text>
+  <line x1="35" y1="560" x2="50" y2="560" class="tree-line"/>
+  <text x="50" y="560" class="leaf-text" dominant-baseline="middle">SECURITY.md</text>
+  <line x1="35" y1="590" x2="50" y2="590" class="tree-line"/>
+  <text x="50" y="590" class="leaf-text" dominant-baseline="middle">output.svg</text>
+</svg>

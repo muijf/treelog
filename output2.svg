@@ -1,0 +1,625 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="430" height="9010">
+<style>
+  .node-text { fill: #4C74B9; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 20px; }
+  .leaf-text { fill: #212b2b; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 20px; }
+  .tree-line { stroke: #c0d1d1; stroke-width: 3; }
+</style>
+  <text x="20" y="20" class="node-text" dominant-baseline="middle">.</text>
+  <line x1="22.5" y1="50" x2="50" y2="50" class="tree-line"/>
+  <text x="50" y="50" class="node-text" dominant-baseline="middle">.git</text>
+  <line x1="52.5" y1="80" x2="80" y2="80" class="tree-line"/>
+  <text x="80" y="80" class="node-text" dominant-baseline="middle">hooks</text>
+  <line x1="82.5" y1="110" x2="110" y2="110" class="tree-line"/>
+  <text x="110" y="110" class="leaf-text" dominant-baseline="middle">applypatch-msg.sample</text>
+  <line x1="82.5" y1="140" x2="110" y2="140" class="tree-line"/>
+  <text x="110" y="140" class="leaf-text" dominant-baseline="middle">commit-msg.sample</text>
+  <line x1="82.5" y1="170" x2="110" y2="170" class="tree-line"/>
+  <text x="110" y="170" class="leaf-text" dominant-baseline="middle">fsmonitor-watchman.sample</text>
+  <line x1="82.5" y1="200" x2="110" y2="200" class="tree-line"/>
+  <text x="110" y="200" class="leaf-text" dominant-baseline="middle">post-update.sample</text>
+  <line x1="82.5" y1="230" x2="110" y2="230" class="tree-line"/>
+  <text x="110" y="230" class="leaf-text" dominant-baseline="middle">pre-applypatch.sample</text>
+  <line x1="82.5" y1="260" x2="110" y2="260" class="tree-line"/>
+  <text x="110" y="260" class="leaf-text" dominant-baseline="middle">pre-commit</text>
+  <line x1="82.5" y1="290" x2="110" y2="290" class="tree-line"/>
+  <text x="110" y="290" class="leaf-text" dominant-baseline="middle">pre-commit.sample</text>
+  <line x1="82.5" y1="320" x2="110" y2="320" class="tree-line"/>
+  <text x="110" y="320" class="leaf-text" dominant-baseline="middle">pre-merge-commit.sample</text>
+  <line x1="82.5" y1="350" x2="110" y2="350" class="tree-line"/>
+  <text x="110" y="350" class="leaf-text" dominant-baseline="middle">pre-push.sample</text>
+  <line x1="82.5" y1="380" x2="110" y2="380" class="tree-line"/>
+  <text x="110" y="380" class="leaf-text" dominant-baseline="middle">pre-rebase.sample</text>
+  <line x1="82.5" y1="410" x2="110" y2="410" class="tree-line"/>
+  <text x="110" y="410" class="leaf-text" dominant-baseline="middle">pre-receive.sample</text>
+  <line x1="82.5" y1="440" x2="110" y2="440" class="tree-line"/>
+  <text x="110" y="440" class="leaf-text" dominant-baseline="middle">prepare-commit-msg.sample</text>
+  <line x1="82.5" y1="470" x2="110" y2="470" class="tree-line"/>
+  <text x="110" y="470" class="leaf-text" dominant-baseline="middle">push-to-checkout.sample</text>
+  <line x1="82.5" y1="500" x2="110" y2="500" class="tree-line"/>
+  <text x="110" y="500" class="leaf-text" dominant-baseline="middle">sendemail-validate.sample</text>
+  <line x1="82.5" y1="530" x2="110" y2="530" class="tree-line"/>
+  <text x="110" y="530" class="leaf-text" dominant-baseline="middle">update.sample</text>
+  <line x1="82.5" y1="90" x2="82.5" y2="530" class="tree-line"/>
+  <line x1="52.5" y1="560" x2="80" y2="560" class="tree-line"/>
+  <text x="80" y="560" class="node-text" dominant-baseline="middle">info</text>
+  <line x1="82.5" y1="590" x2="110" y2="590" class="tree-line"/>
+  <text x="110" y="590" class="leaf-text" dominant-baseline="middle">exclude</text>
+  <line x1="82.5" y1="570" x2="82.5" y2="590" class="tree-line"/>
+  <line x1="52.5" y1="620" x2="80" y2="620" class="tree-line"/>
+  <text x="80" y="620" class="node-text" dominant-baseline="middle">logs</text>
+  <line x1="82.5" y1="650" x2="110" y2="650" class="tree-line"/>
+  <text x="110" y="650" class="node-text" dominant-baseline="middle">refs</text>
+  <line x1="82.5" y1="680" x2="110" y2="680" class="tree-line"/>
+  <text x="110" y="680" class="leaf-text" dominant-baseline="middle">HEAD</text>
+  <line x1="82.5" y1="630" x2="82.5" y2="680" class="tree-line"/>
+  <line x1="52.5" y1="710" x2="80" y2="710" class="tree-line"/>
+  <text x="80" y="710" class="node-text" dominant-baseline="middle">objects</text>
+  <line x1="82.5" y1="740" x2="110" y2="740" class="tree-line"/>
+  <text x="110" y="740" class="node-text" dominant-baseline="middle">00</text>
+  <line x1="82.5" y1="770" x2="110" y2="770" class="tree-line"/>
+  <text x="110" y="770" class="node-text" dominant-baseline="middle">01</text>
+  <line x1="82.5" y1="800" x2="110" y2="800" class="tree-line"/>
+  <text x="110" y="800" class="node-text" dominant-baseline="middle">02</text>
+  <line x1="82.5" y1="830" x2="110" y2="830" class="tree-line"/>
+  <text x="110" y="830" class="node-text" dominant-baseline="middle">03</text>
+  <line x1="82.5" y1="860" x2="110" y2="860" class="tree-line"/>
+  <text x="110" y="860" class="node-text" dominant-baseline="middle">04</text>
+  <line x1="82.5" y1="890" x2="110" y2="890" class="tree-line"/>
+  <text x="110" y="890" class="node-text" dominant-baseline="middle">08</text>
+  <line x1="82.5" y1="920" x2="110" y2="920" class="tree-line"/>
+  <text x="110" y="920" class="node-text" dominant-baseline="middle">0a</text>
+  <line x1="82.5" y1="950" x2="110" y2="950" class="tree-line"/>
+  <text x="110" y="950" class="node-text" dominant-baseline="middle">0d</text>
+  <line x1="82.5" y1="980" x2="110" y2="980" class="tree-line"/>
+  <text x="110" y="980" class="node-text" dominant-baseline="middle">0f</text>
+  <line x1="82.5" y1="1010" x2="110" y2="1010" class="tree-line"/>
+  <text x="110" y="1010" class="node-text" dominant-baseline="middle">10</text>
+  <line x1="82.5" y1="1040" x2="110" y2="1040" class="tree-line"/>
+  <text x="110" y="1040" class="node-text" dominant-baseline="middle">12</text>
+  <line x1="82.5" y1="1070" x2="110" y2="1070" class="tree-line"/>
+  <text x="110" y="1070" class="node-text" dominant-baseline="middle">13</text>
+  <line x1="82.5" y1="1100" x2="110" y2="1100" class="tree-line"/>
+  <text x="110" y="1100" class="node-text" dominant-baseline="middle">14</text>
+  <line x1="82.5" y1="1130" x2="110" y2="1130" class="tree-line"/>
+  <text x="110" y="1130" class="node-text" dominant-baseline="middle">18</text>
+  <line x1="82.5" y1="1160" x2="110" y2="1160" class="tree-line"/>
+  <text x="110" y="1160" class="node-text" dominant-baseline="middle">1b</text>
+  <line x1="82.5" y1="1190" x2="110" y2="1190" class="tree-line"/>
+  <text x="110" y="1190" class="node-text" dominant-baseline="middle">1d</text>
+  <line x1="82.5" y1="1220" x2="110" y2="1220" class="tree-line"/>
+  <text x="110" y="1220" class="node-text" dominant-baseline="middle">20</text>
+  <line x1="82.5" y1="1250" x2="110" y2="1250" class="tree-line"/>
+  <text x="110" y="1250" class="node-text" dominant-baseline="middle">24</text>
+  <line x1="82.5" y1="1280" x2="110" y2="1280" class="tree-line"/>
+  <text x="110" y="1280" class="node-text" dominant-baseline="middle">25</text>
+  <line x1="82.5" y1="1310" x2="110" y2="1310" class="tree-line"/>
+  <text x="110" y="1310" class="node-text" dominant-baseline="middle">28</text>
+  <line x1="82.5" y1="1340" x2="110" y2="1340" class="tree-line"/>
+  <text x="110" y="1340" class="node-text" dominant-baseline="middle">2a</text>
+  <line x1="82.5" y1="1370" x2="110" y2="1370" class="tree-line"/>
+  <text x="110" y="1370" class="node-text" dominant-baseline="middle">2c</text>
+  <line x1="82.5" y1="1400" x2="110" y2="1400" class="tree-line"/>
+  <text x="110" y="1400" class="node-text" dominant-baseline="middle">2f</text>
+  <line x1="82.5" y1="1430" x2="110" y2="1430" class="tree-line"/>
+  <text x="110" y="1430" class="node-text" dominant-baseline="middle">31</text>
+  <line x1="82.5" y1="1460" x2="110" y2="1460" class="tree-line"/>
+  <text x="110" y="1460" class="node-text" dominant-baseline="middle">32</text>
+  <line x1="82.5" y1="1490" x2="110" y2="1490" class="tree-line"/>
+  <text x="110" y="1490" class="node-text" dominant-baseline="middle">34</text>
+  <line x1="82.5" y1="1520" x2="110" y2="1520" class="tree-line"/>
+  <text x="110" y="1520" class="node-text" dominant-baseline="middle">35</text>
+  <line x1="82.5" y1="1550" x2="110" y2="1550" class="tree-line"/>
+  <text x="110" y="1550" class="node-text" dominant-baseline="middle">37</text>
+  <line x1="82.5" y1="1580" x2="110" y2="1580" class="tree-line"/>
+  <text x="110" y="1580" class="node-text" dominant-baseline="middle">39</text>
+  <line x1="82.5" y1="1610" x2="110" y2="1610" class="tree-line"/>
+  <text x="110" y="1610" class="node-text" dominant-baseline="middle">3b</text>
+  <line x1="82.5" y1="1640" x2="110" y2="1640" class="tree-line"/>
+  <text x="110" y="1640" class="node-text" dominant-baseline="middle">40</text>
+  <line x1="82.5" y1="1670" x2="110" y2="1670" class="tree-line"/>
+  <text x="110" y="1670" class="node-text" dominant-baseline="middle">44</text>
+  <line x1="82.5" y1="1700" x2="110" y2="1700" class="tree-line"/>
+  <text x="110" y="1700" class="node-text" dominant-baseline="middle">46</text>
+  <line x1="82.5" y1="1730" x2="110" y2="1730" class="tree-line"/>
+  <text x="110" y="1730" class="node-text" dominant-baseline="middle">4b</text>
+  <line x1="82.5" y1="1760" x2="110" y2="1760" class="tree-line"/>
+  <text x="110" y="1760" class="node-text" dominant-baseline="middle">4f</text>
+  <line x1="82.5" y1="1790" x2="110" y2="1790" class="tree-line"/>
+  <text x="110" y="1790" class="node-text" dominant-baseline="middle">52</text>
+  <line x1="82.5" y1="1820" x2="110" y2="1820" class="tree-line"/>
+  <text x="110" y="1820" class="node-text" dominant-baseline="middle">53</text>
+  <line x1="82.5" y1="1850" x2="110" y2="1850" class="tree-line"/>
+  <text x="110" y="1850" class="node-text" dominant-baseline="middle">55</text>
+  <line x1="82.5" y1="1880" x2="110" y2="1880" class="tree-line"/>
+  <text x="110" y="1880" class="node-text" dominant-baseline="middle">58</text>
+  <line x1="82.5" y1="1910" x2="110" y2="1910" class="tree-line"/>
+  <text x="110" y="1910" class="node-text" dominant-baseline="middle">5d</text>
+  <line x1="82.5" y1="1940" x2="110" y2="1940" class="tree-line"/>
+  <text x="110" y="1940" class="node-text" dominant-baseline="middle">5e</text>
+  <line x1="82.5" y1="1970" x2="110" y2="1970" class="tree-line"/>
+  <text x="110" y="1970" class="node-text" dominant-baseline="middle">5f</text>
+  <line x1="82.5" y1="2000" x2="110" y2="2000" class="tree-line"/>
+  <text x="110" y="2000" class="node-text" dominant-baseline="middle">62</text>
+  <line x1="82.5" y1="2030" x2="110" y2="2030" class="tree-line"/>
+  <text x="110" y="2030" class="node-text" dominant-baseline="middle">64</text>
+  <line x1="82.5" y1="2060" x2="110" y2="2060" class="tree-line"/>
+  <text x="110" y="2060" class="node-text" dominant-baseline="middle">65</text>
+  <line x1="82.5" y1="2090" x2="110" y2="2090" class="tree-line"/>
+  <text x="110" y="2090" class="node-text" dominant-baseline="middle">66</text>
+  <line x1="82.5" y1="2120" x2="110" y2="2120" class="tree-line"/>
+  <text x="110" y="2120" class="node-text" dominant-baseline="middle">69</text>
+  <line x1="82.5" y1="2150" x2="110" y2="2150" class="tree-line"/>
+  <text x="110" y="2150" class="node-text" dominant-baseline="middle">6b</text>
+  <line x1="82.5" y1="2180" x2="110" y2="2180" class="tree-line"/>
+  <text x="110" y="2180" class="node-text" dominant-baseline="middle">6c</text>
+  <line x1="82.5" y1="2210" x2="110" y2="2210" class="tree-line"/>
+  <text x="110" y="2210" class="node-text" dominant-baseline="middle">6d</text>
+  <line x1="82.5" y1="2240" x2="110" y2="2240" class="tree-line"/>
+  <text x="110" y="2240" class="node-text" dominant-baseline="middle">6e</text>
+  <line x1="82.5" y1="2270" x2="110" y2="2270" class="tree-line"/>
+  <text x="110" y="2270" class="node-text" dominant-baseline="middle">72</text>
+  <line x1="82.5" y1="2300" x2="110" y2="2300" class="tree-line"/>
+  <text x="110" y="2300" class="node-text" dominant-baseline="middle">73</text>
+  <line x1="82.5" y1="2330" x2="110" y2="2330" class="tree-line"/>
+  <text x="110" y="2330" class="node-text" dominant-baseline="middle">74</text>
+  <line x1="82.5" y1="2360" x2="110" y2="2360" class="tree-line"/>
+  <text x="110" y="2360" class="node-text" dominant-baseline="middle">76</text>
+  <line x1="82.5" y1="2390" x2="110" y2="2390" class="tree-line"/>
+  <text x="110" y="2390" class="node-text" dominant-baseline="middle">79</text>
+  <line x1="82.5" y1="2420" x2="110" y2="2420" class="tree-line"/>
+  <text x="110" y="2420" class="node-text" dominant-baseline="middle">7a</text>
+  <line x1="82.5" y1="2450" x2="110" y2="2450" class="tree-line"/>
+  <text x="110" y="2450" class="node-text" dominant-baseline="middle">7c</text>
+  <line x1="82.5" y1="2480" x2="110" y2="2480" class="tree-line"/>
+  <text x="110" y="2480" class="node-text" dominant-baseline="middle">7d</text>
+  <line x1="82.5" y1="2510" x2="110" y2="2510" class="tree-line"/>
+  <text x="110" y="2510" class="node-text" dominant-baseline="middle">7e</text>
+  <line x1="82.5" y1="2540" x2="110" y2="2540" class="tree-line"/>
+  <text x="110" y="2540" class="node-text" dominant-baseline="middle">80</text>
+  <line x1="82.5" y1="2570" x2="110" y2="2570" class="tree-line"/>
+  <text x="110" y="2570" class="node-text" dominant-baseline="middle">82</text>
+  <line x1="82.5" y1="2600" x2="110" y2="2600" class="tree-line"/>
+  <text x="110" y="2600" class="node-text" dominant-baseline="middle">84</text>
+  <line x1="82.5" y1="2630" x2="110" y2="2630" class="tree-line"/>
+  <text x="110" y="2630" class="node-text" dominant-baseline="middle">87</text>
+  <line x1="82.5" y1="2660" x2="110" y2="2660" class="tree-line"/>
+  <text x="110" y="2660" class="node-text" dominant-baseline="middle">88</text>
+  <line x1="82.5" y1="2690" x2="110" y2="2690" class="tree-line"/>
+  <text x="110" y="2690" class="node-text" dominant-baseline="middle">8b</text>
+  <line x1="82.5" y1="2720" x2="110" y2="2720" class="tree-line"/>
+  <text x="110" y="2720" class="node-text" dominant-baseline="middle">91</text>
+  <line x1="82.5" y1="2750" x2="110" y2="2750" class="tree-line"/>
+  <text x="110" y="2750" class="node-text" dominant-baseline="middle">92</text>
+  <line x1="82.5" y1="2780" x2="110" y2="2780" class="tree-line"/>
+  <text x="110" y="2780" class="node-text" dominant-baseline="middle">95</text>
+  <line x1="82.5" y1="2810" x2="110" y2="2810" class="tree-line"/>
+  <text x="110" y="2810" class="node-text" dominant-baseline="middle">96</text>
+  <line x1="82.5" y1="2840" x2="110" y2="2840" class="tree-line"/>
+  <text x="110" y="2840" class="node-text" dominant-baseline="middle">97</text>
+  <line x1="82.5" y1="2870" x2="110" y2="2870" class="tree-line"/>
+  <text x="110" y="2870" class="node-text" dominant-baseline="middle">98</text>
+  <line x1="82.5" y1="2900" x2="110" y2="2900" class="tree-line"/>
+  <text x="110" y="2900" class="node-text" dominant-baseline="middle">99</text>
+  <line x1="82.5" y1="2930" x2="110" y2="2930" class="tree-line"/>
+  <text x="110" y="2930" class="node-text" dominant-baseline="middle">9a</text>
+  <line x1="82.5" y1="2960" x2="110" y2="2960" class="tree-line"/>
+  <text x="110" y="2960" class="node-text" dominant-baseline="middle">9b</text>
+  <line x1="82.5" y1="2990" x2="110" y2="2990" class="tree-line"/>
+  <text x="110" y="2990" class="node-text" dominant-baseline="middle">9e</text>
+  <line x1="82.5" y1="3020" x2="110" y2="3020" class="tree-line"/>
+  <text x="110" y="3020" class="node-text" dominant-baseline="middle">a4</text>
+  <line x1="82.5" y1="3050" x2="110" y2="3050" class="tree-line"/>
+  <text x="110" y="3050" class="node-text" dominant-baseline="middle">a5</text>
+  <line x1="82.5" y1="3080" x2="110" y2="3080" class="tree-line"/>
+  <text x="110" y="3080" class="node-text" dominant-baseline="middle">a6</text>
+  <line x1="82.5" y1="3110" x2="110" y2="3110" class="tree-line"/>
+  <text x="110" y="3110" class="node-text" dominant-baseline="middle">a9</text>
+  <line x1="82.5" y1="3140" x2="110" y2="3140" class="tree-line"/>
+  <text x="110" y="3140" class="node-text" dominant-baseline="middle">aa</text>
+  <line x1="82.5" y1="3170" x2="110" y2="3170" class="tree-line"/>
+  <text x="110" y="3170" class="node-text" dominant-baseline="middle">ab</text>
+  <line x1="82.5" y1="3200" x2="110" y2="3200" class="tree-line"/>
+  <text x="110" y="3200" class="node-text" dominant-baseline="middle">ad</text>
+  <line x1="82.5" y1="3230" x2="110" y2="3230" class="tree-line"/>
+  <text x="110" y="3230" class="node-text" dominant-baseline="middle">af</text>
+  <line x1="82.5" y1="3260" x2="110" y2="3260" class="tree-line"/>
+  <text x="110" y="3260" class="node-text" dominant-baseline="middle">b2</text>
+  <line x1="82.5" y1="3290" x2="110" y2="3290" class="tree-line"/>
+  <text x="110" y="3290" class="node-text" dominant-baseline="middle">b3</text>
+  <line x1="82.5" y1="3320" x2="110" y2="3320" class="tree-line"/>
+  <text x="110" y="3320" class="node-text" dominant-baseline="middle">b4</text>
+  <line x1="82.5" y1="3350" x2="110" y2="3350" class="tree-line"/>
+  <text x="110" y="3350" class="node-text" dominant-baseline="middle">b5</text>
+  <line x1="82.5" y1="3380" x2="110" y2="3380" class="tree-line"/>
+  <text x="110" y="3380" class="node-text" dominant-baseline="middle">b9</text>
+  <line x1="82.5" y1="3410" x2="110" y2="3410" class="tree-line"/>
+  <text x="110" y="3410" class="node-text" dominant-baseline="middle">bb</text>
+  <line x1="82.5" y1="3440" x2="110" y2="3440" class="tree-line"/>
+  <text x="110" y="3440" class="node-text" dominant-baseline="middle">bc</text>
+  <line x1="82.5" y1="3470" x2="110" y2="3470" class="tree-line"/>
+  <text x="110" y="3470" class="node-text" dominant-baseline="middle">c0</text>
+  <line x1="82.5" y1="3500" x2="110" y2="3500" class="tree-line"/>
+  <text x="110" y="3500" class="node-text" dominant-baseline="middle">c2</text>
+  <line x1="82.5" y1="3530" x2="110" y2="3530" class="tree-line"/>
+  <text x="110" y="3530" class="node-text" dominant-baseline="middle">c3</text>
+  <line x1="82.5" y1="3560" x2="110" y2="3560" class="tree-line"/>
+  <text x="110" y="3560" class="node-text" dominant-baseline="middle">c4</text>
+  <line x1="82.5" y1="3590" x2="110" y2="3590" class="tree-line"/>
+  <text x="110" y="3590" class="node-text" dominant-baseline="middle">c5</text>
+  <line x1="82.5" y1="3620" x2="110" y2="3620" class="tree-line"/>
+  <text x="110" y="3620" class="node-text" dominant-baseline="middle">c7</text>
+  <line x1="82.5" y1="3650" x2="110" y2="3650" class="tree-line"/>
+  <text x="110" y="3650" class="node-text" dominant-baseline="middle">c8</text>
+  <line x1="82.5" y1="3680" x2="110" y2="3680" class="tree-line"/>
+  <text x="110" y="3680" class="node-text" dominant-baseline="middle">c9</text>
+  <line x1="82.5" y1="3710" x2="110" y2="3710" class="tree-line"/>
+  <text x="110" y="3710" class="node-text" dominant-baseline="middle">cb</text>
+  <line x1="82.5" y1="3740" x2="110" y2="3740" class="tree-line"/>
+  <text x="110" y="3740" class="node-text" dominant-baseline="middle">cc</text>
+  <line x1="82.5" y1="3770" x2="110" y2="3770" class="tree-line"/>
+  <text x="110" y="3770" class="node-text" dominant-baseline="middle">cd</text>
+  <line x1="82.5" y1="3800" x2="110" y2="3800" class="tree-line"/>
+  <text x="110" y="3800" class="node-text" dominant-baseline="middle">d1</text>
+  <line x1="82.5" y1="3830" x2="110" y2="3830" class="tree-line"/>
+  <text x="110" y="3830" class="node-text" dominant-baseline="middle">d2</text>
+  <line x1="82.5" y1="3860" x2="110" y2="3860" class="tree-line"/>
+  <text x="110" y="3860" class="node-text" dominant-baseline="middle">d4</text>
+  <line x1="82.5" y1="3890" x2="110" y2="3890" class="tree-line"/>
+  <text x="110" y="3890" class="node-text" dominant-baseline="middle">d5</text>
+  <line x1="82.5" y1="3920" x2="110" y2="3920" class="tree-line"/>
+  <text x="110" y="3920" class="node-text" dominant-baseline="middle">d9</text>
+  <line x1="82.5" y1="3950" x2="110" y2="3950" class="tree-line"/>
+  <text x="110" y="3950" class="node-text" dominant-baseline="middle">da</text>
+  <line x1="82.5" y1="3980" x2="110" y2="3980" class="tree-line"/>
+  <text x="110" y="3980" class="node-text" dominant-baseline="middle">db</text>
+  <line x1="82.5" y1="4010" x2="110" y2="4010" class="tree-line"/>
+  <text x="110" y="4010" class="node-text" dominant-baseline="middle">dc</text>
+  <line x1="82.5" y1="4040" x2="110" y2="4040" class="tree-line"/>
+  <text x="110" y="4040" class="node-text" dominant-baseline="middle">dd</text>
+  <line x1="82.5" y1="4070" x2="110" y2="4070" class="tree-line"/>
+  <text x="110" y="4070" class="node-text" dominant-baseline="middle">de</text>
+  <line x1="82.5" y1="4100" x2="110" y2="4100" class="tree-line"/>
+  <text x="110" y="4100" class="node-text" dominant-baseline="middle">df</text>
+  <line x1="82.5" y1="4130" x2="110" y2="4130" class="tree-line"/>
+  <text x="110" y="4130" class="node-text" dominant-baseline="middle">e0</text>
+  <line x1="82.5" y1="4160" x2="110" y2="4160" class="tree-line"/>
+  <text x="110" y="4160" class="node-text" dominant-baseline="middle">e1</text>
+  <line x1="82.5" y1="4190" x2="110" y2="4190" class="tree-line"/>
+  <text x="110" y="4190" class="node-text" dominant-baseline="middle">e4</text>
+  <line x1="82.5" y1="4220" x2="110" y2="4220" class="tree-line"/>
+  <text x="110" y="4220" class="node-text" dominant-baseline="middle">e6</text>
+  <line x1="82.5" y1="4250" x2="110" y2="4250" class="tree-line"/>
+  <text x="110" y="4250" class="node-text" dominant-baseline="middle">ea</text>
+  <line x1="82.5" y1="4280" x2="110" y2="4280" class="tree-line"/>
+  <text x="110" y="4280" class="node-text" dominant-baseline="middle">ee</text>
+  <line x1="82.5" y1="4310" x2="110" y2="4310" class="tree-line"/>
+  <text x="110" y="4310" class="node-text" dominant-baseline="middle">ef</text>
+  <line x1="82.5" y1="4340" x2="110" y2="4340" class="tree-line"/>
+  <text x="110" y="4340" class="node-text" dominant-baseline="middle">f0</text>
+  <line x1="82.5" y1="4370" x2="110" y2="4370" class="tree-line"/>
+  <text x="110" y="4370" class="node-text" dominant-baseline="middle">f2</text>
+  <line x1="82.5" y1="4400" x2="110" y2="4400" class="tree-line"/>
+  <text x="110" y="4400" class="node-text" dominant-baseline="middle">f3</text>
+  <line x1="82.5" y1="4430" x2="110" y2="4430" class="tree-line"/>
+  <text x="110" y="4430" class="node-text" dominant-baseline="middle">f4</text>
+  <line x1="82.5" y1="4460" x2="110" y2="4460" class="tree-line"/>
+  <text x="110" y="4460" class="node-text" dominant-baseline="middle">f6</text>
+  <line x1="82.5" y1="4490" x2="110" y2="4490" class="tree-line"/>
+  <text x="110" y="4490" class="node-text" dominant-baseline="middle">f7</text>
+  <line x1="82.5" y1="4520" x2="110" y2="4520" class="tree-line"/>
+  <text x="110" y="4520" class="node-text" dominant-baseline="middle">f8</text>
+  <line x1="82.5" y1="4550" x2="110" y2="4550" class="tree-line"/>
+  <text x="110" y="4550" class="node-text" dominant-baseline="middle">fa</text>
+  <line x1="82.5" y1="4580" x2="110" y2="4580" class="tree-line"/>
+  <text x="110" y="4580" class="node-text" dominant-baseline="middle">fc</text>
+  <line x1="82.5" y1="4610" x2="110" y2="4610" class="tree-line"/>
+  <text x="110" y="4610" class="node-text" dominant-baseline="middle">fd</text>
+  <line x1="82.5" y1="4640" x2="110" y2="4640" class="tree-line"/>
+  <text x="110" y="4640" class="node-text" dominant-baseline="middle">fe</text>
+  <line x1="82.5" y1="4670" x2="110" y2="4670" class="tree-line"/>
+  <text x="110" y="4670" class="node-text" dominant-baseline="middle">ff</text>
+  <line x1="82.5" y1="4700" x2="110" y2="4700" class="tree-line"/>
+  <text x="110" y="4700" class="node-text" dominant-baseline="middle">info</text>
+  <line x1="82.5" y1="4730" x2="110" y2="4730" class="tree-line"/>
+  <text x="110" y="4730" class="node-text" dominant-baseline="middle">pack</text>
+  <line x1="82.5" y1="720" x2="82.5" y2="4730" class="tree-line"/>
+  <line x1="52.5" y1="4760" x2="80" y2="4760" class="tree-line"/>
+  <text x="80" y="4760" class="node-text" dominant-baseline="middle">refs</text>
+  <line x1="82.5" y1="4790" x2="110" y2="4790" class="tree-line"/>
+  <text x="110" y="4790" class="node-text" dominant-baseline="middle">heads</text>
+  <line x1="82.5" y1="4820" x2="110" y2="4820" class="tree-line"/>
+  <text x="110" y="4820" class="node-text" dominant-baseline="middle">remotes</text>
+  <line x1="82.5" y1="4850" x2="110" y2="4850" class="tree-line"/>
+  <text x="110" y="4850" class="node-text" dominant-baseline="middle">tags</text>
+  <line x1="82.5" y1="4770" x2="82.5" y2="4850" class="tree-line"/>
+  <line x1="52.5" y1="4880" x2="80" y2="4880" class="tree-line"/>
+  <text x="80" y="4880" class="leaf-text" dominant-baseline="middle">COMMIT_EDITMSG</text>
+  <line x1="52.5" y1="4910" x2="80" y2="4910" class="tree-line"/>
+  <text x="80" y="4910" class="leaf-text" dominant-baseline="middle">FETCH_HEAD</text>
+  <line x1="52.5" y1="4940" x2="80" y2="4940" class="tree-line"/>
+  <text x="80" y="4940" class="leaf-text" dominant-baseline="middle">HEAD</text>
+  <line x1="52.5" y1="4970" x2="80" y2="4970" class="tree-line"/>
+  <text x="80" y="4970" class="leaf-text" dominant-baseline="middle">ORIG_HEAD</text>
+  <line x1="52.5" y1="5000" x2="80" y2="5000" class="tree-line"/>
+  <text x="80" y="5000" class="leaf-text" dominant-baseline="middle">config</text>
+  <line x1="52.5" y1="5030" x2="80" y2="5030" class="tree-line"/>
+  <text x="80" y="5030" class="leaf-text" dominant-baseline="middle">description</text>
+  <line x1="52.5" y1="5060" x2="80" y2="5060" class="tree-line"/>
+  <text x="80" y="5060" class="leaf-text" dominant-baseline="middle">index</text>
+  <line x1="52.5" y1="60" x2="52.5" y2="5060" class="tree-line"/>
+  <line x1="22.5" y1="5090" x2="50" y2="5090" class="tree-line"/>
+  <text x="50" y="5090" class="node-text" dominant-baseline="middle">.github</text>
+  <line x1="52.5" y1="5120" x2="80" y2="5120" class="tree-line"/>
+  <text x="80" y="5120" class="node-text" dominant-baseline="middle">ISSUE_TEMPLATE</text>
+  <line x1="82.5" y1="5150" x2="110" y2="5150" class="tree-line"/>
+  <text x="110" y="5150" class="leaf-text" dominant-baseline="middle">bug_report.md</text>
+  <line x1="82.5" y1="5180" x2="110" y2="5180" class="tree-line"/>
+  <text x="110" y="5180" class="leaf-text" dominant-baseline="middle">config.yml</text>
+  <line x1="82.5" y1="5210" x2="110" y2="5210" class="tree-line"/>
+  <text x="110" y="5210" class="leaf-text" dominant-baseline="middle">feature_request.md</text>
+  <line x1="82.5" y1="5130" x2="82.5" y2="5210" class="tree-line"/>
+  <line x1="52.5" y1="5240" x2="80" y2="5240" class="tree-line"/>
+  <text x="80" y="5240" class="node-text" dominant-baseline="middle">workflows</text>
+  <line x1="82.5" y1="5270" x2="110" y2="5270" class="tree-line"/>
+  <text x="110" y="5270" class="leaf-text" dominant-baseline="middle">ci.yml</text>
+  <line x1="82.5" y1="5300" x2="110" y2="5300" class="tree-line"/>
+  <text x="110" y="5300" class="leaf-text" dominant-baseline="middle">publish.yml</text>
+  <line x1="82.5" y1="5250" x2="82.5" y2="5300" class="tree-line"/>
+  <line x1="52.5" y1="5330" x2="80" y2="5330" class="tree-line"/>
+  <text x="80" y="5330" class="leaf-text" dominant-baseline="middle">FUNDING.yml</text>
+  <line x1="52.5" y1="5360" x2="80" y2="5360" class="tree-line"/>
+  <text x="80" y="5360" class="leaf-text" dominant-baseline="middle">dependabot.yml</text>
+  <line x1="52.5" y1="5390" x2="80" y2="5390" class="tree-line"/>
+  <text x="80" y="5390" class="leaf-text" dominant-baseline="middle">pull_request_template.md</text>
+  <line x1="52.5" y1="5100" x2="52.5" y2="5390" class="tree-line"/>
+  <line x1="22.5" y1="5420" x2="50" y2="5420" class="tree-line"/>
+  <text x="50" y="5420" class="node-text" dominant-baseline="middle">.vscode</text>
+  <line x1="52.5" y1="5450" x2="80" y2="5450" class="tree-line"/>
+  <text x="80" y="5450" class="leaf-text" dominant-baseline="middle">settings.json</text>
+  <line x1="52.5" y1="5430" x2="52.5" y2="5450" class="tree-line"/>
+  <line x1="22.5" y1="5480" x2="50" y2="5480" class="tree-line"/>
+  <text x="50" y="5480" class="node-text" dominant-baseline="middle">examples</text>
+  <line x1="52.5" y1="5510" x2="80" y2="5510" class="tree-line"/>
+  <text x="80" y="5510" class="leaf-text" dominant-baseline="middle">basic.rs</text>
+  <line x1="52.5" y1="5540" x2="80" y2="5540" class="tree-line"/>
+  <text x="80" y="5540" class="leaf-text" dominant-baseline="middle">builder.rs</text>
+  <line x1="52.5" y1="5570" x2="80" y2="5570" class="tree-line"/>
+  <text x="80" y="5570" class="leaf-text" dominant-baseline="middle">cargo.rs</text>
+  <line x1="52.5" y1="5600" x2="80" y2="5600" class="tree-line"/>
+  <text x="80" y="5600" class="leaf-text" dominant-baseline="middle">clap.rs</text>
+  <line x1="52.5" y1="5630" x2="80" y2="5630" class="tree-line"/>
+  <text x="80" y="5630" class="leaf-text" dominant-baseline="middle">comparison.rs</text>
+  <line x1="52.5" y1="5660" x2="80" y2="5660" class="tree-line"/>
+  <text x="80" y="5660" class="leaf-text" dominant-baseline="middle">complex.rs</text>
+  <line x1="52.5" y1="5690" x2="80" y2="5690" class="tree-line"/>
+  <text x="80" y="5690" class="leaf-text" dominant-baseline="middle">customization.rs</text>
+  <line x1="52.5" y1="5720" x2="80" y2="5720" class="tree-line"/>
+  <text x="80" y="5720" class="leaf-text" dominant-baseline="middle">export.rs</text>
+  <line x1="52.5" y1="5750" x2="80" y2="5750" class="tree-line"/>
+  <text x="80" y="5750" class="leaf-text" dominant-baseline="middle">file_tree.rs</text>
+  <line x1="52.5" y1="5780" x2="80" y2="5780" class="tree-line"/>
+  <text x="80" y="5780" class="leaf-text" dominant-baseline="middle">filesystem.rs</text>
+  <line x1="52.5" y1="5810" x2="80" y2="5810" class="tree-line"/>
+  <text x="80" y="5810" class="leaf-text" dominant-baseline="middle">git2.rs</text>
+  <line x1="52.5" y1="5840" x2="80" y2="5840" class="tree-line"/>
+  <text x="80" y="5840" class="leaf-text" dominant-baseline="middle">iterator.rs</text>
+  <line x1="52.5" y1="5870" x2="80" y2="5870" class="tree-line"/>
+  <text x="80" y="5870" class="leaf-text" dominant-baseline="middle">macro.rs</text>
+  <line x1="52.5" y1="5900" x2="80" y2="5900" class="tree-line"/>
+  <text x="80" y="5900" class="leaf-text" dominant-baseline="middle">merge.rs</text>
+  <line x1="52.5" y1="5930" x2="80" y2="5930" class="tree-line"/>
+  <text x="80" y="5930" class="leaf-text" dominant-baseline="middle">path.rs</text>
+  <line x1="52.5" y1="5960" x2="80" y2="5960" class="tree-line"/>
+  <text x="80" y="5960" class="leaf-text" dominant-baseline="middle">petgraph.rs</text>
+  <line x1="52.5" y1="5990" x2="80" y2="5990" class="tree-line"/>
+  <text x="80" y="5990" class="leaf-text" dominant-baseline="middle">ron.rs</text>
+  <line x1="52.5" y1="6020" x2="80" y2="6020" class="tree-line"/>
+  <text x="80" y="6020" class="leaf-text" dominant-baseline="middle">search.rs</text>
+  <line x1="52.5" y1="6050" x2="80" y2="6050" class="tree-line"/>
+  <text x="80" y="6050" class="leaf-text" dominant-baseline="middle">serde.rs</text>
+  <line x1="52.5" y1="6080" x2="80" y2="6080" class="tree-line"/>
+  <text x="80" y="6080" class="leaf-text" dominant-baseline="middle">sorting.rs</text>
+  <line x1="52.5" y1="6110" x2="80" y2="6110" class="tree-line"/>
+  <text x="80" y="6110" class="leaf-text" dominant-baseline="middle">statistics.rs</text>
+  <line x1="52.5" y1="6140" x2="80" y2="6140" class="tree-line"/>
+  <text x="80" y="6140" class="leaf-text" dominant-baseline="middle">syn.rs</text>
+  <line x1="52.5" y1="6170" x2="80" y2="6170" class="tree-line"/>
+  <text x="80" y="6170" class="leaf-text" dominant-baseline="middle">transform.rs</text>
+  <line x1="52.5" y1="6200" x2="80" y2="6200" class="tree-line"/>
+  <text x="80" y="6200" class="leaf-text" dominant-baseline="middle">traversal.rs</text>
+  <line x1="52.5" y1="6230" x2="80" y2="6230" class="tree-line"/>
+  <text x="80" y="6230" class="leaf-text" dominant-baseline="middle">tree_sitter.rs</text>
+  <line x1="52.5" y1="6260" x2="80" y2="6260" class="tree-line"/>
+  <text x="80" y="6260" class="leaf-text" dominant-baseline="middle">xml.rs</text>
+  <line x1="52.5" y1="5490" x2="52.5" y2="6260" class="tree-line"/>
+  <line x1="22.5" y1="6290" x2="50" y2="6290" class="tree-line"/>
+  <text x="50" y="6290" class="node-text" dominant-baseline="middle">images</text>
+  <line x1="52.5" y1="6320" x2="80" y2="6320" class="tree-line"/>
+  <text x="80" y="6320" class="leaf-text" dominant-baseline="middle">banner.png</text>
+  <line x1="52.5" y1="6300" x2="52.5" y2="6320" class="tree-line"/>
+  <line x1="22.5" y1="6350" x2="50" y2="6350" class="tree-line"/>
+  <text x="50" y="6350" class="node-text" dominant-baseline="middle">scripts</text>
+  <line x1="52.5" y1="6380" x2="80" y2="6380" class="tree-line"/>
+  <text x="80" y="6380" class="leaf-text" dominant-baseline="middle">ci-check.sh</text>
+  <line x1="52.5" y1="6410" x2="80" y2="6410" class="tree-line"/>
+  <text x="80" y="6410" class="leaf-text" dominant-baseline="middle">validate-version.sh</text>
+  <line x1="52.5" y1="6360" x2="52.5" y2="6410" class="tree-line"/>
+  <line x1="22.5" y1="6440" x2="50" y2="6440" class="tree-line"/>
+  <text x="50" y="6440" class="node-text" dominant-baseline="middle">src</text>
+  <line x1="52.5" y1="6470" x2="80" y2="6470" class="tree-line"/>
+  <text x="80" y="6470" class="leaf-text" dominant-baseline="middle">builder.rs</text>
+  <line x1="52.5" y1="6500" x2="80" y2="6500" class="tree-line"/>
+  <text x="80" y="6500" class="leaf-text" dominant-baseline="middle">cargo.rs</text>
+  <line x1="52.5" y1="6530" x2="80" y2="6530" class="tree-line"/>
+  <text x="80" y="6530" class="leaf-text" dominant-baseline="middle">clap.rs</text>
+  <line x1="52.5" y1="6560" x2="80" y2="6560" class="tree-line"/>
+  <text x="80" y="6560" class="leaf-text" dominant-baseline="middle">cli.rs</text>
+  <line x1="52.5" y1="6590" x2="80" y2="6590" class="tree-line"/>
+  <text x="80" y="6590" class="leaf-text" dominant-baseline="middle">comparison.rs</text>
+  <line x1="52.5" y1="6620" x2="80" y2="6620" class="tree-line"/>
+  <text x="80" y="6620" class="leaf-text" dominant-baseline="middle">config.rs</text>
+  <line x1="52.5" y1="6650" x2="80" y2="6650" class="tree-line"/>
+  <text x="80" y="6650" class="leaf-text" dominant-baseline="middle">export.rs</text>
+  <line x1="52.5" y1="6680" x2="80" y2="6680" class="tree-line"/>
+  <text x="80" y="6680" class="leaf-text" dominant-baseline="middle">filesystem.rs</text>
+  <line x1="52.5" y1="6710" x2="80" y2="6710" class="tree-line"/>
+  <text x="80" y="6710" class="leaf-text" dominant-baseline="middle">git2.rs</text>
+  <line x1="52.5" y1="6740" x2="80" y2="6740" class="tree-line"/>
+  <text x="80" y="6740" class="leaf-text" dominant-baseline="middle">iterator.rs</text>
+  <line x1="52.5" y1="6770" x2="80" y2="6770" class="tree-line"/>
+  <text x="80" y="6770" class="leaf-text" dominant-baseline="middle">level.rs</text>
+  <line x1="52.5" y1="6800" x2="80" y2="6800" class="tree-line"/>
+  <text x="80" y="6800" class="leaf-text" dominant-baseline="middle">lib.rs</text>
+  <line x1="52.5" y1="6830" x2="80" y2="6830" class="tree-line"/>
+  <text x="80" y="6830" class="leaf-text" dominant-baseline="middle">macros.rs</text>
+  <line x1="52.5" y1="6860" x2="80" y2="6860" class="tree-line"/>
+  <text x="80" y="6860" class="leaf-text" dominant-baseline="middle">merge.rs</text>
+  <line x1="52.5" y1="6890" x2="80" y2="6890" class="tree-line"/>
+  <text x="80" y="6890" class="leaf-text" dominant-baseline="middle">path.rs</text>
+  <line x1="52.5" y1="6920" x2="80" y2="6920" class="tree-line"/>
+  <text x="80" y="6920" class="leaf-text" dominant-baseline="middle">petgraph.rs</text>
+  <line x1="52.5" y1="6950" x2="80" y2="6950" class="tree-line"/>
+  <text x="80" y="6950" class="leaf-text" dominant-baseline="middle">renderer.rs</text>
+  <line x1="52.5" y1="6980" x2="80" y2="6980" class="tree-line"/>
+  <text x="80" y="6980" class="leaf-text" dominant-baseline="middle">ron.rs</text>
+  <line x1="52.5" y1="7010" x2="80" y2="7010" class="tree-line"/>
+  <text x="80" y="7010" class="leaf-text" dominant-baseline="middle">serde.rs</text>
+  <line x1="52.5" y1="7040" x2="80" y2="7040" class="tree-line"/>
+  <text x="80" y="7040" class="leaf-text" dominant-baseline="middle">style.rs</text>
+  <line x1="52.5" y1="7070" x2="80" y2="7070" class="tree-line"/>
+  <text x="80" y="7070" class="leaf-text" dominant-baseline="middle">syn.rs</text>
+  <line x1="52.5" y1="7100" x2="80" y2="7100" class="tree-line"/>
+  <text x="80" y="7100" class="leaf-text" dominant-baseline="middle">transform.rs</text>
+  <line x1="52.5" y1="7130" x2="80" y2="7130" class="tree-line"/>
+  <text x="80" y="7130" class="leaf-text" dominant-baseline="middle">traversal.rs</text>
+  <line x1="52.5" y1="7160" x2="80" y2="7160" class="tree-line"/>
+  <text x="80" y="7160" class="leaf-text" dominant-baseline="middle">tree.rs</text>
+  <line x1="52.5" y1="7190" x2="80" y2="7190" class="tree-line"/>
+  <text x="80" y="7190" class="leaf-text" dominant-baseline="middle">tree_sitter.rs</text>
+  <line x1="52.5" y1="7220" x2="80" y2="7220" class="tree-line"/>
+  <text x="80" y="7220" class="leaf-text" dominant-baseline="middle">utils.rs</text>
+  <line x1="52.5" y1="7250" x2="80" y2="7250" class="tree-line"/>
+  <text x="80" y="7250" class="leaf-text" dominant-baseline="middle">xml.rs</text>
+  <line x1="52.5" y1="6450" x2="52.5" y2="7250" class="tree-line"/>
+  <line x1="22.5" y1="7280" x2="50" y2="7280" class="tree-line"/>
+  <text x="50" y="7280" class="node-text" dominant-baseline="middle">target</text>
+  <line x1="52.5" y1="7310" x2="80" y2="7310" class="tree-line"/>
+  <text x="80" y="7310" class="node-text" dominant-baseline="middle">debug</text>
+  <line x1="82.5" y1="7340" x2="110" y2="7340" class="tree-line"/>
+  <text x="110" y="7340" class="node-text" dominant-baseline="middle">.fingerprint</text>
+  <line x1="82.5" y1="7370" x2="110" y2="7370" class="tree-line"/>
+  <text x="110" y="7370" class="node-text" dominant-baseline="middle">build</text>
+  <line x1="82.5" y1="7400" x2="110" y2="7400" class="tree-line"/>
+  <text x="110" y="7400" class="node-text" dominant-baseline="middle">deps</text>
+  <line x1="82.5" y1="7430" x2="110" y2="7430" class="tree-line"/>
+  <text x="110" y="7430" class="node-text" dominant-baseline="middle">examples</text>
+  <line x1="82.5" y1="7460" x2="110" y2="7460" class="tree-line"/>
+  <text x="110" y="7460" class="node-text" dominant-baseline="middle">incremental</text>
+  <line x1="82.5" y1="7490" x2="110" y2="7490" class="tree-line"/>
+  <text x="110" y="7490" class="leaf-text" dominant-baseline="middle">.cargo-lock</text>
+  <line x1="82.5" y1="7520" x2="110" y2="7520" class="tree-line"/>
+  <text x="110" y="7520" class="leaf-text" dominant-baseline="middle">libtreelog.d</text>
+  <line x1="82.5" y1="7550" x2="110" y2="7550" class="tree-line"/>
+  <text x="110" y="7550" class="leaf-text" dominant-baseline="middle">libtreelog.rlib</text>
+  <line x1="82.5" y1="7580" x2="110" y2="7580" class="tree-line"/>
+  <text x="110" y="7580" class="leaf-text" dominant-baseline="middle">treelog</text>
+  <line x1="82.5" y1="7610" x2="110" y2="7610" class="tree-line"/>
+  <text x="110" y="7610" class="leaf-text" dominant-baseline="middle">treelog.d</text>
+  <line x1="82.5" y1="7320" x2="82.5" y2="7610" class="tree-line"/>
+  <line x1="52.5" y1="7640" x2="80" y2="7640" class="tree-line"/>
+  <text x="80" y="7640" class="node-text" dominant-baseline="middle">doc</text>
+  <line x1="82.5" y1="7670" x2="110" y2="7670" class="tree-line"/>
+  <text x="110" y="7670" class="node-text" dominant-baseline="middle">search.index</text>
+  <line x1="82.5" y1="7700" x2="110" y2="7700" class="tree-line"/>
+  <text x="110" y="7700" class="node-text" dominant-baseline="middle">src</text>
+  <line x1="82.5" y1="7730" x2="110" y2="7730" class="tree-line"/>
+  <text x="110" y="7730" class="node-text" dominant-baseline="middle">static.files</text>
+  <line x1="82.5" y1="7760" x2="110" y2="7760" class="tree-line"/>
+  <text x="110" y="7760" class="node-text" dominant-baseline="middle">trait.impl</text>
+  <line x1="82.5" y1="7790" x2="110" y2="7790" class="tree-line"/>
+  <text x="110" y="7790" class="node-text" dominant-baseline="middle">treelog</text>
+  <line x1="82.5" y1="7820" x2="110" y2="7820" class="tree-line"/>
+  <text x="110" y="7820" class="leaf-text" dominant-baseline="middle">.lock</text>
+  <line x1="82.5" y1="7850" x2="110" y2="7850" class="tree-line"/>
+  <text x="110" y="7850" class="leaf-text" dominant-baseline="middle">crates.js</text>
+  <line x1="82.5" y1="7880" x2="110" y2="7880" class="tree-line"/>
+  <text x="110" y="7880" class="leaf-text" dominant-baseline="middle">help.html</text>
+  <line x1="82.5" y1="7910" x2="110" y2="7910" class="tree-line"/>
+  <text x="110" y="7910" class="leaf-text" dominant-baseline="middle">settings.html</text>
+  <line x1="82.5" y1="7940" x2="110" y2="7940" class="tree-line"/>
+  <text x="110" y="7940" class="leaf-text" dominant-baseline="middle">src-files.js</text>
+  <line x1="82.5" y1="7650" x2="82.5" y2="7940" class="tree-line"/>
+  <line x1="52.5" y1="7970" x2="80" y2="7970" class="tree-line"/>
+  <text x="80" y="7970" class="node-text" dominant-baseline="middle">flycheck0</text>
+  <line x1="82.5" y1="8000" x2="110" y2="8000" class="tree-line"/>
+  <text x="110" y="8000" class="leaf-text" dominant-baseline="middle">stderr</text>
+  <line x1="82.5" y1="8030" x2="110" y2="8030" class="tree-line"/>
+  <text x="110" y="8030" class="leaf-text" dominant-baseline="middle">stdout</text>
+  <line x1="82.5" y1="7980" x2="82.5" y2="8030" class="tree-line"/>
+  <line x1="52.5" y1="8060" x2="80" y2="8060" class="tree-line"/>
+  <text x="80" y="8060" class="node-text" dominant-baseline="middle">package</text>
+  <line x1="82.5" y1="8090" x2="110" y2="8090" class="tree-line"/>
+  <text x="110" y="8090" class="node-text" dominant-baseline="middle">treelog-0.0.1</text>
+  <line x1="82.5" y1="8120" x2="110" y2="8120" class="tree-line"/>
+  <text x="110" y="8120" class="node-text" dominant-baseline="middle">treelog-0.0.2</text>
+  <line x1="82.5" y1="8150" x2="110" y2="8150" class="tree-line"/>
+  <text x="110" y="8150" class="leaf-text" dominant-baseline="middle">treelog-0.0.1.crate</text>
+  <line x1="82.5" y1="8180" x2="110" y2="8180" class="tree-line"/>
+  <text x="110" y="8180" class="leaf-text" dominant-baseline="middle">treelog-0.0.2.crate</text>
+  <line x1="82.5" y1="8070" x2="82.5" y2="8180" class="tree-line"/>
+  <line x1="52.5" y1="8210" x2="80" y2="8210" class="tree-line"/>
+  <text x="80" y="8210" class="node-text" dominant-baseline="middle">release</text>
+  <line x1="82.5" y1="8240" x2="110" y2="8240" class="tree-line"/>
+  <text x="110" y="8240" class="node-text" dominant-baseline="middle">.fingerprint</text>
+  <line x1="82.5" y1="8270" x2="110" y2="8270" class="tree-line"/>
+  <text x="110" y="8270" class="node-text" dominant-baseline="middle">build</text>
+  <line x1="82.5" y1="8300" x2="110" y2="8300" class="tree-line"/>
+  <text x="110" y="8300" class="node-text" dominant-baseline="middle">deps</text>
+  <line x1="82.5" y1="8330" x2="110" y2="8330" class="tree-line"/>
+  <text x="110" y="8330" class="node-text" dominant-baseline="middle">examples</text>
+  <line x1="82.5" y1="8360" x2="110" y2="8360" class="tree-line"/>
+  <text x="110" y="8360" class="node-text" dominant-baseline="middle">incremental</text>
+  <line x1="82.5" y1="8390" x2="110" y2="8390" class="tree-line"/>
+  <text x="110" y="8390" class="leaf-text" dominant-baseline="middle">.cargo-lock</text>
+  <line x1="82.5" y1="8420" x2="110" y2="8420" class="tree-line"/>
+  <text x="110" y="8420" class="leaf-text" dominant-baseline="middle">libtreelog.d</text>
+  <line x1="82.5" y1="8450" x2="110" y2="8450" class="tree-line"/>
+  <text x="110" y="8450" class="leaf-text" dominant-baseline="middle">libtreelog.rlib</text>
+  <line x1="82.5" y1="8480" x2="110" y2="8480" class="tree-line"/>
+  <text x="110" y="8480" class="leaf-text" dominant-baseline="middle">treelog</text>
+  <line x1="82.5" y1="8510" x2="110" y2="8510" class="tree-line"/>
+  <text x="110" y="8510" class="leaf-text" dominant-baseline="middle">treelog.d</text>
+  <line x1="82.5" y1="8220" x2="82.5" y2="8510" class="tree-line"/>
+  <line x1="52.5" y1="8540" x2="80" y2="8540" class="tree-line"/>
+  <text x="80" y="8540" class="leaf-text" dominant-baseline="middle">.rustc_info.json</text>
+  <line x1="52.5" y1="8570" x2="80" y2="8570" class="tree-line"/>
+  <text x="80" y="8570" class="leaf-text" dominant-baseline="middle">.rustdoc_fingerprint.json</text>
+  <line x1="52.5" y1="8600" x2="80" y2="8600" class="tree-line"/>
+  <text x="80" y="8600" class="leaf-text" dominant-baseline="middle">CACHEDIR.TAG</text>
+  <line x1="52.5" y1="7290" x2="52.5" y2="8600" class="tree-line"/>
+  <line x1="22.5" y1="8630" x2="50" y2="8630" class="tree-line"/>
+  <text x="50" y="8630" class="leaf-text" dominant-baseline="middle">.gitignore</text>
+  <line x1="22.5" y1="8660" x2="50" y2="8660" class="tree-line"/>
+  <text x="50" y="8660" class="leaf-text" dominant-baseline="middle">.pre-commit-config.yaml</text>
+  <line x1="22.5" y1="8690" x2="50" y2="8690" class="tree-line"/>
+  <text x="50" y="8690" class="leaf-text" dominant-baseline="middle">CHANGELOG.md</text>
+  <line x1="22.5" y1="8720" x2="50" y2="8720" class="tree-line"/>
+  <text x="50" y="8720" class="leaf-text" dominant-baseline="middle">CODE_OF_CONDUCT.md</text>
+  <line x1="22.5" y1="8750" x2="50" y2="8750" class="tree-line"/>
+  <text x="50" y="8750" class="leaf-text" dominant-baseline="middle">CONTRIBUTING.md</text>
+  <line x1="22.5" y1="8780" x2="50" y2="8780" class="tree-line"/>
+  <text x="50" y="8780" class="leaf-text" dominant-baseline="middle">Cargo.lock</text>
+  <line x1="22.5" y1="8810" x2="50" y2="8810" class="tree-line"/>
+  <text x="50" y="8810" class="leaf-text" dominant-baseline="middle">Cargo.toml</text>
+  <line x1="22.5" y1="8840" x2="50" y2="8840" class="tree-line"/>
+  <text x="50" y="8840" class="leaf-text" dominant-baseline="middle">LICENSE</text>
+  <line x1="22.5" y1="8870" x2="50" y2="8870" class="tree-line"/>
+  <text x="50" y="8870" class="leaf-text" dominant-baseline="middle">README.md</text>
+  <line x1="22.5" y1="8900" x2="50" y2="8900" class="tree-line"/>
+  <text x="50" y="8900" class="leaf-text" dominant-baseline="middle">SECURITY.md</text>
+  <line x1="22.5" y1="8930" x2="50" y2="8930" class="tree-line"/>
+  <text x="50" y="8930" class="leaf-text" dominant-baseline="middle">output.svg</text>
+  <line x1="22.5" y1="8960" x2="50" y2="8960" class="tree-line"/>
+  <text x="50" y="8960" class="leaf-text" dominant-baseline="middle">output2.svg</text>
+  <line x1="22.5" y1="30" x2="22.5" y2="8960" class="tree-line"/>
+</svg>
