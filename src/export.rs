@@ -21,19 +21,20 @@ impl Tree {
         let mut html = String::from(
             r#"<div class="tree">
 <style>
-.tree ul { list-style: none; margin: 0; padding-left: 20px; }
-.tree li { margin: 5px 0; }
-.tree .node { cursor: pointer; }
-.tree .node::before { content: "▶ "; }
-.tree .node.expanded::before { content: "▼ "; }
-.tree .children { display: none; }
-.tree .node.expanded + .children { display: block; }
-.tree .leaf { color: #666; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 20px; }
+.tree ul { list-style: none; padding-left: 0.5em; margin-left: 0.3em; border-left: 3px solid #c0d1d1; margin-bottom: 1em; color: #212b2b; }
+.tree li { list-style-type: none; margin-bottom: 0.5em; margin-top: 0.5em; }
+.tree details summary { cursor: pointer; color: #4C74B9; }
+.tree details summary::-webkit-details-marker { color: #4C74B9; font-size: 18px; }
+.tree details[open] > summary::-webkit-details-marker { color: #2b4b82; }
+.tree details[open] > summary { color: #2b4b82; }
 </style>
+<ul>
 "#,
         );
         self.to_html_recursive(&mut html, 0);
-        html.push_str("</div>");
+        html.push_str("</ul></div>");
         html
     }
 
@@ -41,25 +42,25 @@ impl Tree {
         match self {
             Tree::Node(label, children) => {
                 let indent = "  ".repeat(depth);
-                html.push_str(&format!(
-                    "{indent}<li class=\"node\" onclick=\"this.classList.toggle('expanded')\">{label}\n"
-                ));
                 if !children.is_empty() {
-                    html.push_str(&format!("{indent}  <ul class=\"children\">\n"));
+                    html.push_str(&format!(
+                        "{indent}<li>\n{indent}  <details>\n{indent}    <summary>{}</summary>\n{indent}    <ul>\n",
+                        html_escape(label)
+                    ));
                     for child in children {
                         child.to_html_recursive(html, depth + 2);
                     }
-                    html.push_str(&format!("{indent}  </ul>\n"));
+                    html.push_str(&format!(
+                        "{indent}    </ul>\n{indent}  </details>\n{indent}</li>\n"
+                    ));
+                } else {
+                    html.push_str(&format!("{indent}<li>{}</li>\n", html_escape(label)));
                 }
-                html.push_str(&format!("{indent}</li>\n"));
             }
             Tree::Leaf(lines) => {
                 let indent = "  ".repeat(depth);
                 for line in lines {
-                    html.push_str(&format!(
-                        "{indent}<li class=\"leaf\">{line}</li>\n",
-                        line = html_escape(line)
-                    ));
+                    html.push_str(&format!("{indent}<li>{}</li>\n", html_escape(line)));
                 }
             }
         }
