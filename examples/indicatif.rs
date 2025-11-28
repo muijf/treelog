@@ -2,23 +2,23 @@
 //!
 //! This example simulates a dependency resolution process (similar to Maven/Gradle)
 //! where dependencies are resolved in a tree structure. It demonstrates:
-//! - Hierarchical progress bars using `TreeProgressManager`
+//! - Hierarchical progress bars using `IncrementalTree`
 //! - Dynamic tree updates as dependencies are added
 //! - Progress tracking for multiple concurrent downloads
 //! - Real-time UI updates with formatted messages
 
 use std::collections::HashMap;
-use std::sync::Arc;
 use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
 
 use console::style;
-use indicatif::{HumanDuration, MultiProgressAlignment, ProgressBar, ProgressStyle};
+use indicatif::{HumanDuration, MultiProgress, MultiProgressAlignment, ProgressBar, ProgressStyle};
 use once_cell::sync::Lazy;
 use rand::rngs::ThreadRng;
 use rand::{Rng, RngCore};
-use treelog::indicatif::TreeProgressManager;
+use treelog::incremental::IncrementalTree;
 
 /// Configuration constants for the simulation.
 struct Config;
@@ -177,7 +177,7 @@ fn get_terminal_width() -> usize {
 ///
 /// We don't use the {tree} template key because we manually format messages with prefixes.
 /// The template key handler requires thread-local state which is unreliable here.
-fn create_item_style(_tree_manager: &TreeProgressManager) -> ProgressStyle {
+fn create_item_style() -> ProgressStyle {
     ProgressStyle::with_template("{wide_msg}").expect("Progress style template should be valid")
 }
 
@@ -310,7 +310,7 @@ fn get_action(rng: &mut dyn RngCore, tree_state: &TreeState) -> Action {
 fn handle_increment_progress(
     manager_id: usize,
     tree_state: &mut TreeState,
-    tree_manager: &TreeProgressManager,
+    tree: &Arc<Mutex<IncrementalTree>>,
     main_progress_bar: &ProgressBar,
     rng: &mut ThreadRng,
 ) {
@@ -329,11 +329,11 @@ fn handle_increment_progress(
         .min(remaining_bytes);
 
     progress_bar.inc(chunk_size);
-    update_item_message(manager_id, dependency, tree_manager, tree_state);
+    update_item_message(manager_id, dependency, tree, tree_state);
 
     // Check if this dependency is now complete
     if progress_bar.position() >= total_bytes {
-        progress_bar.set_style(create_item_style(tree_manager));
+        progress_bar.set_style(create_item_style());
         main_progress_bar.inc(1);
         update_active_items(tree_state);
     }
@@ -346,7 +346,7 @@ fn handle_increment_progress(
 fn update_item_message(
     manager_id: usize,
     dependency: &Dependency,
-    tree_manager: &TreeProgressManager,
+    tree: &Arc<Mutex<IncrementalTree>>,
     _tree_state: &TreeState,
 ) {
     let total_bytes = dependency.progress_bar.length().unwrap_or(0);
@@ -360,7 +360,8 @@ fn update_item_message(
 
     // Build the formatted prefix with tree structure if this is a child dependency
     let formatted_prefix = if dependency.parent.is_some() {
-        tree_manager
+        tree.lock()
+            .unwrap()
             .get_prefix(manager_id)
             .map(|tree_prefix| {
                 format!(
@@ -391,9 +392,15 @@ fn update_item_message(
 /// Initializes the progress display system.
 ///
 /// Returns the initialized components needed for the simulation.
-fn initialize_progress_display() -> (Arc<TreeProgressManager>, ProgressBar, TreeState, usize) {
-    let tree_manager = Arc::new(TreeProgressManager::new());
-    let multi_progress = tree_manager.get_multi_progress();
+fn initialize_progress_display() -> (
+    Arc<Mutex<IncrementalTree>>,
+    MultiProgress,
+    ProgressBar,
+    TreeState,
+    usize,
+) {
+    let tree = Arc::new(Mutex::new(IncrementalTree::new()));
+    let multi_progress = MultiProgress::new();
     multi_progress.set_alignment(MultiProgressAlignment::Bottom);
 
     // Create main progress bar style
@@ -410,9 +417,7 @@ fn initialize_progress_display() -> (Arc<TreeProgressManager>, ProgressBar, Tree
 
     // Initialize styles for all dependency progress bars
     for dependency in DEPENDENCIES.iter() {
-        dependency
-            .progress_bar
-            .set_style(create_item_style(&tree_manager));
+        dependency.progress_bar.set_style(create_item_style());
     }
 
     let tree_state = TreeState {
@@ -425,14 +430,20 @@ fn initialize_progress_display() -> (Arc<TreeProgressManager>, ProgressBar, Tree
 
     main_progress_bar.tick();
 
-    (tree_manager, main_progress_bar, tree_state, terminal_width)
+    (
+        tree,
+        multi_progress,
+        main_progress_bar,
+        tree_state,
+        terminal_width,
+    )
 }
 
 /// Handles adding a new dependency to the tree.
 fn handle_add_dependency(
     dependency_index: usize,
-    tree_manager: &TreeProgressManager,
-    multi_progress: &indicatif::MultiProgress,
+    tree: &Arc<Mutex<IncrementalTree>>,
+    multi_progress: &MultiProgress,
     tree_state: &mut TreeState,
     main_progress_bar: &ProgressBar,
     terminal_width: usize,
@@ -456,12 +467,18 @@ fn handle_add_dependency(
             })
     });
 
-    // Add the progress bar to the tree manager
-    let manager_id = tree_manager.add_progress_bar(
-        parent_manager_id,
-        dependency.progress_bar.clone(),
-        multi_progress,
-    );
+    // Add the node to the tree
+    let manager_id = {
+        let mut tree_guard = tree.lock().unwrap();
+        tree_guard.add_node("", parent_manager_id)
+    };
+
+    // Calculate insert position and insert into MultiProgress
+    let insert_pos = {
+        let tree_guard = tree.lock().unwrap();
+        tree_guard.calculate_insert_position_for_existing(manager_id)
+    };
+    multi_progress.insert(insert_pos, dependency.progress_bar.clone());
 
     // Update state
     tree_state
@@ -471,12 +488,11 @@ fn handle_add_dependency(
         .dependency_index_to_manager_id
         .insert(dependency_index, manager_id);
 
-    // Prefixes are automatically updated by add_progress_bar().
     // We need to update messages with our custom formatting because
     // adding a new sibling can change which items are "last child" at various levels.
     for (&dep_idx, &mgr_id) in &tree_state.dependency_index_to_manager_id {
         if let Some(dep) = tree_state.dependencies.get(&dep_idx) {
-            update_item_message(mgr_id, dep, tree_manager, tree_state);
+            update_item_message(mgr_id, dep, tree, tree_state);
         }
     }
 
@@ -487,7 +503,7 @@ fn handle_add_dependency(
 /// Handles incrementing progress for a dependency.
 fn handle_progress_increment(
     manager_id: usize,
-    tree_manager: &TreeProgressManager,
+    tree: &Arc<Mutex<IncrementalTree>>,
     tree_state: &mut TreeState,
     main_progress_bar: &ProgressBar,
     terminal_width: usize,
@@ -502,19 +518,19 @@ fn handle_progress_increment(
         return;
     }
 
-    handle_increment_progress(manager_id, tree_state, tree_manager, main_progress_bar, rng);
+    handle_increment_progress(manager_id, tree_state, tree, main_progress_bar, rng);
     update_main_progress_message(main_progress_bar, tree_state, terminal_width);
 }
 
 /// Runs the main simulation loop until all dependencies are resolved.
 fn run_simulation_loop(
-    tree_manager: Arc<TreeProgressManager>,
+    tree: Arc<Mutex<IncrementalTree>>,
+    multi_progress: MultiProgress,
     main_progress_bar: ProgressBar,
     mut tree_state: TreeState,
     terminal_width: usize,
     start_time: Instant,
 ) {
-    let multi_progress = tree_manager.get_multi_progress();
     let mut rng = ThreadRng::default();
 
     loop {
@@ -532,8 +548,8 @@ fn run_simulation_loop(
             Action::ModifyTree(dependency_index) => {
                 handle_add_dependency(
                     dependency_index,
-                    &tree_manager,
-                    multi_progress,
+                    &tree,
+                    &multi_progress,
                     &mut tree_state,
                     &main_progress_bar,
                     terminal_width,
@@ -542,7 +558,7 @@ fn run_simulation_loop(
             Action::IncProgressBar(manager_id) => {
                 handle_progress_increment(
                     manager_id,
-                    &tree_manager,
+                    &tree,
                     &mut tree_state,
                     &main_progress_bar,
                     terminal_width,
@@ -559,11 +575,12 @@ pub fn main() {
     println!();
     let start_time = Instant::now();
 
-    let (tree_manager, main_progress_bar, tree_state, terminal_width) =
+    let (tree, multi_progress, main_progress_bar, tree_state, terminal_width) =
         initialize_progress_display();
 
     run_simulation_loop(
-        tree_manager,
+        tree,
+        multi_progress,
         main_progress_bar,
         tree_state,
         terminal_width,

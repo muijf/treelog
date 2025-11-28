@@ -22,8 +22,8 @@ pub mod compare;
 pub mod config;
 #[cfg(any(feature = "export", doc))]
 pub mod export;
-#[cfg(any(feature = "indicatif", doc))]
-pub mod indicatif;
+#[cfg(any(feature = "incremental", doc))]
+pub mod incremental;
 #[cfg(any(feature = "iterator", doc))]
 pub mod iterator;
 mod level;
@@ -66,9 +66,6 @@ pub use level::LevelPath;
 pub use stats::TreeStats;
 pub use style::{StyleConfig, TreeStyle};
 pub use tree::Tree;
-
-#[cfg(any(feature = "indicatif", doc))]
-pub use indicatif::TreeProgressManager;
 
 // Re-export renderer functions
 pub use renderer::{

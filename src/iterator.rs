@@ -1,4 +1,25 @@
 //! Iterator API for line-by-line tree access.
+//!
+//! This module provides iterators for **static, pre-built** `Tree` structures.
+//! The tree must be fully constructed before iteration begins.
+//!
+//! # Examples
+//!
+//! ```no_run
+//! use treelog::{Tree, iterator::TreeIteratorExt};
+//!
+//! let tree = Tree::Node("root".to_string(), vec![
+//!     Tree::Leaf(vec!["item".to_string()])
+//! ]);
+//!
+//! // Iterate over lines
+//! for line in tree.lines() {
+//!     println!("{} {}", line.prefix, line.content);
+//! }
+//!
+//! // Or collect into a vector of strings
+//! let lines: Vec<String> = tree.to_lines();
+//! ```
 
 use crate::config::RenderConfig;
 use crate::level::LevelPath;
@@ -32,7 +53,11 @@ struct LeafState {
 /// An iterator that yields lines of a rendered tree one at a time.
 ///
 /// This allows streaming access to tree lines without materializing
-/// the entire tree string in memory.
+/// the entire tree string in memory. Each iteration yields a [`Line`] struct
+/// containing the prefix, content, depth, and last-child status.
+///
+/// For incrementally-built trees, see [`IncrementalTree`](crate::incremental::IncrementalTree)
+/// instead.
 ///
 /// # Examples
 ///
@@ -282,6 +307,18 @@ pub trait TreeIteratorExt {
     fn lines(&self) -> TreeLines<'_>;
 
     /// Returns an iterator with a custom configuration.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use treelog::{Tree, TreeStyle, RenderConfig, iterator::TreeIteratorExt};
+    ///
+    /// let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
+    /// let config = RenderConfig::default().with_style(TreeStyle::Ascii);
+    /// for line in tree.lines_with_config(&config) {
+    ///     println!("{} {}", line.prefix, line.content);
+    /// }
+    /// ```
     fn lines_with_config(&self, config: &RenderConfig) -> TreeLines<'_>;
 
     /// Collects all lines into a `Vec<String>`.
@@ -297,6 +334,16 @@ pub trait TreeIteratorExt {
     fn to_lines(&self) -> Vec<String>;
 
     /// Collects all lines into a `Vec<String>` with a custom configuration.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use treelog::{Tree, TreeStyle, RenderConfig, iterator::TreeIteratorExt};
+    ///
+    /// let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
+    /// let config = RenderConfig::default().with_style(TreeStyle::Ascii);
+    /// let lines: Vec<String> = tree.to_lines_with_config(&config);
+    /// ```
     fn to_lines_with_config(&self, config: &RenderConfig) -> Vec<String>;
 }
 

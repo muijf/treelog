@@ -79,8 +79,8 @@ arbitrary-git2 = ["dep:git2"]
 arbitrary-syn = ["dep:syn"]
 arbitrary-tree-sitter = ["dep:tree-sitter"]
 arbitrary-clap = ["dep:clap"]
-indicatif = ["dep:indicatif"]
-all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "compare", "search", "sort", "stats", "merge", "export", "color", "serde", "serde-json", "serde-yaml", "serde-toml", "serde-ron", "walkdir", "petgraph", "cargo-metadata", "git2", "syn", "tree-sitter", "clap", "arbitrary", "arbitrary-json", "arbitrary-yaml", "arbitrary-toml", "arbitrary-xml", "arbitrary-walkdir", "arbitrary-petgraph", "arbitrary-cargo", "arbitrary-git2", "arbitrary-syn", "arbitrary-tree-sitter", "arbitrary-clap", "indicatif"]
+incremental = []
+all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "compare", "search", "sort", "stats", "merge", "export", "color", "serde", "serde-json", "serde-yaml", "serde-toml", "serde-ron", "walkdir", "petgraph", "cargo-metadata", "git2", "syn", "tree-sitter", "clap", "arbitrary", "arbitrary-json", "arbitrary-yaml", "arbitrary-toml", "arbitrary-xml", "arbitrary-walkdir", "arbitrary-petgraph", "arbitrary-cargo", "arbitrary-git2", "arbitrary-syn", "arbitrary-tree-sitter", "arbitrary-clap", "incremental"]
 
 [dev-dependencies]
 colored = "3.0"
