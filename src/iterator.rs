@@ -13,7 +13,7 @@
 //! ]);
 //!
 //! // Iterate over lines
-//! for line in tree.lines() {
+//! for line in TreeIteratorExt::lines(&tree) {
 //!     println!("{} {}", line.prefix, line.content);
 //! }
 //!
