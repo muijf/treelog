@@ -15,7 +15,7 @@
     doc
 ))]
 pub mod arbitrary;
-#[cfg(any(feature = "builder", feature = "incremental", doc))]
+#[cfg(any(feature = "builder", feature = "incremental", feature = "macro", doc))]
 pub mod build;
 #[cfg(any(
     feature = "export-html",
@@ -26,8 +26,6 @@ pub mod build;
 pub mod export;
 #[cfg(any(feature = "iterator", doc))]
 pub mod iterator;
-#[cfg(any(feature = "macro", doc))]
-mod macros;
 #[cfg(any(
     feature = "compare",
     feature = "merge",

@@ -65,11 +65,11 @@ cargo build --release --bin treelog --features cli,arbitrary-walkdir,serde-json
 
 **Core Features:**
 - `iterator` - Iterator API for streaming trees
-- `macro` - Macro DSL for tree construction
 - `formatters` - Custom formatters for nodes and leaves
 - `color` - Color output support (requires `colored`)
 
-**Builder:**
+**Tree Building:**
+- `macro` - Macro DSL for tree construction
 - `builder` - Builder API for constructing trees
 - `incremental` - Incremental tree construction for dynamic tree building
 
