@@ -52,7 +52,10 @@ search = []
 sort = []
 stats = []
 merge = []
-export = []
+export = ["export-html", "export-svg", "export-dot"]
+export-html = []
+export-svg = []
+export-dot = []
 color = ["colored"]
 serde = ["serde-json", "serde-yaml", "serde-toml", "serde-ron"]
 serde-json = ["dep:serde", "dep:serde_json"]
@@ -80,7 +83,7 @@ arbitrary-syn = ["dep:syn"]
 arbitrary-tree-sitter = ["dep:tree-sitter"]
 arbitrary-clap = ["dep:clap"]
 incremental = []
-all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "compare", "search", "sort", "stats", "merge", "export", "color", "serde", "serde-json", "serde-yaml", "serde-toml", "serde-ron", "walkdir", "petgraph", "cargo-metadata", "git2", "syn", "tree-sitter", "clap", "arbitrary", "arbitrary-json", "arbitrary-yaml", "arbitrary-toml", "arbitrary-xml", "arbitrary-walkdir", "arbitrary-petgraph", "arbitrary-cargo", "arbitrary-git2", "arbitrary-syn", "arbitrary-tree-sitter", "arbitrary-clap", "incremental"]
+all = ["builder", "iterator", "macro", "formatters", "traversal", "transform", "path", "compare", "search", "sort", "stats", "merge", "export", "export-html", "export-svg", "export-dot", "color", "serde", "serde-json", "serde-yaml", "serde-toml", "serde-ron", "walkdir", "petgraph", "cargo-metadata", "git2", "syn", "tree-sitter", "clap", "arbitrary", "arbitrary-json", "arbitrary-yaml", "arbitrary-toml", "arbitrary-xml", "arbitrary-walkdir", "arbitrary-petgraph", "arbitrary-cargo", "arbitrary-git2", "arbitrary-syn", "arbitrary-tree-sitter", "arbitrary-clap", "incremental"]
 
 [dev-dependencies]
 colored = "3.0"
@@ -166,7 +169,7 @@ required-features = ["merge"]
 [[example]]
 name = "export"
 path = "examples/export.rs"
-required-features = ["export"]
+required-features = ["export-html", "export-svg", "export-dot"]
 
 [[example]]
 name = "serde"

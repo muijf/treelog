@@ -17,7 +17,12 @@
 pub mod arbitrary;
 #[cfg(any(feature = "builder", feature = "incremental", doc))]
 pub mod build;
-#[cfg(any(feature = "export", doc))]
+#[cfg(any(
+    feature = "export-html",
+    feature = "export-svg",
+    feature = "export-dot",
+    doc
+))]
 pub mod export;
 #[cfg(any(feature = "iterator", doc))]
 pub mod iterator;

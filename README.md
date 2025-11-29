@@ -64,11 +64,14 @@ cargo build --release --bin treelog --features cli,arbitrary-walkdir,serde-json
 > Most features are optional to keep the core library lightweight. Enable only what you need.
 
 **Core Features:**
-- `builder` - Builder API for constructing trees
 - `iterator` - Iterator API for streaming trees
 - `macro` - Macro DSL for tree construction
 - `formatters` - Custom formatters for nodes and leaves
 - `color` - Color output support (requires `colored`)
+
+**Builder:**
+- `builder` - Builder API for constructing trees
+- `incremental` - Incremental tree construction for dynamic tree building
 
 **Tree Operations:**
 - `traversal` - Tree traversal iterators (pre-order, post-order, level-order)
@@ -79,7 +82,18 @@ cargo build --release --bin treelog --features cli,arbitrary-walkdir,serde-json
 - `sort` - Tree sorting operations (sort by label, depth, custom)
 - `stats` - Tree statistics and metrics
 - `merge` - Tree merging with different strategies
-- `export` - Export to HTML, SVG, and DOT formats
+
+**Export Formats:**
+- <details><summary><code>export</code> - Meta-feature enabling all export formats</summary>
+
+  Enables all of the following:
+  - `export-html` - Export to HTML format with collapsible nodes
+  - `export-svg` - Export to SVG tree diagram format
+  - `export-dot` - Export to Graphviz DOT format
+
+  You can also enable individual features instead of the meta-feature.
+
+  </details>
 
 **Exact Serialization (Round-Trip):**
 - <details><summary><code>serde</code> - Meta-feature enabling all serde serialization</summary>
