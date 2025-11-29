@@ -109,8 +109,7 @@ cargo build --release --bin treelog --features cli,arbitrary-walkdir,serde-json
 - `arbitrary-clap` - Build trees from clap command structures
 
 **CLI:**
-- `clap` - Enables clap dependency (used by CLI)
-- `cli` - CLI binary (includes `clap`)
+- `cli` - CLI binary
 
 **Quick examples:**
 
