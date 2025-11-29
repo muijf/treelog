@@ -56,11 +56,11 @@ pub fn output_tree(tree: &treelog::Tree, cli: &Cli) -> Result<(), Box<dyn std::e
     let config = build_render_config(cli)?;
     let output = match &cli.format {
         OutputFormat::Text => tree.render_to_string_with_config(&config),
-        #[cfg(feature = "export")]
+        #[cfg(feature = "export-html")]
         OutputFormat::Html => tree.to_html(),
-        #[cfg(feature = "export")]
+        #[cfg(feature = "export-svg")]
         OutputFormat::Svg => tree.to_svg(),
-        #[cfg(feature = "export")]
+        #[cfg(feature = "export-dot")]
         OutputFormat::Dot => tree.to_dot(),
         #[cfg(feature = "serde-json")]
         OutputFormat::Json => tree

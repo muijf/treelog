@@ -20,16 +20,7 @@ use std::fmt;
 /// );
 /// ```
 #[derive(Clone, Debug, PartialEq, Eq)]
-#[cfg_attr(
-    any(
-        feature = "serde",
-        feature = "serde-json",
-        feature = "serde-yaml",
-        feature = "serde-toml",
-        feature = "serde-ron"
-    ),
-    derive(serde::Serialize, serde::Deserialize)
-)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum Tree {
     /// A node with a label and child trees.
     Node(String, Vec<Tree>),

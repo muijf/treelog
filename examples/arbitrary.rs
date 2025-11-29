@@ -10,14 +10,13 @@ fn main() {
     println!("=== Arbitrary Data Conversion Examples ===\n");
 
     #[cfg(any(
-        feature = "arbitrary",
         feature = "arbitrary-json",
         feature = "arbitrary-yaml",
         feature = "arbitrary-toml"
     ))]
     {
         // Example 1: TOML - Converting a Cargo.toml-like structure
-        #[cfg(any(feature = "arbitrary", feature = "arbitrary-toml"))]
+        #[cfg(feature = "arbitrary-toml")]
         {
             println!("--- TOML Example ---");
             let toml_data = r#"
@@ -51,7 +50,7 @@ builder = []
         }
 
         // Example 2: JSON - Converting a configuration object
-        #[cfg(any(feature = "arbitrary", feature = "arbitrary-json"))]
+        #[cfg(feature = "arbitrary-json")]
         {
             println!("--- JSON Example ---");
             let json_data = r#"
@@ -83,7 +82,7 @@ builder = []
         }
 
         // Example 3: YAML - Converting a configuration file
-        #[cfg(any(feature = "arbitrary", feature = "arbitrary-yaml"))]
+        #[cfg(feature = "arbitrary-yaml")]
         {
             println!("--- YAML Example ---");
             let yaml_data = r#"
@@ -121,7 +120,7 @@ features:
         }
 
         // Example 4: Simple array conversion
-        #[cfg(any(feature = "arbitrary", feature = "arbitrary-json"))]
+        #[cfg(feature = "arbitrary-json")]
         {
             println!("--- Array Example ---");
             let array_json = r#"[1, 2, 3, "four", true, null]"#;
@@ -139,7 +138,7 @@ features:
         }
 
         // Example 5: Comparison with exact serialization
-        #[cfg(any(feature = "arbitrary", feature = "arbitrary-json"))]
+        #[cfg(feature = "arbitrary-json")]
         {
             println!("--- Comparison: Arbitrary vs Exact Serialization ---");
             let json_data = r#"{"name": "test", "value": 42}"#;
@@ -181,15 +180,16 @@ features:
     }
 
     #[cfg(not(any(
-        feature = "arbitrary",
         feature = "arbitrary-json",
         feature = "arbitrary-yaml",
         feature = "arbitrary-toml"
     )))]
     {
         println!(
-            "Note: Enable the 'arbitrary' feature (or individual 'arbitrary-json', 'arbitrary-yaml', 'arbitrary-toml' features) to see arbitrary serialization examples."
+            "Note: Enable individual 'arbitrary-json', 'arbitrary-yaml', or 'arbitrary-toml' features to see arbitrary serialization examples."
         );
-        println!("Run: cargo run --example arbitrary --features arbitrary");
+        println!(
+            "Run: cargo run --example arbitrary --features arbitrary-json,arbitrary-yaml,arbitrary-toml"
+        );
     }
 }

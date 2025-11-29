@@ -39,9 +39,9 @@ fn main() {
         }
     }
 
-    #[cfg(not(feature = "walkdir"))]
+    #[cfg(not(feature = "arbitrary-walkdir"))]
     {
-        println!("Note: Enable 'walkdir' feature to use file system tree building.");
+        println!("Note: Enable 'arbitrary-walkdir' feature to use file system tree building.");
         println!("Example usage:");
         println!("  let tree = Tree::from_dir(\".\").unwrap();");
     }

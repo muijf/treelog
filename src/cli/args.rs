@@ -26,11 +26,11 @@ pub enum OutputFormat {
     Toml,
     #[cfg(feature = "serde-ron")]
     Ron,
-    #[cfg(feature = "export")]
+    #[cfg(feature = "export-html")]
     Html,
-    #[cfg(feature = "export")]
+    #[cfg(feature = "export-svg")]
     Svg,
-    #[cfg(feature = "export")]
+    #[cfg(feature = "export-dot")]
     Dot,
 }
 
@@ -135,7 +135,11 @@ pub enum Commands {
         strategy: treelog::ops::merge::MergeStrategy,
     },
     /// Export tree to various formats
-    #[cfg(feature = "export")]
+    #[cfg(any(
+        feature = "export-html",
+        feature = "export-svg",
+        feature = "export-dot"
+    ))]
     Export {
         #[command(subcommand)]
         format: ExportFormat,
@@ -264,7 +268,11 @@ pub enum TransformOp {
 }
 
 #[derive(Subcommand)]
-#[cfg(feature = "export")]
+#[cfg(any(
+    feature = "export-html",
+    feature = "export-svg",
+    feature = "export-dot"
+))]
 pub enum ExportFormat {
     /// Export to HTML
     Html,

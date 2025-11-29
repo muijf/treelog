@@ -1,6 +1,10 @@
 //! Command handler functions.
 
-#[cfg(feature = "export")]
+#[cfg(any(
+    feature = "export-html",
+    feature = "export-svg",
+    feature = "export-dot"
+))]
 use super::args::ExportFormat;
 #[cfg(feature = "transform")]
 use super::args::TransformOp;
@@ -260,12 +264,19 @@ pub fn handle_merge(
 }
 
 #[allow(unused_variables)]
-#[cfg(feature = "export")]
+#[cfg(any(
+    feature = "export-html",
+    feature = "export-svg",
+    feature = "export-dot"
+))]
 pub fn handle_export(format: &ExportFormat, input: &str) -> Result<(), Box<dyn std::error::Error>> {
     let tree = utils::read_tree(input)?;
     let output = match format {
+        #[cfg(feature = "export-html")]
         ExportFormat::Html => tree.to_html(),
+        #[cfg(feature = "export-svg")]
         ExportFormat::Svg => tree.to_svg(),
+        #[cfg(feature = "export-dot")]
         ExportFormat::Dot => tree.to_dot(),
     };
     println!("{}", output);

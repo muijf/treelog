@@ -54,9 +54,9 @@ fn main() {
         println!("{}", tree.render_to_string());
     }
 
-    #[cfg(not(feature = "petgraph"))]
+    #[cfg(not(feature = "arbitrary-petgraph"))]
     {
-        println!("Note: Enable 'petgraph' feature to use graph conversion.");
+        println!("Note: Enable 'arbitrary-petgraph' feature to use graph conversion.");
         println!("Example usage:");
         println!("  let graph: Graph<String, ()> = tree.to_graph();");
         println!("  let tree = Tree::from_graph(&graph);");

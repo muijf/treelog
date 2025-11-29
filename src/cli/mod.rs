@@ -4,7 +4,11 @@ mod args;
 mod handlers;
 mod utils;
 
-#[cfg(feature = "export")]
+#[cfg(any(
+    feature = "export-html",
+    feature = "export-svg",
+    feature = "export-dot"
+))]
 pub use args::ExportFormat;
 #[cfg(feature = "transform")]
 pub use args::TransformOp;
@@ -36,7 +40,11 @@ fn main() {
             first,
             second,
         } => handle_merge(strategy, first, second, &cli),
-        #[cfg(feature = "export")]
+        #[cfg(any(
+            feature = "export-html",
+            feature = "export-svg",
+            feature = "export-dot"
+        ))]
         Commands::Export { format, input } => handle_export(format, input),
     };
 

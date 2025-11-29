@@ -57,7 +57,7 @@ cd treelog
 cargo build --release --bin treelog --features cli,arbitrary-walkdir,serde-json
 ```
 
-> **Note**: The CLI requires the `cli` feature. Enable additional features based on the input sources you need. You can use convenience aliases like `walkdir` (for `arbitrary-walkdir`).
+> **Note**: The CLI requires the `cli` feature. Enable additional features based on the input sources you need.
 
 ## Feature Flags
 
@@ -84,71 +84,45 @@ cargo build --release --bin treelog --features cli,arbitrary-walkdir,serde-json
 - `merge` - Tree merging with different strategies
 
 **Export Formats:**
-- <details><summary><code>export</code> - Meta-feature enabling all export formats</summary>
-
-  Enables all of the following:
-  - `export-html` - Export to HTML format with collapsible nodes
-  - `export-svg` - Export to SVG tree diagram format
-  - `export-dot` - Export to Graphviz DOT format
-
-  You can also enable individual features instead of the meta-feature.
-
-  </details>
+- `export-html` - Export to HTML format with collapsible nodes
+- `export-svg` - Export to SVG tree diagram format
+- `export-dot` - Export to Graphviz DOT format
 
 **Exact Serialization (Round-Trip):**
-- <details><summary><code>serde</code> - Meta-feature enabling all serde serialization</summary>
-
-  Enables all of the following:
-  - `serde-json` - JSON serialization/deserialization (Tree ↔ JSON)
-  - `serde-yaml` - YAML serialization/deserialization (Tree ↔ YAML)
-  - `serde-toml` - TOML serialization/deserialization (Tree ↔ TOML)
-  - `serde-ron` - RON serialization/deserialization (Tree ↔ RON)
-
-  You can also enable individual features instead of the meta-feature.
-
-  </details>
+- `serde` - Enables serialization/deserialization support for Tree structures (enables `serde` dependency)
+- `serde-json` - JSON serialization/deserialization (Tree ↔ JSON)
+- `serde-yaml` - YAML serialization/deserialization (Tree ↔ YAML)
+- `serde-toml` - TOML serialization/deserialization (Tree ↔ TOML)
+- `serde-ron` - RON serialization/deserialization (Tree ↔ RON)
 
 **Arbitrary Conversion (One-Way):**
-- <details><summary><code>arbitrary</code> - Meta-feature enabling all arbitrary conversions</summary>
+- `arbitrary-json` - Convert any JSON to Tree (requires `serde-json`)
+- `arbitrary-yaml` - Convert any YAML to Tree (requires `serde-yaml`)
+- `arbitrary-toml` - Convert any TOML to Tree (requires `serde-toml`)
+- `arbitrary-xml` - Convert XML/HTML to Tree
+- `arbitrary-walkdir` - Build trees from directory structures
+- `arbitrary-petgraph` - Convert petgraph graphs to Tree
+- `arbitrary-cargo` - Build trees from Cargo metadata
+- `arbitrary-git2` - Build trees from Git repositories
+- `arbitrary-syn` - Build trees from Rust AST
+- `arbitrary-tree-sitter` - Build trees from tree-sitter parse trees
+- `arbitrary-clap` - Build trees from clap command structures
 
-  Enables all of the following:
-  - `arbitrary-json` - Convert any JSON to Tree (requires `serde-json`)
-  - `arbitrary-yaml` - Convert any YAML to Tree (requires `serde-yaml`)
-  - `arbitrary-toml` - Convert any TOML to Tree (requires `serde-toml`)
-  - `arbitrary-xml` - Convert XML/HTML to Tree
-  - `arbitrary-walkdir` - Build trees from directory structures
-  - `arbitrary-petgraph` - Convert petgraph graphs to Tree
-  - `arbitrary-cargo` - Build trees from Cargo metadata
-  - `arbitrary-git2` - Build trees from Git repositories
-  - `arbitrary-syn` - Build trees from Rust AST
-  - `arbitrary-tree-sitter` - Build trees from tree-sitter parse trees
-  - `arbitrary-clap` - Build trees from clap command structures
-
-  You can also enable individual features instead of the meta-feature.
-
-  </details>
-
-**Convenience Aliases:**
-- `walkdir` - Alias for `arbitrary-walkdir`
-- `petgraph` - Alias for `arbitrary-petgraph`
-- `cargo-metadata` - Alias for `arbitrary-cargo`
-- `git2` - Alias for `arbitrary-git2`
-- `syn` - Alias for `arbitrary-syn`
-- `tree-sitter` - Alias for `arbitrary-tree-sitter`
-- `clap` - Alias for `arbitrary-clap` (also used by CLI)
+**CLI:**
+- `clap` - Enables clap dependency (used by CLI)
 - `cli` - CLI binary (includes `clap`)
 
 **Quick examples:**
 
 ```toml
 # Common feature set
-treelog = { version = "0.1.0-beta.0", features = ["traversal", "transform", "path", "compare", "merge", "export"] }
+treelog = { version = "0.1.0-beta.0", features = ["traversal", "transform", "path", "compare", "merge", "export-html", "export-svg", "export-dot"] }
 
-# Enable everything
-treelog = { version = "0.1.0-beta.0", features = ["all"] }
+# With serialization support
+treelog = { version = "0.1.0-beta.0", features = ["serde", "serde-json", "serde-yaml"] }
 ```
 
-> **Note**: The `cli` feature is separate and must be enabled explicitly for the binary. Use convenience aliases like `walkdir` (for `arbitrary-walkdir`) when available.
+> **Note**: The `cli` feature is separate and must be enabled explicitly for the binary.
 
 ## Quick Start
 

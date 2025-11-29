@@ -28,9 +28,9 @@ fn main() {
         }
     }
 
-    #[cfg(not(feature = "cargo-metadata"))]
+    #[cfg(not(feature = "arbitrary-cargo"))]
     {
-        println!("Note: Enable 'cargo-metadata' feature to use cargo dependency visualization.");
+        println!("Note: Enable 'arbitrary-cargo' feature to use cargo dependency visualization.");
         println!("Example usage:");
         println!("  let tree = Tree::from_cargo_metadata(\"Cargo.toml\").unwrap();");
     }

@@ -7,16 +7,7 @@ use crate::tree::Tree;
 /// This struct provides various metrics about a tree, including its depth,
 /// width, and counts of nodes and leaves.
 #[derive(Clone, Debug, PartialEq, Eq)]
-#[cfg_attr(
-    any(
-        feature = "serde",
-        feature = "serde-json",
-        feature = "serde-yaml",
-        feature = "serde-toml",
-        feature = "serde-ron"
-    ),
-    derive(serde::Serialize, serde::Deserialize)
-)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct TreeStats {
     /// Maximum depth of the tree
     pub depth: usize,
