@@ -26,7 +26,7 @@ impl Tree {
     /// # Examples
     ///
     /// ```
-    /// use treelog::{Tree, merge::MergeStrategy};
+    /// use treelog::{Tree, ops::merge::MergeStrategy};
     ///
     /// let tree1 = Tree::Node("root".to_string(), vec![
     ///     Tree::Leaf(vec!["a".to_string()])
@@ -36,8 +36,8 @@ impl Tree {
     /// ]);
     /// let merged = tree1.merge(tree2, MergeStrategy::Append);
     /// ```
-    pub fn merge(&self, other: Tree, strategy: crate::merge::MergeStrategy) -> Tree {
-        use crate::merge::MergeStrategy;
+    pub fn merge(&self, other: Tree, strategy: crate::ops::merge::MergeStrategy) -> Tree {
+        use crate::ops::merge::MergeStrategy;
         match strategy {
             MergeStrategy::Replace => self.merge_replace(&other),
             MergeStrategy::Append => self.merge_append(&other),

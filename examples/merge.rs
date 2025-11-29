@@ -1,7 +1,7 @@
 //! Example demonstrating tree merging features.
 
 use treelog::Tree;
-use treelog::merge::MergeStrategy;
+use treelog::ops::merge::MergeStrategy;
 
 fn main() {
     let tree1 = Tree::Node(

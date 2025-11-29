@@ -18,7 +18,7 @@ use indicatif::{HumanDuration, MultiProgress, MultiProgressAlignment, ProgressBa
 use once_cell::sync::Lazy;
 use rand::rngs::ThreadRng;
 use rand::{Rng, RngCore};
-use treelog::incremental::IncrementalTree;
+use treelog::build::IncrementalTree;
 
 /// Configuration constants for the simulation.
 struct Config;

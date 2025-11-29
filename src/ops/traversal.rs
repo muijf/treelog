@@ -109,7 +109,7 @@ impl Tree {
 /// # Examples
 ///
 /// ```
-/// use treelog::{Tree, traversal::PreOrder};
+/// use treelog::{Tree, ops::traversal::PreOrder};
 ///
 /// let tree = Tree::Node("root".to_string(), vec![
 ///     Tree::Leaf(vec!["item".to_string()])
@@ -147,7 +147,7 @@ impl<'a> Iterator for PreOrder<'a> {
 /// # Examples
 ///
 /// ```
-/// use treelog::{Tree, traversal::PostOrder};
+/// use treelog::{Tree, ops::traversal::PostOrder};
 ///
 /// let tree = Tree::Node("root".to_string(), vec![
 ///     Tree::Leaf(vec!["item".to_string()])
@@ -195,7 +195,7 @@ impl<'a> Iterator for PostOrder<'a> {
 /// # Examples
 ///
 /// ```
-/// use treelog::{Tree, traversal::LevelOrder};
+/// use treelog::{Tree, ops::traversal::LevelOrder};
 ///
 /// let tree = Tree::Node("root".to_string(), vec![
 ///     Tree::Leaf(vec!["item".to_string()])
@@ -234,7 +234,7 @@ impl<'a> Iterator for LevelOrder<'a> {
 /// # Examples
 ///
 /// ```
-/// use treelog::{Tree, traversal::Nodes};
+/// use treelog::{Tree, ops::traversal::Nodes};
 ///
 /// let tree = Tree::Node("root".to_string(), vec![
 ///     Tree::Leaf(vec!["item".to_string()])
@@ -267,7 +267,7 @@ impl<'a> Iterator for Nodes<'a> {
 /// # Examples
 ///
 /// ```
-/// use treelog::{Tree, traversal::Leaves};
+/// use treelog::{Tree, ops::traversal::Leaves};
 ///
 /// let tree = Tree::Node("root".to_string(), vec![
 ///     Tree::Leaf(vec!["item".to_string()])

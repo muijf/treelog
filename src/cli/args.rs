@@ -132,7 +132,7 @@ pub enum Commands {
         second: String,
         /// Merge strategy
         #[arg(long, value_enum, default_value = "append")]
-        strategy: treelog::merge::MergeStrategy,
+        strategy: treelog::ops::merge::MergeStrategy,
     },
     /// Export tree to various formats
     #[cfg(feature = "export")]

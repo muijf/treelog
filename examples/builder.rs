@@ -1,6 +1,6 @@
 //! Example demonstrating the high-level builder API.
 
-use treelog::builder::TreeBuilder;
+use treelog::build::TreeBuilder;
 
 fn main() {
     // Build a tree using the fluent builder API

@@ -1,6 +1,6 @@
 //! Basic example demonstrating simple tree construction and rendering.
 
-use treelog::{Tree, renderer::write_tree};
+use treelog::{Tree, render::write_tree};
 
 fn main() {
     // Create a simple tree

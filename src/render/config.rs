@@ -1,6 +1,6 @@
 //! Configuration options for tree rendering.
 
-use crate::style::StyleConfig;
+use crate::render::style::StyleConfig;
 
 /// Type alias for node formatter functions.
 #[cfg(feature = "formatters")]
@@ -200,7 +200,7 @@ impl RenderConfig {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::style::TreeStyle;
+    use crate::render::style::TreeStyle;
 
     #[test]
     fn test_default_config() {

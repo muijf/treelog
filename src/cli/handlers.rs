@@ -226,13 +226,13 @@ pub fn handle_compare(first: &str, second: &str) -> Result<(), Box<dyn std::erro
         println!("Found {} difference(s):", diffs.len());
         for diff in diffs {
             match diff {
-                treelog::compare::TreeDiff::OnlyInFirst { path, content } => {
+                treelog::ops::compare::TreeDiff::OnlyInFirst { path, content } => {
                     println!("  Only in first (path: {:?}): {}", path, content);
                 }
-                treelog::compare::TreeDiff::OnlyInSecond { path, content } => {
+                treelog::ops::compare::TreeDiff::OnlyInSecond { path, content } => {
                     println!("  Only in second (path: {:?}): {}", path, content);
                 }
-                treelog::compare::TreeDiff::DifferentContent {
+                treelog::ops::compare::TreeDiff::DifferentContent {
                     path,
                     first,
                     second,
@@ -248,7 +248,7 @@ pub fn handle_compare(first: &str, second: &str) -> Result<(), Box<dyn std::erro
 #[allow(unused_variables)]
 #[cfg(feature = "merge")]
 pub fn handle_merge(
-    strategy: &treelog::merge::MergeStrategy,
+    strategy: &treelog::ops::merge::MergeStrategy,
     first: &str,
     second: &str,
     cli: &Cli,

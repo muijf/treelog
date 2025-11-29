@@ -21,8 +21,8 @@
 //! let lines: Vec<String> = tree.to_lines();
 //! ```
 
-use crate::config::RenderConfig;
-use crate::level::LevelPath;
+use crate::render::config::RenderConfig;
+use crate::render::level::LevelPath;
 use crate::tree::Tree;
 
 /// Represents a single line in the rendered tree.
@@ -121,12 +121,15 @@ impl<'a> TreeLines<'a> {
         }
     }
 
-    fn build_prefix(level: &LevelPath, style: &crate::style::StyleConfig) -> String {
-        crate::prefix::compute_prefix(level, style)
+    fn build_prefix(level: &LevelPath, style: &crate::render::style::StyleConfig) -> String {
+        crate::render::prefix::compute_prefix(level, style)
     }
 
-    fn build_second_line_prefix(level: &LevelPath, style: &crate::style::StyleConfig) -> String {
-        crate::prefix::compute_second_line_prefix(level, style)
+    fn build_second_line_prefix(
+        level: &LevelPath,
+        style: &crate::render::style::StyleConfig,
+    ) -> String {
+        crate::render::prefix::compute_second_line_prefix(level, style)
     }
 }
 

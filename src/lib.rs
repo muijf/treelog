@@ -15,28 +15,27 @@
     doc
 ))]
 pub mod arbitrary;
-#[cfg(any(feature = "builder", doc))]
-pub mod builder;
-#[cfg(any(feature = "compare", doc))]
-pub mod compare;
-pub mod config;
+#[cfg(any(feature = "builder", feature = "incremental", doc))]
+pub mod build;
 #[cfg(any(feature = "export", doc))]
 pub mod export;
-#[cfg(any(feature = "incremental", doc))]
-pub mod incremental;
 #[cfg(any(feature = "iterator", doc))]
 pub mod iterator;
-mod level;
 #[cfg(any(feature = "macro", doc))]
 mod macros;
-#[cfg(any(feature = "merge", doc))]
-pub mod merge;
-#[cfg(any(feature = "path", doc))]
-pub mod path;
-mod prefix;
-pub mod renderer;
-#[cfg(any(feature = "search", doc))]
-pub mod search;
+#[cfg(any(
+    feature = "compare",
+    feature = "merge",
+    feature = "transform",
+    feature = "search",
+    feature = "sort",
+    feature = "path",
+    feature = "stats",
+    feature = "traversal",
+    doc
+))]
+pub mod ops;
+pub mod render;
 #[cfg(any(
     feature = "serde-json",
     feature = "serde-yaml",
@@ -45,35 +44,24 @@ pub mod search;
     doc
 ))]
 pub mod serde;
-#[cfg(any(feature = "sort", doc))]
-pub mod sort;
-#[cfg(any(feature = "stats", doc))]
-pub mod stats;
-pub mod style;
-#[cfg(any(feature = "transform", doc))]
-pub mod transform;
-#[cfg(any(feature = "traversal", doc))]
-pub mod traversal;
 pub mod tree;
 pub mod utils;
 
 // Re-export main types
-pub use config::RenderConfig;
 #[cfg(any(feature = "iterator", doc))]
 pub use iterator::{Line, TreeIteratorExt};
-pub use level::LevelPath;
 #[cfg(any(feature = "stats", doc))]
-pub use stats::TreeStats;
-pub use style::{StyleConfig, TreeStyle};
+pub use ops::stats::TreeStats;
+pub use render::{LevelPath, RenderConfig, StyleConfig, TreeStyle};
 pub use tree::Tree;
 
 // Re-export renderer functions
-pub use renderer::{
+pub use render::{
     render_to_string, render_to_string_with_config, write_tree, write_tree_with_config,
 };
 
 // Re-export prefix functions
-pub use prefix::{compute_prefix, compute_second_line_prefix};
+pub use render::{compute_prefix, compute_second_line_prefix};
 
 /// Extension methods for Tree that provide convenient rendering.
 impl Tree {
@@ -150,7 +138,7 @@ mod tests {
     #[cfg(feature = "builder")]
     #[test]
     fn test_builder_api() {
-        use crate::builder::TreeBuilder;
+        use crate::build::builder::TreeBuilder;
         let mut builder = TreeBuilder::new();
         builder.node("root").leaf("item");
         let tree = builder.build();

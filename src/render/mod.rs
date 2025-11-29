@@ -1,10 +1,20 @@
 //! Core rendering logic for trees.
 
+// Declare sub-modules first
+pub mod config;
+pub mod level;
+pub mod prefix;
+pub mod style;
+
+// Re-export public types and functions
+pub use config::RenderConfig;
+pub use level::LevelPath;
+pub use prefix::{compute_prefix, compute_second_line_prefix};
+pub use style::{StyleConfig, TreeStyle};
+
 use std::fmt;
 use std::fmt::Write;
 
-use crate::config::RenderConfig;
-use crate::level::LevelPath;
 use crate::tree::Tree;
 use crate::utils::estimate_capacity;
 
@@ -14,7 +24,7 @@ use crate::utils::estimate_capacity;
 ///
 /// ```
 /// use treelog::Tree;
-/// use treelog::renderer::write_tree;
+/// use treelog::render::write_tree;
 ///
 /// let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
 /// let mut output = String::new();
@@ -30,7 +40,7 @@ pub fn write_tree(f: &mut dyn Write, tree: &Tree) -> fmt::Result {
 ///
 /// ```
 /// use treelog::{Tree, TreeStyle, RenderConfig};
-/// use treelog::renderer::write_tree_with_config;
+/// use treelog::render::write_tree_with_config;
 ///
 /// let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
 /// let config = RenderConfig::default().with_style(TreeStyle::Ascii);
@@ -143,7 +153,7 @@ fn write_tree_element(
 ///
 /// ```
 /// use treelog::Tree;
-/// use treelog::renderer::render_to_string;
+/// use treelog::render::render_to_string;
 ///
 /// let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
 /// let output = render_to_string(&tree);
@@ -158,7 +168,7 @@ pub fn render_to_string(tree: &Tree) -> String {
 ///
 /// ```
 /// use treelog::{Tree, TreeStyle, RenderConfig};
-/// use treelog::renderer::render_to_string_with_config;
+/// use treelog::render::render_to_string_with_config;
 ///
 /// let tree = Tree::Node("root".to_string(), vec![Tree::Leaf(vec!["item".to_string()])]);
 /// let config = RenderConfig::default().with_style(TreeStyle::Ascii);
@@ -174,7 +184,7 @@ pub fn render_to_string_with_config(tree: &Tree, config: &RenderConfig) -> Strin
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::style::TreeStyle;
+    use crate::render::style::TreeStyle;
 
     #[test]
     fn test_write_tree() {

@@ -139,7 +139,7 @@ treelog = { version = "0.1.0-beta.0", features = ["all"] }
 ## Quick Start
 
 ```rust
-use treelog::{Tree, renderer::write_tree};
+use treelog::{Tree, render::write_tree};
 
 let tree = Tree::Node("root".to_string(), vec![
     Tree::Leaf(vec!["item1".to_string()]),

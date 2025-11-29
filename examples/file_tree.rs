@@ -1,6 +1,6 @@
 //! Example: Simulating a file system tree structure.
 
-use treelog::builder::TreeBuilder;
+use treelog::build::TreeBuilder;
 
 fn main() {
     let mut builder = TreeBuilder::new();

@@ -51,13 +51,13 @@ fn main() {
     println!("Differences between Tree 1 and Tree 2:");
     for diff in diffs {
         match diff {
-            treelog::compare::TreeDiff::OnlyInFirst { path, content } => {
+            treelog::ops::compare::TreeDiff::OnlyInFirst { path, content } => {
                 println!("  Only in first at path {path:?}: {content}");
             }
-            treelog::compare::TreeDiff::OnlyInSecond { path, content } => {
+            treelog::ops::compare::TreeDiff::OnlyInSecond { path, content } => {
                 println!("  Only in second at path {path:?}: {content}");
             }
-            treelog::compare::TreeDiff::DifferentContent {
+            treelog::ops::compare::TreeDiff::DifferentContent {
                 path,
                 first,
                 second,

@@ -7,7 +7,7 @@
 //! # Examples
 //!
 //! ```no_run
-//! use treelog::{incremental::IncrementalTree, Tree};
+//! use treelog::{build::incremental::IncrementalTree, Tree};
 //!
 //! let mut tree = IncrementalTree::new();
 //! let root_id = tree.add_node("root", None);
@@ -22,9 +22,9 @@
 
 use std::collections::HashMap;
 
-use crate::level::LevelPath;
-use crate::prefix::compute_prefix;
-use crate::style::StyleConfig;
+use crate::render::level::LevelPath;
+use crate::render::prefix::compute_prefix;
+use crate::render::style::StyleConfig;
 use crate::tree::Tree;
 
 /// A dynamic tree that builds a `Tree` enum structure incrementally.
@@ -40,7 +40,7 @@ use crate::tree::Tree;
 /// # Examples
 ///
 /// ```no_run
-/// use treelog::incremental::IncrementalTree;
+/// use treelog::build::IncrementalTree;
 ///
 /// let mut tree = IncrementalTree::new();
 /// let root_id = tree.add_node("root", None);
@@ -119,7 +119,7 @@ impl IncrementalTree {
     /// # Examples
     ///
     /// ```no_run
-    /// use treelog::incremental::IncrementalTree;
+    /// use treelog::build::IncrementalTree;
     ///
     /// let mut tree = IncrementalTree::new();
     /// let root_id = tree.add_node("root", None);
@@ -150,7 +150,7 @@ impl IncrementalTree {
     /// # Examples
     ///
     /// ```no_run
-    /// use treelog::incremental::IncrementalTree;
+    /// use treelog::build::IncrementalTree;
     ///
     /// let mut tree = IncrementalTree::new();
     /// let root_id = tree.add_node("root", None);
@@ -182,7 +182,7 @@ impl IncrementalTree {
     /// # Examples
     ///
     /// ```no_run
-    /// use treelog::incremental::IncrementalTree;
+    /// use treelog::build::IncrementalTree;
     ///
     /// let mut tree = IncrementalTree::new();
     /// let root_id = tree.add_node("root", None);
@@ -212,7 +212,7 @@ impl IncrementalTree {
     /// # Examples
     ///
     /// ```no_run
-    /// use treelog::incremental::IncrementalTree;
+    /// use treelog::build::IncrementalTree;
     ///
     /// let mut tree = IncrementalTree::new();
     /// let root_id = tree.add_node("root", None);
@@ -307,7 +307,7 @@ impl IncrementalTree {
     /// # Examples
     ///
     /// ```no_run
-    /// use treelog::incremental::IncrementalTree;
+    /// use treelog::build::IncrementalTree;
     ///
     /// let mut tree = IncrementalTree::new();
     /// let root_id = tree.add_node("root", None);
@@ -330,7 +330,7 @@ impl IncrementalTree {
     /// # Examples
     ///
     /// ```no_run
-    /// use treelog::incremental::IncrementalTree;
+    /// use treelog::build::IncrementalTree;
     ///
     /// let mut tree = IncrementalTree::new();
     /// let root_id = tree.add_node("root", None);
@@ -374,7 +374,7 @@ impl IncrementalTree {
     /// # Examples
     ///
     /// ```no_run
-    /// use treelog::incremental::IncrementalTree;
+    /// use treelog::build::incremental::IncrementalTree;
     ///
     /// let mut tree = IncrementalTree::new();
     /// let root_id = tree.add_node("root", None);
@@ -391,7 +391,7 @@ impl IncrementalTree {
     /// # Examples
     ///
     /// ```no_run
-    /// use treelog::incremental::IncrementalTree;
+    /// use treelog::build::incremental::IncrementalTree;
     ///
     /// let tree = IncrementalTree::new();
     /// assert!(tree.is_empty());
@@ -410,7 +410,7 @@ impl IncrementalTree {
     /// # Examples
     ///
     /// ```no_run
-    /// use treelog::{incremental::IncrementalTree, StyleConfig, TreeStyle};
+    /// use treelog::{build::incremental::IncrementalTree, StyleConfig, TreeStyle};
     ///
     /// let tree = IncrementalTree::new();
     /// let style = tree.style();
@@ -441,7 +441,7 @@ impl IncrementalTree {
     /// # Examples
     ///
     /// ```no_run
-    /// use treelog::incremental::IncrementalTree;
+    /// use treelog::build::incremental::IncrementalTree;
     ///
     /// let mut tree = IncrementalTree::new();
     /// let root_id = tree.add_node("root", None);

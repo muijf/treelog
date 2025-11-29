@@ -1,7 +1,7 @@
 //! Tree prefix computation for rendering hierarchical structures.
 
-use crate::level::LevelPath;
-use crate::style::StyleConfig;
+use crate::render::level::LevelPath;
+use crate::render::style::StyleConfig;
 
 /// Computes the tree prefix string for a given level path and style.
 ///

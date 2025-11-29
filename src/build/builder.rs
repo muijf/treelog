@@ -10,7 +10,7 @@ use crate::tree::Tree;
 /// # Examples
 ///
 /// ```
-/// use treelog::builder::TreeBuilder;
+/// use treelog::build::TreeBuilder;
 ///
 /// let mut builder = TreeBuilder::new();
 /// builder.node("root").leaf("item1");
@@ -26,7 +26,7 @@ impl TreeBuilder {
     /// # Examples
     ///
     /// ```
-    /// use treelog::builder::TreeBuilder;
+    /// use treelog::build::builder::TreeBuilder;
     ///
     /// let builder = TreeBuilder::new();
     /// ```
@@ -39,7 +39,7 @@ impl TreeBuilder {
     /// # Examples
     ///
     /// ```
-    /// use treelog::builder::TreeBuilder;
+    /// use treelog::build::builder::TreeBuilder;
     ///
     /// let mut builder = TreeBuilder::new();
     /// builder.node("root");
@@ -55,7 +55,7 @@ impl TreeBuilder {
     /// # Examples
     ///
     /// ```
-    /// use treelog::builder::TreeBuilder;
+    /// use treelog::build::builder::TreeBuilder;
     ///
     /// let mut builder = TreeBuilder::new();
     /// builder.node("root").leaf("item");
@@ -72,7 +72,7 @@ impl TreeBuilder {
     /// # Examples
     ///
     /// ```
-    /// use treelog::builder::TreeBuilder;
+    /// use treelog::build::builder::TreeBuilder;
     ///
     /// let mut builder = TreeBuilder::new();
     /// builder.node("root").leaf_lines(vec!["line1", "line2"]);
@@ -92,7 +92,7 @@ impl TreeBuilder {
     /// # Examples
     ///
     /// ```
-    /// use treelog::builder::TreeBuilder;
+    /// use treelog::build::builder::TreeBuilder;
     ///
     /// let mut builder = TreeBuilder::new();
     /// builder.node("root")
@@ -120,7 +120,7 @@ impl TreeBuilder {
     /// # Examples
     ///
     /// ```
-    /// use treelog::builder::TreeBuilder;
+    /// use treelog::build::builder::TreeBuilder;
     ///
     /// let mut builder = TreeBuilder::new();
     /// builder.node("root").leaf("item");
